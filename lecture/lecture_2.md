@@ -61,6 +61,7 @@
 # 기본 디렉티브
 ## 선언적 렌더링 (`{{}}`, `v-text`, `v-html`)
 **HTML Element 콘텐츠 영역 설정**
+
 |Directive|Desc.|
 |---|---|
 |`v-text`, `{{}}`| innerText 속성에 연결됨|
@@ -87,6 +88,7 @@
 
 ## 조건부 렌더링 (`v-show`, `v-if`, `v-else`, `v-else-if`)
 **Vue 객체의 data 속성 값에 따라 렌더링 여부를 결정하는 기능**
+
 |Directive|Desc.|
 |---|---|
 |`v-if`| 조건에 맞지 않으면 렌더링 안함 |
@@ -257,6 +259,7 @@
 ### 인라인 스타일 (`v-bind:style`)
 - 왠만하면 인라인 스타일은 사용하지 않는 것이 좋음. (재사용성이 매우 떨어지고 관리가 안됨)
 - `v-bind:style`로 스타일을 지정할 때 카멜 표기법을 사용해야 함
+  
   |css(케밥 표기법)|javascript object(카멜표기법)|
   |-|-|
   |font-size|fontSize|
