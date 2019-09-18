@@ -110,7 +110,7 @@
 
 # 개발환경 설정
 ## Node.js 설치
-- [Node.js 공식 홈페이지](https://nodejs.org/ko/)에서 LTS 버전 다운로드 및 설치
+- [Node.js 공식 홈페이지](https://nodejs.org/ko/)에서 LTS 버전 다운로드 및 설치  
   <img src="./images/lecture_1/7.png" width="400">
 
 - node 설치 확인
@@ -136,7 +136,7 @@
   https://chrome.google.com/webstore/category/extensions
 - `Vue.js devtools` 검색 후 `Chrome에 추가` 버튼 클릭
   <img src="./images/lecture_1/9.png" width="500">
-  
+
 - url 입력 창 옆에 아이콘 추가됐는지 확인
 - [chrome://extensions/](chrome://extensions/) 에서 Vue.js devtools 세부정보 중 `확장 파일 URL에 대한 액세스 허용` 설정
 
