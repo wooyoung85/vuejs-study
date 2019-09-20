@@ -1,7 +1,7 @@
 # Vue.js 란?
 - 2014 년 11월 9일에 Vue.js v0.11 Release 후 현재 v2.6.10 까지 Release 됨
 - Google Creative Lab에서 일하던 [EVAN YOU](https://blog.evanyou.me/) 가 개발 
-- 현재 가장 주목받고 있는 Frontend Framework 중 하나
+- 현재 가장 주목받고 있는 Frontend Framework 중 하나  
   <img src="./images/lecture_1/1-1.png" width="400">
 
   <sup>이미지 출처 : 

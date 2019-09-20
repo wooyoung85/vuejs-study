@@ -58,7 +58,7 @@
 
 > ### HTML은 주로 `<div class="product-info"></div>` 영역에 있는 코드만 수정할 예정이니 차근차근 잘 따라해 보시기 바랍니다 😎
 
-# 기본 디렉티브
+# 디렉티브 (Directive)
 ## 선언적 렌더링 (`{{}}`, `v-text`, `v-html`)
 **HTML Element 콘텐츠 영역 설정**
 
@@ -268,10 +268,113 @@
 ### CSS 클래스 바인딩 (`v-bind:class`)
 - 개별적인 클래스 단위로 true가 되면 클래스가 주어짐
 
+### 쇼핑몰 예제
 
+- html
+  ```html
+  ...
+  <div class="product-info">
+    ...
 
+    <div class="color-box" v-for="variant in variants" :key="variant.variantId"
+      :style="{ backgroundColor: variant.variantColor }"
+      @mouseover="updateProduct(variant.variantImage, variant.variantColor)">
+    </div>
 
-## 양방향 렌더링 (`v-model`)
+    <button v-on:click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">장바구니 담기</button>
+    <button @click="removeFromCart">장바구니 빼기</button>
+
+    <div class="cart">
+      <p>Cart({{ cart }})</p>
+    </div>
+
+  </div>
+  ...
+  ```
+
+- javascript
+  ```js
+  updateProduct(variantImage, variantColor) {
+    this.image = variantImage
+    if(variantColor === 'blue'){
+      this.inStock = true
+    }
+    else {
+      this.inStock = false
+    }
+  },
+  ```
+
+## Computed 속성
+템플릿 안에서는 단순한 연산만 사용이 가능하기 때문에 복잡한 계산식을 계산해서 return해 줄 수 있는 `computed` 속성 필요
+
+- 템플릿
+  ```html
+  <!-- 템플릿에 복잡한 계산식을 넣으면 재사용성이 떨어지고 관리가 안됨 -->
+  <div id="example">
+    {{ message.split('').reverse().join('') }}
+  </div>
+  ```
+
+- computed  
+  - computed 속성은 계산된 값이 캐싱됨
+  - computed 속성은 해당 속성이 종속된 대상이 변경될 때만 함수를 실행
+  ```html
+  <div id="example">
+    <p>원본 메시지: "{{ message }}"</p>
+    <p>역순으로 표시한 메시지: "{{ reversedMessage }}"</p>
+  </div>
+
+  <script>
+  var vm = new Vue({
+    el: '#example',
+    data: {
+      message: '안녕하세요'
+    },
+    computed: {
+      // 계산된 getter
+      reversedMessage: function () {
+        // `this` 는 vm 인스턴스를 가리킵니다.
+        return this.message.split('').reverse().join('')
+      }
+    }
+  })
+  </script>
+  ```
+
+### 어디서 많이 본 듯한 표현법인데...(Computed vs Methods)
+- methods
+  ```js
+  ...
+  //computed 부분 대체
+  methods: {
+    reversedMessage: function () {
+      return this.message.split('').reverse().join('')
+    }
+  }
+  ...
+  ```
+> 최종 결과는 서로 동일하지만 `reversedMessage` 를 `methods` 방식으로 만들면 `reversedMessage를` 요청 할 때마다 함수가 재실행되고,  
+`computed` 속성은 `message`가 변경되지 않는 한, `reversedMessage를` 여러 번 요청해도 다시 계산 하지 않고 캐싱값을 즉시 반환한다.
+
+### 양방향 렌더링 (`v-model`)
 
 ## 기타 디렉티브
 
+### `v-pre`
+템플릿 문자열을 컴파일 하지 않고 문자열 그대로 출력
+
+- Expression
+  ```html
+  <p v-pre>{{message}}</p>
+  ```
+
+### `v-once`
+Html Element를 딱 한번만 렌더링 (초기값이 주어지면 변경 안됨)
+
+- Expression
+  ```html
+  <p v-once>{{message}}</p>
+  ```
+
+### `v-cloak`
