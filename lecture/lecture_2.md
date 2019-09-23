@@ -269,6 +269,7 @@
 - 개별적인 클래스 단위로 true가 되면 클래스가 주어짐
 
 ### 쇼핑몰 예제
+<img src="./images/lecture_2/5.gif" width="600">
 
 - html
   ```html
@@ -297,10 +298,10 @@
   updateProduct(variantImage, variantColor) {
     this.image = variantImage
     if(variantColor === 'blue'){
-      this.inStock = true
+      this.inStock = false
     }
     else {
-      this.inStock = false
+      this.inStock = true
     }
   },
   ```
@@ -318,7 +319,7 @@
 
 - computed  
   - computed 속성은 계산된 값이 캐싱됨
-  - computed 속성은 해당 속성이 종속된 대상이 변경될 때만 함수를 실행
+  - computed 속성은 종속된 대상이 변경될 때만 함수가 실행됨
   ```html
   <div id="example">
     <p>원본 메시지: "{{ message }}"</p>
@@ -354,10 +355,14 @@
   }
   ...
   ```
-> 최종 결과는 서로 동일하지만 `reversedMessage` 를 `methods` 방식으로 만들면 `reversedMessage를` 요청 할 때마다 함수가 재실행되고,  
+> 최종 결과는 서로 동일하지만..  
+> `reversedMessage` 를 `methods` 방식으로 만들면 `reversedMessage` 를 요청 할 때마다 함수가 재실행되고,  
 `computed` 속성은 `message`가 변경되지 않는 한, `reversedMessage를` 여러 번 요청해도 다시 계산 하지 않고 캐싱값을 즉시 반환한다.
 
-### 양방향 렌더링 (`v-model`)
+### 이와 비슷한 속성 중 Wathch 라는 관찰형 속성도 있는데 비동기 처리가 필요할 때 유용하다고만 알아두고 넘어가겠습니다.  
+> 당연히 computed는 동기 처리를 하겠죠??
+
+## 양방향 렌더링 (`v-model`)
 
 ## 기타 디렉티브
 
