@@ -268,7 +268,7 @@
 ### CSS 클래스 바인딩 (`v-bind:class`)
 - 개별적인 클래스 단위로 true가 되면 클래스가 주어짐
 
-### 쇼핑몰 예제
+### 쇼핑몰 예제 (Step_4)
 <img src="./images/lecture_2/5.gif" width="600">
 
 - html
