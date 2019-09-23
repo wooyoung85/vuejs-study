@@ -10,37 +10,85 @@
 
 <div class="page" />
 
+
+## npm-stat 확인
+[npm-stat.com](https://npm-stat.com/)
+
+<img src="./images/lecture_1/1-2.png" width="400">
+
+> 사용량으로 보면 `React`가 월등히 앞서고 있음 🙄  
+> but, 2~3년 전과 비교해 본다면 그 격차가 매우 줄었음
+
 ## Developer Survey Results 2019
 > **React.js and Vue.js are both the most loved and most wanted web frameworks by developers, while Drupal and jQuery are most dreaded.**
 
-<img src="./images/lecture_1/1-2.png" width="400">
-<img src="./images/lecture_1/1-3.png" width="400">
+<img src="./images/lecture_1/1-3.png" width="300">
+<img src="./images/lecture_1/1-4.png" width="300">
 
 <sup>이미지 출처 : 
 [stackoverflow-Developer Survey Results 2019](https://insights.stackoverflow.com/survey/2019#technology-_-most-loved-dreaded-and-wanted-web-frameworks)
 </sup>
 
+> `Vue.js`는 매우 사랑받는 Web Framework 중 하나이고 `Jquery`는 기피하는 현상을 볼 수 있음
+
 <div class="page" />
+
 
 # Vue.js 의 장점
 ## 가볍고 유연함
-- **ViewModel layer에 초점을 맞추어 핵심 라이브러리가 개발됨**  
+### **ViewModel layer에 초점을 맞추어 핵심 라이브러리가 개발됨**
+<img src="./images/lecture_1/2-1.png" width="400">
+
+<sup>이미지 출처 : 
+[Vue.js 입문자를 위한 공개 세미나](https://www.slideshare.net/GihyoJoshuaJang/do-it-vuejs-88453012?from_action=save)
+</sup>
+
   - Lean & Small (**16KB** minified and gzipped)
   - 실제 개발 시에는 Vue.js 관련 라이브러리 사용이 필수
 
-- **전체 아키텍처를 새롭게 구성할 필요가 없음**  
+### **전체 아키텍처를 새롭게 구성할 필요가 없음** (점진적 프레임워크)  
   - 기존 앱의 일부 화면에 적용해본 후 전체 적용을 검토해볼 수 있음
 
-- **SPA(Single Page Application)으로 구성 가능**
+### **SPA(Single Page Application)를 매우 잘 지원함**
+  - Router 기능 지원 (Client Side Routing)
   - Dynamic UI 의 웹 페이지를 만들 때 유리
-  - Router 기능 지원
 
-## 진입 장벽이 상대적으로 낮음
+<div class="page" />
+
+## 진입 장벽이 (상대적으로) 낮음
+- (상대적으로) 간단하고 쉬운 코드
+- 필요 기술 스택
+
+  <img src="./images/lecture_1/2-2.png" width="400">
+
+  <sup>이미지 출처 : 
+  [Vue.js 입문자를 위한 공개 세미나](https://www.slideshare.net/GihyoJoshuaJang/do-it-vuejs-88453012?from_action=save)
+  </sup>
+
 - `<script>` 태그를 활용하여 CDN 주소를 추가한 후 vue.js 디렉티브 몇 가지를 익히면 바로 프로그래밍 가능
 - 문서가 매우 잘 정리되어 있고, 한글 번역도 매우 훌륭함
 - ~~개떡~~같이 만들어도 동작은 잘 하는편 (React같이 엄격하지 않음, Magic이 있음)
 
+> 공식문서 👉[시작하기 - Vue.js](`https://kr.vuejs.org/v2/guide/`)  
+> 추천 영상 👉 [Learn Vue.js with our Courses - Vue Mastery](https://www.vuemastery.com/courses/) (일부 유료)
+
+
 <div class="page" />
+
+## 리액트와 앵귤러의 장점을 포함하면서 Jquery를 대체 가능한 프레임워크
+### 2-Way Binding (Angular)
+<img src="./images/lecture_1/2-3.png" width="300">
+<img src="./images/lecture_1/2-4.gif" width="300">
+
+### Virtual DOM (React)
+
+<img src="./images/lecture_1/2-5.png" width="300">
+
+<sup>이미지 출처 : 
+[React and the Virtual DOM](https://www.youtube.com/watch?v=BYbgopx44vo)
+</sup>
+
+> Virtual DOM은 `Vue.js 주요컨셉` 설명할 때 자세히 언급할 예정입니다.
 
 # Vue.js 주요컨셉
 ## Inspired by MVVM Pattern 

@@ -11,11 +11,13 @@
   for (var k in obj.data) {
     (function (k) {
       Object.defineProperty(obj, k, {
+        // obj에 값을 할당할 때 동작 정의
         set: function (x) {
           console.log("## setter call : ", k, x);
           this.data[k] = x;
           // watcher에게 알림~!!
         },
+        // obj에 접근할 때 동작 정의
         get: function () {
           console.log("## getter call : ", k, this.data[k]); 
           return this.data[k];
