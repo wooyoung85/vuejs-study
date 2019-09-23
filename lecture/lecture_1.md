@@ -90,6 +90,20 @@
 
 > Virtual DOM은 `Vue.js 주요컨셉` 설명할 때 자세히 언급할 예정입니다.
 
+### Jquery로 했던 작업들은 모두 대체 가능
+그럴수 없겠지만 **jQuery는 이제 그만 쓰는게 좋습니다 ㅠ.ㅠ**  
+jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴의 위험이 높음
+
+||Jquery|Vue.js|
+|-|-|-|
+|구분|자바스크립트 라이브러리|Frontend Framework|
+|렌더링 방식|DOM에 직접 접근|Virtual DOM을 활용|
+|렌더링 속도|16,862 ms|2,985 ms|
+|메모리 사용|62 MB|171 MB|
+
+> 위 표에서 렌더링 속도와 메모리 사용 값은 특정 상황을 가정하여 여러 Front-End Framework의 속도 및 성능을 테스트 한 결과값을 표기하였습니다.  
+>([출처 : Rendering Speed & Performance challenge with Famous Front-End Framework](https://medium.com/thothzocial-engineering/rendering-speed-performance-challenge-with-famous-front-end-framework-196c876a68af) )
+
 # Vue.js 주요컨셉
 ## Inspired by MVVM Pattern 
 - View
@@ -117,7 +131,7 @@
   ```
 - **관심사의 분리**
   - 타입별 파일 분리하는 것이 아니라 느슨하게 결함 된 컴포넌트로 나누어 구성
-  - Single File Component 컨셉을 지키게 되면 컴포넌트의 응집력과 유지 보수성이 좋아짐
+  - Single File Component 컨셉을 지키게 되면 컴포넌트의 응집력과 유지 보수와 재사용성이 높아짐
 
 > 현대적인 UI 개발에서 코드베이스를 서로 얽혀있는 세 개의 거대한 레이어로 나누는 대신, 느슨하게 결합 된 컴포넌트로 나누고 구성하는 것이 더 중요 
 
