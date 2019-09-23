@@ -1,4 +1,4 @@
-# 쇼핑몰 예제 코드 작성
+# 쇼핑몰 예제 코드 작성 (**Step_0**)
 <img src="./images/lecture_2/1.png" width="600">
 
 - 작업폴더 만들기
@@ -94,7 +94,7 @@
 |`v-if`| 조건에 맞지 않으면 렌더링 안함 |
 |`v-show`| 일단 HTML Element를 렌더링 한 후 조건에 맞춰 display 스타일 속성 조정 |  
 
-### 쇼핑몰 예제 코드 추가
+### 쇼핑몰 예제 코드 추가 (**Step_1**)
 <img src="./images/lecture_2/2.gif" width="600">
 
 - html
@@ -138,7 +138,7 @@
   </option>
   ```
 
-### 쇼핑몰 예제 코드 추가
+### 쇼핑몰 예제 코드 추가 (**Step_2**)
 <img src="./images/lecture_2/3.png" width="600">
 
 - html
@@ -210,7 +210,7 @@
   </script>
   ```
 
-### 쇼핑몰 예제 코드 추가
+### 쇼핑몰 예제 코드 추가 (**Step_3**)
 <img src="./images/lecture_2/4.gif" width="600">
 
 - html
