@@ -69,7 +69,7 @@
 - 문서가 매우 잘 정리되어 있고, 한글 번역도 매우 훌륭함
 - ~~개떡~~같이 만들어도 동작은 잘 하는편 (React같이 엄격하지 않음, Magic이 있음)
 
-> 공식문서 👉[시작하기 - Vue.js](`https://kr.vuejs.org/v2/guide/`)  
+> 공식문서 👉[시작하기 - Vue.js](https://kr.vuejs.org/v2/guide/)  
 > 추천 영상 👉 [Learn Vue.js with our Courses - Vue Mastery](https://www.vuemastery.com/courses/) (일부 유료)
 
 
