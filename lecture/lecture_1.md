@@ -9,9 +9,6 @@
   [risingstars.js.org](https://risingstars.js.org/2018/en/)
   </sup>
 
-<div class="page" />
-
-
 ## npm-stat 확인
 [npm-stat.com](https://npm-stat.com/charts.html?package=react&package=vue)
 
@@ -23,16 +20,13 @@
 ## Developer Survey Results 2019
 > **React.js and Vue.js are both the most loved and most wanted web frameworks by developers, while Drupal and jQuery are most dreaded.**
 
-<img src="./images/lecture_1/1-3.png" width="300">
-<img src="./images/lecture_1/1-4.png" width="300">
+<img src="./images/lecture_1/1-3.png" width="600">
 
 <sup>이미지 출처 : 
 [stackoverflow-Developer Survey Results 2019](https://insights.stackoverflow.com/survey/2019#technology-_-most-loved-dreaded-and-wanted-web-frameworks)
 </sup>
 
 > `Vue.js`는 매우 사랑받는 Web Framework 중 하나이고 `Jquery`는 기피하는 현상을 볼 수 있음
-
-<div class="page" />
 
 
 # Vue.js 의 장점
@@ -54,8 +48,6 @@
   - Router 기능 지원 (Client Side Routing)
   - Dynamic UI 의 웹 페이지를 만들 때 유리
 
-<div class="page" />
-
 ## 진입 장벽이 (상대적으로) 낮음
 - (상대적으로) 간단하고 쉬운 코드
 - 필요 기술 스택
@@ -72,9 +64,6 @@
 
 > 공식문서 👉[시작하기 - Vue.js](https://kr.vuejs.org/v2/guide/)  
 > 추천 영상 👉 [Learn Vue.js with our Courses - Vue Mastery](https://www.vuemastery.com/courses/) (일부 유료)
-
-
-<div class="page" />
 
 ## 리액트와 앵귤러의 장점을 포함하면서 Jquery를 대체 가능한 프레임워크
 ### 2-Way Binding (Angular)
@@ -106,6 +95,7 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
 > 위 표에서 렌더링 속도와 메모리 사용 값은 특정 상황을 가정하여 여러 Front-End Framework의 속도 및 성능을 테스트 한 결과값을 표기하였습니다.  
 >([출처 : Rendering Speed & Performance challenge with Famous Front-End Framework](https://medium.com/thothzocial-engineering/rendering-speed-performance-challenge-with-famous-front-end-framework-196c876a68af) )
 
+
 # Vue.js 주요컨셉
 ## Inspired by MVVM Pattern 
 - View
@@ -118,8 +108,6 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
 애플리케이션의 로직(ViewModel)과 사용자 UI(View)를 분리
 
 <img src="./images/lecture_1/3-1.png" width="500">
-
-<div class="page" />
 
 ## Single File Component
 - 하나의 `.vue`파일에서 HTML/CSS/JavaScript를 모두 기술하게 함
@@ -136,8 +124,6 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
   - Single File Component 컨셉을 지키게 되면 컴포넌트의 응집력과 유지 보수와 재사용성이 높아짐
 
 > 현대적인 UI 개발에서 코드베이스를 서로 얽혀있는 세 개의 거대한 레이어로 나누는 대신, 느슨하게 결합 된 컴포넌트로 나누고 구성하는 것이 더 중요 
-
-<div class="page" />
 
 ## Virtual DOM
 **효율적인 DOM 조작을 위해 사용**
@@ -159,9 +145,8 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
 **이는 리소스를 상대적으로 많이 차지하는 Reflow(Layout)와 Repaint 작업을 계속 발생시킴**  
 > 예를 들어 30개의 노드를 하나 하나 수정하면, 그 뜻은 30번의 (잠재적인) 레이아웃 재계산과 30번의 (잠재적인) 리렌더링을 초래한다는 뜻
 
-<div class="page" />
-
 😎**이런 비효율을 개선하기 위해 Virtual DOM이 등장**  
+
 <img src="./images/lecture_1/6.png" width="500">
 
 <sup>이미지 출처: 
@@ -171,7 +156,6 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
 - Real DOM 대신 DOM 트리의 변화를 체크하고 **모든 변화를 하나로 묶어서 던져주면 연산의 횟수를 줄일 수 있음**
   (~~연산의 규모는 커질 수 있지만~~)
 
-<div class="page" />
 
 # 개발환경 설정
 ## Node.js 설치
@@ -215,7 +199,6 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
   3.9.3
   ```
 
-<div class="page" />
 
 # 첫번째 Vue.js Application 
 > 아주 간단한 Application 이기 때문에 [CodePen](https://codepen.io/pen/)에서 실습
@@ -247,8 +230,19 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
   ```
 - 모두 입력 후 `Ctrl` + `Enter` 
 
+
 # 첫번째 Vue.js Application 분석
 - Vue 객체 생성 시 지정된 옵션에 의해 **HTML요소**와 **데이터** 참조
 - 선언적으로 HTML DOM에 데이터를 렌더링 하기 위해 콧수염 표현식 사용
   <img src="./images/lecture_1/10.png" width="600">
 
+
+## 참고자료
+[Vue.js 퀵 스타트](http://www.yes24.com/Product/Goods/45091747)  
+[stepanowon/vuejs_book_2nd: Vue.js QuickStart 2판](https://github.com/stepanowon/vuejs_book_2nd)  
+[Our Courses | Vue Mastery](https://www.vuemastery.com/courses/)  
+[React 인가 Vue 인가?](https://joshua1988.github.io/web_dev/vue-or-react/)  
+[Vue.js 입문자를 위한 공개 세미나](https://www.slideshare.net/GihyoJoshuaJang/do-it-vuejs-88453012)  
+[[Vuetorials] 2. 전반적인 concept](https://jaeyeophan.github.io/2018/10/21/Vuetorials-2-Vue-concept/)  
+[[Vue.JS] 반응형 시스템](https://beomy.tistory.com/66)  
+[이제와서 JQUERY를 쓰면 안되는 이유, 혹은 JQUERY와 웹개발의 역사](https://www.tokyobranch.net/archives/6598)

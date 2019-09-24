@@ -1,62 +1,13 @@
 # 쇼핑몰 예제 코드 작성 (**Step_0**)
-<img src="./images/lecture_2/1.png" width="600">
+<img src="./images/lecture_2/step_0.png" width="600">
 
-- 작업폴더 만들기
+- 예제 소스 내려받기
   ```bash
-  $> mkdir example1
-  $> cd example1
+  $> git clone https://github.com/wooyoung85/vuejs-study.git
+  $> cd vuejs-study/example
   ## Visual Studio Code 실행
   $> code .
   ```
-- `index.html` 생성
-- 코드 입력
-  ```html
-  <!DOCTYPE html>
-  <html lang="ko">
-
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ShoppingMall Example</title>
-    <style>
-      body{font-family:tahoma;color:#282828;margin:0}.nav-bar{background:linear-gradient(-90deg,#84cf6a,#16c0b0);height:60px;margin-bottom:15px}.product{display:flex}img{border:1px solid #d8d8d8;width:70%;margin:40px;box-shadow:0 .5px 1px #d8d8d8}.product-image{flex-basis:700px}.product-info{margin-top:10px;flex-basis:500px}.color-box{width:40px;height:40px;margin-top:5px}.cart{margin-right:25px;float:right;border:1px solid #d8d8d8;padding:5px 20px}button{margin-top:30px;border:none;background-color:#1e95ea;color:#fff;height:40px;width:100px;font-size:14px}.disabledButton{background-color:#d8d8d8}.review-form{width:30%;padding:20px;border:1px solid #d8d8d8}input{width:100%;height:25px;margin-bottom:20px}textarea{width:100%;height:60px}
-    </style>
-  </head>
-
-  <body>
-    <div class="nav-bar"></div>
-    <div id="app">
-      <div class="product">
-        <div class="product-image">
-          <img :src="image" />
-        </div>
-        <div class="product-info">
-          <h1>{{ product }}</h1>
-          <a :href="link" target="_blank">더 많은 상품을 보고 싶으시다면...</a>
-        </div>
-      </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script>
-      var model = {
-        product: 'Socks',
-        image: 'https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg',
-        link: 'https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=socks'
-      }
-
-      var app = new Vue({
-        el: '#app',
-        data: model
-      })
-    </script>
-  </body>
-
-  </html>
-  ```
-
-> ### HTML은 주로 `<div class="product-info"></div>` 영역에 있는 코드만 수정할 예정이니 차근차근 잘 따라해 보시기 바랍니다 😎
 
 # 디렉티브 (Directive)
 ## 선언적 렌더링 (`{{}}`, `v-text`, `v-html`)
@@ -95,28 +46,10 @@
 |`v-show`| 일단 HTML Element를 렌더링 한 후 조건에 맞춰 display 스타일 속성 조정 |  
 
 ### 쇼핑몰 예제 코드 추가 (**Step_1**)
-<img src="./images/lecture_2/2.gif" width="600">
+[index_step_1.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_1.html) 파일 참고
 
-- html
-  ```html
-  ...
-  <div class="product-info">
-    <h1>{{ product }}</h1>
-    <p v-if="inStock">재고 있음</p>
-    <p v-else>재고 없음</p>
-  </div>
-  ...
-  ```
-- javascript
-  ```js
-  // model에 데이터 추가
-  var model = {
-    product: 'Socks',
-    image: 'https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg',
-    inStock: true,
-  }
-  ...
-  ```
+<img src="./images/lecture_2/step_1.gif" width="600">
+
 
 ## 반복 렌더링 (`v-for`)
 **리스트 같이 반복적인 데이터를 렌더링 할 때 사용**
@@ -139,46 +72,9 @@
   ```
 
 ### 쇼핑몰 예제 코드 추가 (**Step_2**)
-<img src="./images/lecture_2/3.png" width="600">
+[index_step_2.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_2.html) 파일 참고
 
-- html
-  ```html
-  ...
-  <div class="product-info">
-    ...
-    <ul>
-      <li v-for="detail in details">{{ detail }}</li>
-    </ul>
-    <ul>
-      <li v-for="size in sizes">{{ size }}</li>
-    </ul>
-    <div v-for="variant in variants" :key="variant.variantId">
-      <p>{{ variant.variantColor }}</p>
-    </div>
-  </div> 
-  ```
-- javascript
-  ```js
-  // model에 데이터 추가
-  var model = {
-    ...
-    details: ['80% cotton', '20% polyester', 'Gender-neutral'],
-    variants: [
-      {
-        variantId: 2234,
-        variantColor: 'green',
-        variantImage: 'https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg'
-      },
-      {
-        variantId: 2235,
-        variantColor: 'blue',
-        variantImage: 'https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg'
-      }
-    ],
-    cart: 0,
-    sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
-  }
-  ```
+<img src="./images/lecture_2/step_2.png" width="600">
 
 > `v-for` 구문 사용시 `key` Attribute를 부여하면 DOM요소를 추적하는 것이 가능해짐  
 > `key` 값은 보통 고유한 값을 부여하게 됨(DB 조회 결과 값 같은 경우에는 Primary Key)  
@@ -211,49 +107,9 @@
   ```
 
 ### 쇼핑몰 예제 코드 추가 (**Step_3**)
-<img src="./images/lecture_2/4.gif" width="600">
+[index_step_3.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_3.html) 파일 참고
 
-- html
-  ```html
-  ...
-  <div class="product-info">
-    ...
-    <div v-for="variant in variants" :key="variant.variantId">
-      <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }}</p>
-    </div>
-    <button v-on:click="addToCart">장바구니 담기</button>
-    <button @click="removeFromCart">장바구니 빼기</button>
-    <div class="cart">
-      <p>Cart({{ cart }})</p>
-    </div>
-  </div>
-  ...
-  ```
-- javascript
-  ```javascript
-  // Vue 객체 옵션 중 methods 항목 추가
-  var app = new Vue({
-    el: '#app',
-    data: model,
-    methods: {
-      addToCart() {
-        this.cart += 1
-      },
-      updateProduct(variantImage) {
-        this.image = variantImage
-      },
-      removeFromCart() {
-        let c = parseInt(this.cart)
-        if (c <= 0) {
-          alert("장바구니가 비었습니다.")
-        }
-        else{
-          this.cart -= 1
-        }
-      }
-    }
-  })
-  ```
+<img src="./images/lecture_2/step_3.gif" width="600">
 
 ## Class & Style 바인딩
 ### 인라인 스타일 (`v-bind:style`)
@@ -268,43 +124,16 @@
 ### CSS 클래스 바인딩 (`v-bind:class`)
 - 개별적인 클래스 단위로 true가 되면 클래스가 주어짐
 
-### 쇼핑몰 예제 (Step_4)
-<img src="./images/lecture_2/5.gif" width="600">
+### 쇼핑몰 예제 코드 추가 (**Step_4**)
+[index_step_4.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_4.html) 파일 참고
 
-- html
-  ```html
-  ...
-  <div class="product-info">
-    ...
+<img src="./images/lecture_2/step_4.gif" width="600">
 
-    <div class="color-box" v-for="variant in variants" :key="variant.variantId"
-      :style="{ backgroundColor: variant.variantColor }"
-      @mouseover="updateProduct(variant.variantImage, variant.variantColor)">
-    </div>
+## 양방향 렌더링 (`v-model`)
+여태 살펴본 디렉티브들은 HTML Element 값을 변경해도 모델 객체의 값이 변경되지 않음  
+`v-model` 디렉티브를 사용하여 폼 `input`과 `textarea` 엘리먼트에 양방향 데이터 바인딩을 생성할 수 있음
 
-    <button v-on:click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">장바구니 담기</button>
-    <button @click="removeFromCart">장바구니 빼기</button>
-
-    <div class="cart">
-      <p>Cart({{ cart }})</p>
-    </div>
-
-  </div>
-  ...
-  ```
-
-- javascript
-  ```js
-  updateProduct(variantImage, variantColor) {
-    this.image = variantImage
-    if(variantColor === 'blue'){
-      this.inStock = false
-    }
-    else {
-      this.inStock = true
-    }
-  },
-  ```
+<img src="./images/lecture_2/v-model.gif" width="600">
 
 ## Computed 속성
 템플릿 안에서는 단순한 연산만 사용이 가능하기 때문에 복잡한 계산식을 계산해서 return해 줄 수 있는 `computed` 속성 필요
@@ -312,7 +141,7 @@
 - 템플릿
   ```html
   <!-- 템플릿에 복잡한 계산식을 넣으면 재사용성이 떨어지고 관리가 안됨 -->
-  <div id="example">
+  <div id="app">
     {{ message.split('').reverse().join('') }}
   </div>
   ```
@@ -321,14 +150,14 @@
   - computed 속성은 계산된 값이 캐싱됨
   - computed 속성은 종속된 대상이 변경될 때만 함수가 실행됨
   ```html
-  <div id="example">
+  <div id="app">
     <p>원본 메시지: "{{ message }}"</p>
     <p>역순으로 표시한 메시지: "{{ reversedMessage }}"</p>
   </div>
 
   <script>
   var vm = new Vue({
-    el: '#example',
+    el: '#app',
     data: {
       message: '안녕하세요'
     },
@@ -362,24 +191,48 @@
 ### 이와 비슷한 속성 중 Wathch 라는 관찰형 속성도 있는데 비동기 처리가 필요할 때 유용하다고만 알아두고 넘어가겠습니다.  
 > 당연히 computed는 동기 처리를 하겠죠??
 
-## 양방향 렌더링 (`v-model`)
+### 쇼핑몰 예제 코드 추가 (**Step_5**)
+[index_step_5.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_5.html) 파일 참고
 
-## 기타 디렉티브
+<img src="./images/lecture_2/step_5.gif" width="600">
 
-### `v-pre`
+
+# 기타 디렉티브
+## `v-pre`
 템플릿 문자열을 컴파일 하지 않고 문자열 그대로 출력
 
-- Expression
-  ```html
-  <p v-pre>{{message}}</p>
-  ```
+### Expression
+```html
+<p v-pre>{{message}}</p>
+```
 
-### `v-once`
+## `v-once`
 Html Element를 딱 한번만 렌더링 (초기값이 주어지면 변경 안됨)
 
-- Expression
-  ```html
-  <p v-once>{{message}}</p>
-  ```
+### Expression
+```html
+<p v-once>{{message}}</p>
+```
 
-### `v-cloak`
+## `v-cloak`
+템플릿 문자열이 잠깐 나타났다 사라지는 현상을 막아줌
+
+### Expression
+```html
+...
+<style>
+  ...
+  [v-cloak] {display:none;}
+</style>
+
+<div id="app" v-cloak>
+...
+</div>
+...
+```
+
+
+## 참고자료
+[Vue.js 퀵 스타트](http://www.yes24.com/Product/Goods/45091747)  
+[stepanowon/vuejs_book_2nd: Vue.js QuickStart 2판](https://github.com/stepanowon/vuejs_book_2nd)  
+[Our Courses | Vue Mastery](https://www.vuemastery.com/courses/) 

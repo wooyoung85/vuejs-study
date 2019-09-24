@@ -56,3 +56,9 @@ vm.b = 2
 ## Vue는 DOM 업데이트를 비동기로 동작한다는데 문제는 없을까?
 - Vue.nextTick() 
 - this.$nextTick() -> Vue 인스턴스 내부에서
+
+
+
+
+# Components
+Components are reusable blocks of code that can have both structure and functionality. They help create a more modular and maintainable codebase.

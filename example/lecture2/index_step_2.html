@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ShoppingMall Example</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
@@ -38,51 +38,27 @@
   <script>
     var model = {
       product: 'Socks',
-      image: 'https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg',
+      image: './assets/vmSocks-green-onWhite.jpg',
       inStock: true,
       details: ['80% cotton', '20% polyester', 'Gender-neutral'],
       variants: [
         {
           variantId: 2234,
           variantColor: 'green',
-          variantImage: 'https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg'
+          variantImage: './assets/vmSocks-green-onWhite.jpg'
         },
         {
           variantId: 2235,
           variantColor: 'blue',
-          variantImage: 'https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg'
+          variantImage: './assets/vmSocks-blue-onWhite.jpg'
         }
       ],
-      cart: 0,
       sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
     }
 
     var app = new Vue({
       el: '#app',
-      data: model,
-      methods: {
-        addToCart() {
-          this.cart += 1
-        },
-        updateProduct(variantImage, variantColor) {
-          this.image = variantImage
-          if (variantColor === 'blue') {
-            this.inStock = false
-          }
-          else {
-            this.inStock = true
-          }
-        },
-        removeFromCart() {
-          let c = parseInt(this.cart)
-          if (c <= 0) {
-            alert("장바구니가 비었습니다.")
-          }
-          else {
-            this.cart -= 1
-          }
-        }
-      }
+      data: model
     })
   </script>
 </body>
