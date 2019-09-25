@@ -21,7 +21,7 @@
 |<img src="./images/lecture_3/2-2.png">|<img src="./images/lecture_3/1-2.png">|
 |<img src="./images/lecture_3/2-1.gif">|<img src="./images/lecture_3/1-1.gif">|
 
-> javascript는 절차적으로 코드를 처리하게 되는데 `price` 나 `quantity` 값의 변화가 이미 계산된 `total`, `totalPriceWithTax` 에 영향을 끼칠 수 있을까???
+> ### javascript는 절차적으로 코드를 처리하게 되는데 어떻게 `price` 나 `quantity` 값의 변화가 이미 계산된 `total`, `totalPriceWithTax` 에 영향을 끼칠 수 있을까???
 
 ## 간단한 Reactivity System 구현 (with. `Dependency Class` & `Object.defineProperty`)
 ```js
