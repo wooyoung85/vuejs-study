@@ -49,8 +49,8 @@
 다른 디렉티브들은 HTML Element 값을 변경해도 모델 객체의 값이 변경되지 않음  
 `input`과 `textarea` 에 `v-model` 디렉티브를 사용하면 양방향 데이터 바인딩을 생성할 수 있음
 
-### 쇼핑몰 예제 코드 추가 (**Step_1**)
-[index_step_1.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_1.html) 파일 참고
+### 쇼핑몰 예제 코드 작성 (**Step_1**)
+[shop_step_1.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/shop_step_1.html) 파일 참고
 
 |단방향 바인딩|양방향 바인딩|
 |-|-|
@@ -76,8 +76,8 @@
   </option>
   ```
 
-### 쇼핑몰 예제 코드 추가 (**Step_2**)
-[index_step_2.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_2.html) 파일 참고
+### 쇼핑몰 예제 코드 작성 (**Step_2**)
+[shop_step_2.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/shop_step_2.html) 파일 참고
 
 <img src="./images/lecture_2/step_2.png" width="600">
 
@@ -111,8 +111,8 @@
   </script>
   ```
 
-### 쇼핑몰 예제 코드 추가 (**Step_3**)
-[index_step_3.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_3.html) 파일 참고
+### 쇼핑몰 예제 코드 작성 (**Step_3**)
+[shop_step_3.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/shop_step_3.html) 파일 참고
 
 <img src="./images/lecture_2/step_3.gif" width="600">
 
@@ -129,8 +129,8 @@
 ### CSS 클래스 바인딩 (`v-bind:class`)
 - 개별적인 클래스 단위로 true가 되면 클래스가 주어짐
 
-### 쇼핑몰 예제 코드 추가 (**Step_4**)
-[index_step_4.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_4.html) 파일 참고
+### 쇼핑몰 예제 코드 작성 (**Step_4**)
+[shop_step_4.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/shop_step_4.html) 파일 참고
 
 <img src="./images/lecture_2/step_4.gif" width="600">
 
@@ -190,8 +190,8 @@
 ### 이와 비슷한 속성 중 Wathch 라는 관찰형 속성도 있는데 비동기 처리가 필요할 때 유용하다고만 알아두고 넘어가겠습니다.  
 > 당연히 computed는 동기 처리를 하겠죠??
 
-### 쇼핑몰 예제 코드 추가 (**Step_5**)
-[index_step_5.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_5.html) 파일 참고
+### 쇼핑몰 예제 코드 작성 (**Step_5**)
+[shop_step_5.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/shop_step_5.html) 파일 참고
 
 <img src="./images/lecture_2/step_5.gif" width="600">
 

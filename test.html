@@ -1,0 +1,25 @@
+<div id="app">
+  <div id="num">{{num}}</div>
+  <button @click="add">100씩 증가</button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  var getfunc = function () {
+    var strNum = document.getElementById("num").innerHTML;
+    console.log(strNum);
+  }
+
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      num: 100
+    },
+    methods: {
+      add: function () {
+        this.num += 100
+        getfunc()
+        //this.$nextTick(getfunc);
+      }
+    }
+  })
+</script>
