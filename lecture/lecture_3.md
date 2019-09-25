@@ -87,6 +87,7 @@ watcher(totalfunc)
 
 > 대략적으로 이런 작업을 거쳐 data에 있는 속성들은 **반응(reactive) 속성**이 된다
 
+## 실제 Vue.js Reactivity System
 <img src="./images/lecture_3/3.png" width="500">
 
 - 각 Component별로 Watcher 인스턴스를 가지게 됨
@@ -94,7 +95,7 @@ watcher(totalfunc)
 - Watcher는 Virtual DOM에 변경사항을 기록하고 re-render 를 명령함(비동기)
 
 
-## 인스턴스에 속성이 동적으로 추가된다면??
+## 만약에 인스턴스 속성이 동적으로 추가된다면??
 👉 이미 만들어진 인스턴스에 반응 속성을 동적으로 추가하는 것은 허용되지 않음
 ```js
 var vm = new Vue({
@@ -116,9 +117,13 @@ vm.b = 2
 - 버퍼링을 거쳐서 큐에 푸시가 되면 이벤트 루프 tick이 큐에 있는 내용을 Flush하면서 실제 DOM을 업데이트 함
 
 ## Vue는 DOM 업데이트를 비동기로 동작한다는데 문제는 없을까?
-- Vue.nextTick() 
-- this.$nextTick() -> Vue 인스턴스 내부에서 사용시
-- 
+일반적으로는 문제가 없겠지만 렌더링 된 값에 의존하는 로직이 있다면 문제가 생길수도 있음
+
+### 해결책
+- `Vue.nextTick()` 
+- `this.$nextTick()` 👈 Vue 인스턴스 내부에서 사용시
+
+### 예제코드
 ```html
 <div id="app">
   <div id="num">{{num}}</div>
@@ -146,9 +151,6 @@ vm.b = 2
   })
 </script>
 ```
-
- 
-
 
 
 ## 참고자료
