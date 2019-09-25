@@ -45,11 +45,16 @@
 |`v-if`| 조건에 맞지 않으면 렌더링 안함 |
 |`v-show`| 일단 HTML Element를 렌더링 한 후 조건에 맞춰 display 스타일 속성 조정 |  
 
+## 양방향 렌더링 (`v-model`)
+다른 디렉티브들은 HTML Element 값을 변경해도 모델 객체의 값이 변경되지 않음  
+`input`과 `textarea` 에 `v-model` 디렉티브를 사용하면 양방향 데이터 바인딩을 생성할 수 있음
+
 ### 쇼핑몰 예제 코드 추가 (**Step_1**)
 [index_step_1.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_1.html) 파일 참고
 
-<img src="./images/lecture_2/step_1.gif" width="600">
-
+|단방향 바인딩|양방향 바인딩|
+|-|-|
+|<img src="./images/lecture_2/step_1_1.gif">|<img src="./images/lecture_2/step_1_2.gif">|
 
 ## 반복 렌더링 (`v-for`)
 **리스트 같이 반복적인 데이터를 렌더링 할 때 사용**
@@ -128,12 +133,6 @@
 [index_step_4.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/index_step_4.html) 파일 참고
 
 <img src="./images/lecture_2/step_4.gif" width="600">
-
-## 양방향 렌더링 (`v-model`)
-여태 살펴본 디렉티브들은 HTML Element 값을 변경해도 모델 객체의 값이 변경되지 않음  
-`v-model` 디렉티브를 사용하여 폼 `input`과 `textarea` 엘리먼트에 양방향 데이터 바인딩을 생성할 수 있음
-
-<img src="./images/lecture_2/v-model.gif" width="600">
 
 ## Computed 속성
 템플릿 안에서는 단순한 연산만 사용이 가능하기 때문에 복잡한 계산식을 계산해서 return해 줄 수 있는 `computed` 속성 필요
@@ -216,6 +215,8 @@ Html Element를 딱 한번만 렌더링 (초기값이 주어지면 변경 안됨
 
 ## `v-cloak`
 템플릿 문자열이 잠깐 나타났다 사라지는 현상을 막아줌
+
+<img src="./images/lecture_2/v-cloak.gif" width="600">
 
 ### Expression
 ```html

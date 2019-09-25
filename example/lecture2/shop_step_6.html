@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ShoppingMall Example</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+
+<body>
+  <div class="nav-bar"></div>
+  <div id="app">
+    <product></product>
+    <product></product>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <template id="productTemplate">
+    <div class="product">
+      <div class="product-image">
+        <img :src="image.front" class="viewer-image" />
+        <img :src='image.side' class="viewer-image" />
+        <img :src="image.back" class="viewer-image" />
+        <img :src="image.flip" class="viewer-image" />
+      </div>
+      <div class="product-info">
+        <h1>{{ title }}</h1>
+
+        <p>{{ sale }}</p>
+
+        <h3>용량</h3>
+        <ul>
+          <li v-for="volume in volumes">{{ volume }}</li>
+        </ul>
+
+        <h3>가입유형</h3>
+        <ul>
+          <li v-for="regType in regTypes">{{ regType }}</li>
+        </ul>
+
+        <h3>색상</h3>
+        <div class="color-info">
+          <div v-for="(variant, index) in variants" :key="variant.variantId"
+            :style="{ backgroundColor: variant.variantColorCode }" @mouseover="updateProduct(index)" class="color-box">
+          </div>
+        </div>
+
+        <button v-on:click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">장바구니 담기</button>
+        <button @click="removeFromCart">장바구니 빼기</button>
+
+        <div class="cart">
+          <p>Cart({{ cart }})</p>
+        </div>
+      </div>
+    </div>
+  </template>
+  <script>
+    Vue.component('product', {
+      template: '#productTemplate',
+      data() {
+        return {
+          brand: "Samsung",
+          selectedVariant: 0,
+          product: '핸드폰',
+          cart: 0,
+          regTypes: ['기기변경', '번호이동', '신규가입'],
+          variants: [
+            {
+              variantId: 1,
+              variantColor: '프리즘 그린',
+              variantColorCode: '#32829D',
+              variantImage: 'A0ZA_001',
+              variantQuantity: 10
+            }, {
+              variantId: 2,
+              variantColor: '프리즘 블랙',
+              variantColorCode: '#231F20',
+              variantImage: 'A0Z6_001',
+              variantQuantity: 2
+            }, {
+              variantId: 3,
+              variantColor: '프리즘 화이트',
+              variantColorCode: '#D2EDF4',
+              variantImage: 'A0Z8_001',
+              variantQuantity: 0
+            },
+            {
+              variantId: 4,
+              variantColor: '플라밍고 핑크',
+              variantColorCode: '#F2756D',
+              variantImage: 'A13T_001',
+              variantQuantity: 100
+            }
+          ],
+          volumes: ['32GB', '64GB', '128GB', '512GB']
+        }
+      },
+      methods: {
+        addToCart() {
+          this.cart += 1
+        },
+        updateProduct(index) {
+          this.selectedVariant = index
+        },
+        removeFromCart() {
+          let c = parseInt(this.cart)
+          if (c <= 0) {
+            alert("장바구니가 비었습니다.")
+          }
+          else {
+            this.cart -= 1
+          }
+        }
+      },
+      computed: {
+        title() {
+          return this.brand + ' ' + this.product
+        },
+        image() {
+          return this.variants[this.selectedVariant].variantImage
+        },
+        inStock() {
+          return this.variants[this.selectedVariant].variantQuantity
+        },
+        sale() {
+          if (this.inStock) {
+            return this.brand + ' ' + this.product + ' ' + this.variants[this.selectedVariant].variantColor + ' 판매중입니다!'
+          }
+          return this.brand + ' ' + this.product + ' ' + this.variants[this.selectedVariant].variantColor + ' 완판되었습니다ㅠ.ㅠ'
+        },
+        image() {
+          return {
+            front: "./assets/" + this.variants[this.selectedVariant].variantImage + "_13.jpg",
+            side: "./assets/" + this.variants[this.selectedVariant].variantImage + "_14.jpg",
+            back: "./assets/" + this.variants[this.selectedVariant].variantImage + "_15.jpg",
+            flip: "./assets/" + this.variants[this.selectedVariant].variantImage + "_16.jpg",
+          }
+        }
+      }
+    })
+
+    var app = new Vue({
+      el: '#app',
+    })
+  </script>
+</body>
+
+</html>
