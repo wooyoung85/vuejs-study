@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ShoppingMall Example</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+  <div class="nav-bar"></div>
+  <div id="app">
+    <div class="cart floating-div">
+      <p>Cart({{ cart.length }})</p>
+      <ul v-for="item in cart">
+        <li>{{item}}</li>
+      </ul>
+    </div>
+    <div v-for="cellphone in cellphones">
+      <product :cellphone="cellphone" @add-to-cart="updateCart" @remove-from-cart="removeItem">
+      </product>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <template id="productTemplate">
+    <div class="product">
+      <div class="product-image">
+        <img :src="image.front" class="viewer-image" v-bind:class="{apple : cellphone.isApple}" />
+        <img :src='image.side' class="viewer-image" v-bind:class="{apple : cellphone.isApple}" />
+        <img :src="image.back" class="viewer-image" v-bind:class="{apple : cellphone.isApple}" />
+        <img :src="image.flip" class="viewer-image" v-bind:class="{apple : cellphone.isApple}" />
+      </div>
+      <div class="product-info">
+        <h1>{{ title }}</h1>
+
+        <p>{{ sale }}</p>
+
+        <h3>용량</h3>
+        <ul>
+          <li v-for="volume in volumes">{{ volume }}</li>
+        </ul>
+
+        <h3>가입유형</h3>
+        <ul>
+          <li v-for="regType in regTypes">{{ regType }}</li>
+        </ul>
+
+        <h3>색상</h3>
+        <div class="color-info">
+          <div v-for="(variant, index) in cellphone.variants" :key="variant.variantId"
+            :style="{ backgroundColor: variant.variantColorCode }" @mouseover="updateProduct(index)" class="color-box">
+          </div>
+        </div>
+
+        <button @click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">장바구니 담기</button>
+        <button @click="removeFromCart">장바구니 빼기</button>
+      </div>
+    </div>
+  </template>
+  <script>
+    Vue.component('product', {
+      template: '#productTemplate',
+      props: {
+        cellphone: {
+          type: Object,
+          required: true
+        }
+      },
+      data() {
+        return {
+          selectedVariant: 0,
+          regTypes: ['기기변경', '번호이동', '신규가입'],
+          volumes: ['32GB', '64GB', '128GB', '512GB']
+        }
+      },
+      methods: {
+        updateProduct(index) {
+          this.selectedVariant = index
+        },
+        addToCart() {
+          this.$emit('add-to-cart', this.cellphone.variants[this.selectedVariant].variantId)
+        },
+        removeFromCart() {
+          this.$emit('remove-from-cart', this.cellphone.variants[this.selectedVariant].variantId)
+        }
+      },
+      computed: {
+        title() {
+          return this.cellphone.brand + ' ' + this.cellphone.product
+        },
+        image() {
+          return this.cellphone.variants[this.selectedVariant].variantImage
+        },
+        inStock() {
+          return this.cellphone.variants[this.selectedVariant].variantQuantity
+        },
+        sale() {
+          if (this.inStock) {
+            return this.cellphone.brand + ' ' + this.cellphone.product + ' ' + this.cellphone.variants[this.selectedVariant].variantColor + ' 판매중입니다!'
+          }
+          return this.cellphone.brand + ' ' + this.cellphone.product + ' ' + this.cellphone.variants[this.selectedVariant].variantColor + ' 완판되었습니다ㅠ.ㅠ'
+        },
+        image() {
+          return {
+            front: "./assets/images/" + this.cellphone.product + "/" + this.cellphone.variants[this.selectedVariant].variantImage + "_13.jpg",
+            side: "./assets/images/" + this.cellphone.product + "/" + this.cellphone.variants[this.selectedVariant].variantImage + "_14.jpg",
+            back: "./assets/images/" + this.cellphone.product + "/" + this.cellphone.variants[this.selectedVariant].variantImage + "_15.jpg",
+            flip: "./assets/images/" + this.cellphone.product + "/" + this.cellphone.variants[this.selectedVariant].variantImage + "_16.jpg"
+          }
+        }
+      }
+    })
+
+    var model = {
+      cart: [],
+      cellphones: [
+        {
+          brand: "Samsung",
+          product: 'Galaxy S10',
+          isApple: false,
+          variants: [
+            {
+              variantId: 11,
+              variantColor: '프리즘 그린',
+              variantColorCode: '#32829D',
+              variantImage: 'A0ZA_001',
+              variantQuantity: 10
+            }, {
+              variantId: 12,
+              variantColor: '프리즘 블랙',
+              variantColorCode: '#231F20',
+              variantImage: 'A0Z6_001',
+              variantQuantity: 2
+            }, {
+              variantId: 13,
+              variantColor: '프리즘 화이트',
+              variantColorCode: '#D2EDF4',
+              variantImage: 'A0Z8_001',
+              variantQuantity: 0
+            },
+            {
+              variantId: 14,
+              variantColor: '플라밍고 핑크',
+              variantColorCode: '#F2756D',
+              variantImage: 'A13T_001',
+              variantQuantity: 100
+            }
+          ]
+        },
+        {
+          brand: "Apple",
+          product: 'iPhone XR',
+          isApple: true,
+          variants: [
+            {
+              variantId: 21,
+              variantColor: '옐로',
+              variantColorCode: '#F9D045',
+              variantImage: 'A0QP_001',
+              variantQuantity: 10
+            }, {
+              variantId: 22,
+              variantColor: '화이트',
+              variantColorCode: '#F3F3F3',
+              variantImage: 'A0QM_001',
+              variantQuantity: 2
+            }, {
+              variantId: 23,
+              variantColor: 'Product Red',
+              variantColorCode: '#B41325',
+              variantImage: 'A0QN_001',
+              variantQuantity: 0
+            },
+            {
+              variantId: 24,
+              variantColor: '코럴',
+              variantColorCode: '#FF6E5A',
+              variantImage: 'A0QQ_001',
+              variantQuantity: 10
+            },
+            {
+              variantId: 25,
+              variantColor: '블루',
+              variantColorCode: '#48AEE6',
+              variantImage: 'A0QR_001',
+              variantQuantity: 0
+            },
+            {
+              variantId: 26,
+              variantColor: '블랙',
+              variantColorCode: '#2E3034',
+              variantImage: 'A0PY_001',
+              variantQuantity: 100
+            }
+          ]
+        }
+      ]
+    }
+
+    var app = new Vue({
+      el: '#app',
+      data: model,
+      methods:{
+        updateCart(id) {
+          this.cart.push(id)
+        },
+        removeItem(id) {
+          for(var i = this.cart.length - 1; i >= 0; i--) {
+            if (this.cart[i] === id) {
+               this.cart.splice(i, 1);
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
