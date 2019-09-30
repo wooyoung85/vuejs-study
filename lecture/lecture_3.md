@@ -9,19 +9,29 @@
 
 ## 전역 컴포넌트
 
-## 
-
-## 앞에서 작성했던 코드들을 Component화 시켜보자 (Step_6)
+### 쇼핑몰 예제 코드 작성 (**Step_6**)
 - [shop_step_6.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_6.html) 파일 참고
+
+## 지역 컴포넌트
+
+## Props
+
+## Emit
+
+## EventBus
+
+### 쇼핑몰 예제 코드 작성 (**Step_7**)
+- [shop_step_7.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_7.html) 파일 참고
+
 
 # Vue.js Reactivity System
 ## 예제 코드
-|Vanila Javascript|Vue.js|
-|-|-|
-|<img src="./images/lecture_3/2-2.png">|<img src="./images/lecture_3/1-2.png">|
-|<img src="./images/lecture_3/2-1.gif">|<img src="./images/lecture_3/1-1.gif">|
+|#|Vanila Javascript|Vue.js|
+|-|-|-|
+|코드|<img src="./images/lecture_3/2-2.png" width="300px">|<img src="./images/lecture_3/1-2.png" width="300px">|
+|결과확인|<img src="./images/lecture_3/2-1.gif" width="300px">|<img src="./images/lecture_3/1-1.gif" width="300px">|
 
-> ### javascript는 절차적으로 코드를 처리하게 되는데 어떻게 `price` 나 `quantity` 값의 변화가 이미 계산된 `total`, `totalPriceWithTax` 에 영향을 끼칠 수 있을까???
+> ### javascript는 절차적으로 코드를 처리하게 되는데 어떻게 `price` 나 `quantity` 값의 변화가 <br/> 이미 계산된 `total`, `totalPriceWithTax` 에 영향을 끼칠 수 있을까???
 
 ## 간단한 Reactivity System 구현 (with. `Dependency Class` & `Object.defineProperty`)
 ```js
@@ -151,11 +161,6 @@ vm.b = 2
   })
 </script>
 ```
-
-<iframe src="https://player.vimeo.com/video/3514904" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-<p><a href="https://vimeo.com/3514904">Slagsm&aring;lsklubben - Sponsored by destiny</a> from <a href="https://vimeo.com/tomasnilsson">Tomas Nilsson</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-
 
 ## 참고자료
 [Vue.js 퀵 스타트](http://www.yes24.com/Product/Goods/45091747)  
