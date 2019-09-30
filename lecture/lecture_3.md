@@ -14,7 +14,7 @@ Vue.component('product', {})
 - 첫번째 인자값은 컴포넌트 명
 - 두번째 인자는 컴포넌트의 option들을 설정 (type은 object)
 
-### data 속성은 함수 형태로 선언
+### **data** 속성은 <span style="color:red">**함수**</span> 형태로 선언
 ```js
 Vue.component('product', {
   template: `<div></div>`,
@@ -31,14 +31,15 @@ Vue.component('product', {
 ### 쇼핑몰 예제 코드 작성 (**Step_6**)
 - [shop_step_6.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_6.html) 파일 참고
 
-## Props
-부모로부터 데이터를 전달받는 방법
+## Props (Pass Props)
+상위 컴포넌트에서 하위 컴포넌트로 데이터를 전달하는 방법
 
 ### 쇼핑몰 예제 코드 작성 (**Step_7**)
 - [shop_step_7.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_7.html) 파일 참고
 
 
-## Emit
+## Emit (Emit Events)
+하위 컴포넌트에서 상위 컴포넌트로 통신하는 방법
 
 ### 쇼핑몰 예제 코드 작성 (**Step_8**)
 - [shop_step_8.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_8.html) 파일 참고
