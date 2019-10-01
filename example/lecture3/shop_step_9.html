@@ -12,9 +12,7 @@
 <body>
   <div class="nav-bar"></div>
   <div id="app">
-    <div class="cart">
-      <p>Cart({{ cart }})</p>
-    </div>
+    <cart></cart>
     <div v-for="cellphone in cellphones">
       <product :cellphone="cellphone">
       </product>
@@ -22,6 +20,15 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <template id="cartTemplate">
+    <div class="cart floating-div">
+      <p>Cart({{ cartItems.length }})</p>
+      <ul v-for="cartitem in cartItems">
+        <li>{{cartitem}}</li>
+      </ul>
+    </div>
+  </template>
 
   <template id="productTemplate">
     <div class="product">
@@ -53,12 +60,39 @@
           </div>
         </div>
 
-        <button v-on:click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">장바구니 담기</button>
+        <button @click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">장바구니 담기</button>
         <button @click="removeFromCart">장바구니 빼기</button>
       </div>
     </div>
   </template>
   <script>
+    var eventBus = new Vue();
+
+    Vue.component('cart', {
+      template: '#cartTemplate',
+      data() {
+        return {
+          cartItems: []
+        }
+      },
+      methods: {
+        updateCart(id) {
+          this.cartItems.push(id)
+        },
+        removeItem(id) {
+          for (var i = this.cartItems.length - 1; i >= 0; i--) {
+            if (this.cartItems[i] === id) {
+              this.cartItems.splice(i, 1);
+            }
+          }
+        }
+      },
+      created() {
+        eventBus.$on('add-to-cart', this.updateCart);
+        eventBus.$on('remove-from-cart', this.removeItem);
+      }
+    })
+
     Vue.component('product', {
       template: '#productTemplate',
       props: {
@@ -75,20 +109,14 @@
         }
       },
       methods: {
-        addToCart() {
-          this.cart += 1
-        },
         updateProduct(index) {
           this.selectedVariant = index
         },
+        addToCart() {
+          eventBus.$emit('add-to-cart', this.cellphone.variants[this.selectedVariant].variantId)
+        },
         removeFromCart() {
-          let c = parseInt(this.cart)
-          if (c <= 0) {
-            alert("장바구니가 비었습니다.")
-          }
-          else {
-            this.cart -= 1
-          }
+          eventBus.$emit('remove-from-cart', this.cellphone.variants[this.selectedVariant].variantId)
         }
       },
       computed: {
@@ -126,26 +154,26 @@
           isApple: false,
           variants: [
             {
-              variantId: 1,
+              variantId: 11,
               variantColor: '프리즘 그린',
               variantColorCode: '#32829D',
               variantImage: 'A0ZA_001',
               variantQuantity: 10
             }, {
-              variantId: 2,
+              variantId: 12,
               variantColor: '프리즘 블랙',
               variantColorCode: '#231F20',
               variantImage: 'A0Z6_001',
               variantQuantity: 2
             }, {
-              variantId: 3,
+              variantId: 13,
               variantColor: '프리즘 화이트',
               variantColorCode: '#D2EDF4',
               variantImage: 'A0Z8_001',
               variantQuantity: 0
             },
             {
-              variantId: 4,
+              variantId: 14,
               variantColor: '플라밍고 핑크',
               variantColorCode: '#F2756D',
               variantImage: 'A13T_001',
@@ -159,40 +187,40 @@
           isApple: true,
           variants: [
             {
-              variantId: 1,
+              variantId: 21,
               variantColor: '옐로',
               variantColorCode: '#F9D045',
               variantImage: 'A0QP_001',
               variantQuantity: 10
             }, {
-              variantId: 2,
+              variantId: 22,
               variantColor: '화이트',
               variantColorCode: '#F3F3F3',
               variantImage: 'A0QM_001',
               variantQuantity: 2
             }, {
-              variantId: 3,
+              variantId: 23,
               variantColor: 'Product Red',
               variantColorCode: '#B41325',
               variantImage: 'A0QN_001',
               variantQuantity: 0
             },
             {
-              variantId: 4,
+              variantId: 24,
               variantColor: '코럴',
               variantColorCode: '#FF6E5A',
               variantImage: 'A0QQ_001',
               variantQuantity: 10
             },
             {
-              variantId: 5,
+              variantId: 25,
               variantColor: '블루',
               variantColorCode: '#48AEE6',
               variantImage: 'A0QR_001',
               variantQuantity: 0
             },
             {
-              variantId: 6,
+              variantId: 26,
               variantColor: '블랙',
               variantColorCode: '#2E3034',
               variantImage: 'A0PY_001',
@@ -200,8 +228,7 @@
             }
           ]
         }
-      ],
-      cart: []
+      ]
     }
 
     var app = new Vue({

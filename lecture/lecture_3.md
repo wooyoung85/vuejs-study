@@ -116,9 +116,23 @@ var totalfunc = function() {
 watcher(totalfunc)
 ```
 - Vue 인스턴스가 초기화 될 때 data(javascript object)에 있는 모든 속성별로  `Object.defineProperty()` 메서드를 사용하여 getter/setter 설정
-- getter 호출 시 dependency가 있는 target function 을 수집함
+- watcher 함수가 파라미터로 전달받은 target 함수를 실행하게 되면 dependency가 생김
+- 위 예제로 좀 더 자세히 설명해 본다면..
+  1. watcher가 total 함수를 실행 
+  2. price와 quantity 값을 각각의 getter로 호출
+  3. 이때 getter 함수는 target 함수를 각 data 속성 별로 subscribers에 등록
+
 - data 속성 값을 변경하기 위해 setter를 이용하게 됨
-- setter가 호출되면 내부 데이터를 변경하고 dependency가 있는 target function들을 실행함
+- setter가 호출되면 내부 데이터를 변경하고 dependency가 있는 target 함수들을 실행함
+
+```js
+> data.total
+10
+> data.price = 200
+200
+> data.total
+400
+```
 
 > 대략적으로 이런 작업을 거쳐 data에 있는 속성들은 **반응(reactive) 속성**이 된다
 
@@ -133,15 +147,16 @@ watcher(totalfunc)
 ## 만약에 인스턴스 속성이 동적으로 추가된다면??
 👉 이미 만들어진 인스턴스에 반응 속성을 동적으로 추가하는 것은 허용되지 않음
 ```js
-var vm = new Vue({
-  data: {
-    a: 1
-  }
-})
-// vm.a 는 반응적임
- 
-vm.b = 2
-// vm.b 를 변경하면 화면변화 없음
+// 위 예제에 이어서 코드 작성 
+> data.totalWithTax = data.price * data.quantity * 1.2
+480
+// 이후 price나 quantity 값을 변경해도 totalWithTax 값은 변화 없음 (total 값만 변함)
+> data.price = 150
+150
+> data.total
+300
+> data.totalWithTax
+480
 ```
 > 하지만 이 경우에도 `Vue.set(object, key, value)` 메소드를 사용하여 변경사항을 감지하게 할 수 있다.
 

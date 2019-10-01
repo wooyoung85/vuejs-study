@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.css" integrity="sha384-BTL0nVi8DnMrNdMQZG1Ww6yasK9ZGnUxL1ZWukXQ7fygA1py52yPp9W4wrR00VML" crossorigin="anonymous">
+        <style>
+/*--------------------------------------------------------------------------------------------- * Copyright (c) Microsoft Corporation. All rights reserved. * Licensed under the MIT License. See License.txt in the project root for license information. *--------------------------------------------------------------------------------------------*/ body { font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback"; font-size: 14px; padding: 0 26px; line-height: 22px; word-wrap: break-word; } #code-csp-warning { position: fixed; top: 0; right: 0; color: white; margin: 16px; text-align: center; font-size: 12px; font-family: sans-serif; background-color:#444444; cursor: pointer; padding: 6px; box-shadow: 1px 1px 1px rgba(0,0,0,.25); } #code-csp-warning:hover { text-decoration: none; background-color:#007acc; box-shadow: 2px 2px 2px rgba(0,0,0,.25); } body.scrollBeyondLastLine { margin-bottom: calc(100vh - 22px); } body.showEditorSelection .code-line { position: relative; } body.showEditorSelection .code-active-line:before, body.showEditorSelection .code-line:hover:before { content: ""; display: block; position: absolute; top: 0; left: -12px; height: 100%; } body.showEditorSelection li.code-active-line:before, body.showEditorSelection li.code-line:hover:before { left: -30px; } .vscode-light.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); } .vscode-light.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); } .vscode-light.showEditorSelection .code-line .code-line:hover:before { border-left: none; } .vscode-dark.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); } .vscode-dark.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); } .vscode-dark.showEditorSelection .code-line .code-line:hover:before { border-left: none; } .vscode-high-contrast.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 160, 0, 0.7); } .vscode-high-contrast.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 160, 0, 1); } .vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before { border-left: none; } img { max-width: 100%; max-height: 100%; } a { text-decoration: none; } a:hover { text-decoration: underline; } a:focus, input:focus, select:focus, textarea:focus { outline: 1px solid -webkit-focus-ring-color; outline-offset: -1px; } hr { border: 0; height: 2px; border-bottom: 2px solid; } h1 { padding-bottom: 0.3em; line-height: 1.2; border-bottom-width: 1px; border-bottom-style: solid; } h1, h2, h3 { font-weight: normal; } h1 code, h2 code, h3 code, h4 code, h5 code, h6 code { font-size: inherit; line-height: auto; } table { border-collapse: collapse; } table > thead > tr > th { text-align: left; border-bottom: 1px solid; } table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td { padding: 5px 10px; } table > tbody > tr + tr > td { border-top: 1px solid; } blockquote { margin: 0 7px 0 5px; padding: 0 16px 0 10px; border-left-width: 5px; border-left-style: solid; } code { font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback"; font-size: 14px; line-height: 19px; } body.wordWrap pre { white-space: pre-wrap; } .mac code { font-size: 12px; line-height: 18px; } pre:not(.hljs), pre.hljs code > div { padding: 16px; border-radius: 3px; overflow: auto; } /** Theming */ pre code { color: var(--vscode-editor-foreground); } .vscode-light pre:not(.hljs), .vscode-light code > div { background-color: rgba(220, 220, 220, 0.4); } .vscode-dark pre:not(.hljs), .vscode-dark code > div { background-color: rgba(10, 10, 10, 0.4); } .vscode-high-contrast pre:not(.hljs), .vscode-high-contrast code > div { background-color: rgb(0, 0, 0); } .vscode-high-contrast h1 { border-color: rgb(0, 0, 0); } .vscode-light table > thead > tr > th { border-color: rgba(0, 0, 0, 0.69); } .vscode-dark table > thead > tr > th { border-color: rgba(255, 255, 255, 0.69); } .vscode-light h1, .vscode-light hr, .vscode-light table > tbody > tr + tr > td { border-color: rgba(0, 0, 0, 0.18); } .vscode-dark h1, .vscode-dark hr, .vscode-dark table > tbody > tr + tr > td { border-color: rgba(255, 255, 255, 0.18); } 
+</style>
+<style>
+/* Tomorrow Theme */ /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */ /* Original theme - https://github.com/chriskempson/tomorrow-theme */ /* Tomorrow Comment */ .hljs-comment, .hljs-quote { color: #8e908c; } /* Tomorrow Red */ .hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-deletion { color: #c82829; } /* Tomorrow Orange */ .hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-meta, .hljs-link { color: #f5871f; } /* Tomorrow Yellow */ .hljs-attribute { color: #eab700; } /* Tomorrow Green */ .hljs-string, .hljs-symbol, .hljs-bullet, .hljs-addition { color: #718c00; } /* Tomorrow Blue */ .hljs-title, .hljs-section { color: #4271ae; } /* Tomorrow Purple */ .hljs-keyword, .hljs-selector-tag { color: #8959a8; } .hljs { display: block; overflow-x: auto; color: #4d4d4c; padding: 0.5em; } .hljs-emphasis { font-style: italic; } .hljs-strong { font-weight: bold; }
+</style>
+<style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="components">Components</h1>
+<h2 id="%EC%A0%95%EC%9D%98">정의</h2>
+<ul>
+<li>재사용 가능한 코드 블럭</li>
+<li>모듈화하고 관리가 용이한 코드베이스를 만드는데 도움이 됨</li>
+</ul>
+<img src="file:///d%3A/workspace/vuejs-study/images/lecture_3/1.gif">
+<blockquote>
+<p>컴포넌트는 SPA(Single Page Application) 개발 시 가장 기본적이고 중요한 요소임</p>
+</blockquote>
+<h2 id="%EC%A0%84%EC%97%AD-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8">전역 컴포넌트</h2>
+<pre class="hljs"><code><div>Vue.component(<span class="hljs-string">'product'</span>, {})
+</div></code></pre>
+<ul>
+<li>첫번째 인자값은 컴포넌트 명</li>
+<li>두번째 인자는 컴포넌트의 option들을 설정 (type은 object)</li>
+</ul>
+<h3 id="data-%EC%86%8D%EC%84%B1%EC%9D%80-span-style%22colorred%22%ED%95%A8%EC%88%98span-%ED%98%95%ED%83%9C%EB%A1%9C-%EC%84%A0%EC%96%B8"><strong>data</strong> 속성은 <span style="color:red"><strong>함수</strong></span> 형태로 선언</h3>
+<pre class="hljs"><code><div>Vue.component(<span class="hljs-string">'product'</span>, {
+  <span class="hljs-attr">template</span>: <span class="hljs-string">`&lt;div&gt;&lt;/div&gt;`</span>,
+  data() {
+    <span class="hljs-keyword">return</span> {
+    }
+  },
+  <span class="hljs-attr">methods</span>: {},
+  <span class="hljs-attr">computed</span>: {}
+})
+</div></code></pre>
+<blockquote>
+<p><strong>컴포넌트별로 다른 data 속성을 가지기 위해서</strong></p>
+</blockquote>
+<h3 id="%EC%87%BC%ED%95%91%EB%AA%B0-%EC%98%88%EC%A0%9C-%EC%BD%94%EB%93%9C-%EC%9E%91%EC%84%B1-step6">쇼핑몰 예제 코드 작성 (<strong>Step_6</strong>)</h3>
+<ul>
+<li><a href="https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_6.html">shop_step_6.html</a> 파일 참고</li>
+</ul>
+<h2 id="props">Props</h2>
+<p>상위 컴포넌트에서 하위 컴포넌트로 데이터를 전달하는 방법 (<strong>Pass Props</strong>)</p>
+<h3 id="%EC%87%BC%ED%95%91%EB%AA%B0-%EC%98%88%EC%A0%9C-%EC%BD%94%EB%93%9C-%EC%9E%91%EC%84%B1-step7">쇼핑몰 예제 코드 작성 (<strong>Step_7</strong>)</h3>
+<ul>
+<li><a href="https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_7.html">shop_step_7.html</a> 파일 참고</li>
+</ul>
+<h2 id="emit">Emit</h2>
+<p>하위 컴포넌트에서 상위 컴포넌트로 통신하는 방법 (<strong>Emit Events</strong>)</p>
+<h3 id="%EC%87%BC%ED%95%91%EB%AA%B0-%EC%98%88%EC%A0%9C-%EC%BD%94%EB%93%9C-%EC%9E%91%EC%84%B1-step8">쇼핑몰 예제 코드 작성 (<strong>Step_8</strong>)</h3>
+<ul>
+<li><a href="https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_8.html">shop_step_8.html</a> 파일 참고</li>
+</ul>
+<h2 id="eventbus">EventBus</h2>
+<h2 id="%EC%A7%80%EC%97%AD-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8">지역 컴포넌트</h2>
+<h1 id="vuejs-reactivity-system">Vue.js Reactivity System</h1>
+<h2 id="%EC%98%88%EC%A0%9C-%EC%BD%94%EB%93%9C">예제 코드</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Vanila Javascript</th>
+<th>Vue.js</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>코드</td>
+<td><img src="file:///d%3A/workspace/vuejs-study/images/lecture_3/2-2.png" width="300px"></td>
+<td><img src="file:///d%3A/workspace/vuejs-study/images/lecture_3/1-2.png" width="300px"></td>
+</tr>
+<tr>
+<td>결과확인</td>
+<td><img src="file:///d%3A/workspace/vuejs-study/images/lecture_3/2-1.gif" width="300px"></td>
+<td><img src="file:///d%3A/workspace/vuejs-study/images/lecture_3/1-1.gif" width="300px"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<h3 id="javascript%EB%8A%94-%EC%A0%88%EC%B0%A8%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B2%8C-%EB%90%98%EB%8A%94%EB%8D%B0-%EC%96%B4%EB%96%BB%EA%B2%8C-price-%EB%82%98-quantity-%EA%B0%92%EC%9D%98-%EB%B3%80%ED%99%94%EA%B0%80-br-%EC%9D%B4%EB%AF%B8-%EA%B3%84%EC%82%B0%EB%90%9C-total-totalpricewithtax-%EC%97%90-%EC%98%81%ED%96%A5%EC%9D%84-%EB%81%BC%EC%B9%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C">javascript는 절차적으로 코드를 처리하게 되는데 어떻게 <code>price</code> 나 <code>quantity</code> 값의 변화가 <br/> 이미 계산된 <code>total</code>, <code>totalPriceWithTax</code> 에 영향을 끼칠 수 있을까???</h3>
+</blockquote>
+<h2 id="%EA%B0%84%EB%8B%A8%ED%95%9C-reactivity-system-%EA%B5%AC%ED%98%84-with-dependency-class--objectdefineproperty">간단한 Reactivity System 구현 (with. <code>Dependency Class</code> &amp; <code>Object.defineProperty</code>)</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> data = { <span class="hljs-attr">price</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">2</span> }
+<span class="hljs-keyword">let</span> target = <span class="hljs-literal">null</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dep</span> </span>{
+  <span class="hljs-keyword">constructor</span> () {
+    <span class="hljs-comment">// 특정 변수에 종속적인 target(구독자)들의 집합  </span>
+    <span class="hljs-keyword">this</span>.subscribers = [] 
+  }
+  depend() {  
+    <span class="hljs-keyword">if</span> (target &amp;&amp; !<span class="hljs-keyword">this</span>.subscribers.includes(target)) {
+      <span class="hljs-comment">// target이 있으면서 신규로 subscribe하는 경우에만 subscribers에 push</span>
+      <span class="hljs-keyword">this</span>.subscribers.push(target)
+    } 
+  }
+  notify() {
+    <span class="hljs-comment">// 특정 변수의 값이 setter에 의해 변경되면 notify()를 Call하게 되고, target(구독자)들이 실행됨</span>
+    <span class="hljs-keyword">this</span>.subscribers.forEach(<span class="hljs-function"><span class="hljs-params">sub</span> =&gt;</span> sub())
+  }
+}
+
+<span class="hljs-comment">// data 속성별로 실행됨</span>
+<span class="hljs-built_in">Object</span>.keys(data).forEach(<span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> {
+  <span class="hljs-keyword">let</span> internalValue = data[key]
+  
+  <span class="hljs-comment">// 당연히 data 속성별로 dependency instance가 생김</span>
+  <span class="hljs-keyword">const</span> dep = <span class="hljs-keyword">new</span> Dep()
+  
+  <span class="hljs-built_in">Object</span>.defineProperty(data, key, {
+    get() {
+      <span class="hljs-comment">// target들이 dependency를 갖도록 하는 작업</span>
+      <span class="hljs-comment">// Collect Dependencies</span>
+      dep.depend() 
+      <span class="hljs-keyword">return</span> internalValue
+    },
+    set(newVal) {
+      internalValue = newVal
+      <span class="hljs-comment">// 구독 중인 target들이 실행됨</span>
+      <span class="hljs-comment">// Notify</span>
+      dep.notify() 
+    }
+  })
+})
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">watcher</span>(<span class="hljs-params">myFunc</span>) </span>{
+  target = myFunc
+  target()
+  target = <span class="hljs-literal">null</span>
+}
+
+<span class="hljs-keyword">var</span> totalfunc = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  data.total = data.price * data.quantity
+}
+
+watcher(totalfunc)
+</div></code></pre>
+<ul>
+<li>
+<p>Vue 인스턴스가 초기화 될 때 data(javascript object)에 있는 모든 속성별로  <code>Object.defineProperty()</code> 메서드를 사용하여 getter/setter 설정</p>
+</li>
+<li>
+<p>watcher 함수가 파라미터로 전달받은 target 함수를 실행하게 되면 dependency가 생김</p>
+</li>
+<li>
+<p>위 예제로 좀 더 자세히 설명해 본다면..</p>
+<ol>
+<li>watcher가 total 함수를 실행</li>
+<li>price와 quantity 값을 각각의 getter로 호출</li>
+<li>이때 getter 함수는 target 함수를 각 data 속성 별로 subscribers에 등록</li>
+</ol>
+</li>
+<li>
+<p>data 속성 값을 변경하기 위해 setter를 이용하게 됨</p>
+</li>
+<li>
+<p>setter가 호출되면 내부 데이터를 변경하고 dependency가 있는 target 함수들을 실행함</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>&gt; data.total
+<span class="hljs-number">10</span>
+&gt; data.price = <span class="hljs-number">200</span>
+<span class="hljs-number">200</span>
+&gt; data.total
+<span class="hljs-number">400</span>
+</div></code></pre>
+<blockquote>
+<p>대략적으로 이런 작업을 거쳐 data에 있는 속성들은 <strong>반응(reactive) 속성</strong>이 된다</p>
+</blockquote>
+<h2 id="%EC%8B%A4%EC%A0%9C-vuejs-reactivity-system">실제 Vue.js Reactivity System</h2>
+<img src="file:///d%3A/workspace/vuejs-study/images/lecture_3/3.png" width="500">
+<ul>
+<li>각 Component별로 Watcher 인스턴스를 가지게 됨</li>
+<li>Watcher는 각 속성별로 getter 호출 시 dependency가 있는 target function 들을 수집함</li>
+<li>Watcher는 Virtual DOM에 변경사항을 기록하고 re-render 를 명령함(비동기)</li>
+</ul>
+<h2 id="%EB%A7%8C%EC%95%BD%EC%97%90-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4-%EC%86%8D%EC%84%B1%EC%9D%B4-%EB%8F%99%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%B6%94%EA%B0%80%EB%90%9C%EB%8B%A4%EB%A9%B4">만약에 인스턴스 속성이 동적으로 추가된다면??</h2>
+<p>👉 이미 만들어진 인스턴스에 반응 속성을 동적으로 추가하는 것은 허용되지 않음</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 위 예제에 이어서 코드 작성 </span>
+&gt; data.totalWithTax = data.price * data.quantity * <span class="hljs-number">1.2</span>
+<span class="hljs-number">480</span>
+<span class="hljs-comment">// 이후 price나 quantity 값을 변경해도 totalWithTax 값은 변화 없음 (total 값만 변함)</span>
+&gt; data.price = <span class="hljs-number">150</span>
+<span class="hljs-number">150</span>
+&gt; data.total
+<span class="hljs-number">300</span>
+&gt; data.totalWithTax
+<span class="hljs-number">480</span>
+</div></code></pre>
+<blockquote>
+<p>하지만 이 경우에도 <code>Vue.set(object, key, value)</code> 메소드를 사용하여 변경사항을 감지하게 할 수 있다.</p>
+</blockquote>
+<h2 id="%EB%B9%84%EB%8F%99%EA%B8%B0-%EA%B0%B1%EC%8B%A0-%ED%81%90queue">비동기 갱신 큐(Queue)</h2>
+<ul>
+<li>사용자가 데이터를 변경하면 Watcher가 관리하는 Virtual DOM에는 즉시 반영됨</li>
+<li>but, DOM 조작을 최소화 하기 위해 모든 데이터 변경 사항은 버퍼링 됨<br>
+(버퍼링으로 중복이 제거된 작업)</li>
+<li>버퍼링을 거쳐서 큐에 푸시가 되면 이벤트 루프 tick이 큐에 있는 내용을 Flush하면서 실제 DOM을 업데이트 함</li>
+</ul>
+<h2 id="vue%EB%8A%94-dom-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%EB%A5%BC-%EB%B9%84%EB%8F%99%EA%B8%B0%EB%A1%9C-%EB%8F%99%EC%9E%91%ED%95%9C%EB%8B%A4%EB%8A%94%EB%8D%B0-%EB%AC%B8%EC%A0%9C%EB%8A%94-%EC%97%86%EC%9D%84%EA%B9%8C">Vue는 DOM 업데이트를 비동기로 동작한다는데 문제는 없을까?</h2>
+<p>일반적으로는 문제가 없겠지만 렌더링 된 값에 의존하는 로직이 있다면 문제가 생길수도 있음</p>
+<h3 id="%ED%95%B4%EA%B2%B0%EC%B1%85">해결책</h3>
+<ul>
+<li><code>Vue.nextTick()</code></li>
+<li><code>this.$nextTick()</code> 👈 Vue 인스턴스 내부에서 사용시</li>
+</ul>
+<h3 id="%EC%98%88%EC%A0%9C%EC%BD%94%EB%93%9C">예제코드</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"num"</span>&gt;</span>{{num}}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"add"</span>&gt;</span>100씩 증가<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">var</span> getfunc = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> strNum = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"num"</span>).innerHTML;
+    <span class="hljs-built_in">console</span>.log(strNum);
+  }
+
+  <span class="hljs-keyword">var</span> vm = <span class="hljs-keyword">new</span> Vue({
+    <span class="hljs-attr">el</span>: <span class="hljs-string">"#app"</span>,
+    <span class="hljs-attr">data</span>: {
+      <span class="hljs-attr">num</span>: <span class="hljs-number">100</span>
+    },
+    <span class="hljs-attr">methods</span>: {
+      <span class="hljs-attr">add</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">this</span>.num += <span class="hljs-number">100</span>
+        getfunc()
+        <span class="hljs-comment">//this.$nextTick(getfunc);</span>
+      }
+    }
+  })
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</div></code></pre>
+<h2 id="%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C">참고자료</h2>
+<p><a href="http://www.yes24.com/Product/Goods/45091747">Vue.js 퀵 스타트</a><br>
+<a href="https://github.com/stepanowon/vuejs_book_2nd">stepanowon/vuejs_book_2nd: Vue.js QuickStart 2판</a><br>
+<a href="https://www.vuemastery.com/courses/">Our Courses | Vue Mastery</a><br>
+<a href="https://beomy.tistory.com/55">[Vue.JS] 컴포넌트 (기본)</a><br>
+<a href="https://kr.vuejs.org/v2/api/index.html#Vue-nextTick">API — Vue.js</a><br>
+<a href="http://vuejs.kr/jekyll/update/2017/01/19/vuejs-nexttick-example/">Vue.js에서 nextTick 사용하기</a></p>
+
+    </body>
+    </html>

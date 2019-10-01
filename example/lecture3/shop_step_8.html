@@ -13,9 +13,9 @@
   <div class="nav-bar"></div>
   <div id="app">
     <div class="cart floating-div">
-      <p>Cart({{ cart.length }})</p>
-      <ul v-for="item in cart">
-        <li>{{item}}</li>
+      <p>Cart({{ cartItems.length }})</p>
+      <ul v-for="cartitem in cartItems">
+        <li>{{cartitem}}</li>
       </ul>
     </div>
     <div v-for="cellphone in cellphones">
@@ -51,8 +51,8 @@
 
         <h3>색상</h3>
         <div class="color-info">
-          <div v-for="(variant, index) in cellphone.variants" :key="variant.variantId"
-            :style="{ backgroundColor: variant.variantColorCode }" @mouseover="updateProduct(index)" class="color-box">
+          <div v-for="(variant, index) in cellphone.variants" :key="variant.variantId" :style="{ backgroundColor: variant.variantColorCode }"
+            @mouseover="updateProduct(index)" class="color-box">
           </div>
         </div>
 
@@ -116,7 +116,7 @@
     })
 
     var model = {
-      cart: [],
+      cartItems: [],
       cellphones: [
         {
           brand: "Samsung",
@@ -204,14 +204,14 @@
     var app = new Vue({
       el: '#app',
       data: model,
-      methods:{
+      methods: {
         updateCart(id) {
-          this.cart.push(id)
+          this.cartItems.push(id)
         },
         removeItem(id) {
-          for(var i = this.cart.length - 1; i >= 0; i--) {
-            if (this.cart[i] === id) {
-               this.cart.splice(i, 1);
+          for (var i = this.cartItems.length - 1; i >= 0; i--) {
+            if (this.cartItems[i] === id) {
+              this.cartItems.splice(i, 1);
             }
           }
         }
