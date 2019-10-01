@@ -35,6 +35,27 @@ Vue.component('product', {
 ```
 > **컴포넌트별로 다른 data 속성을 가지기 위해서**  
 
+## 지역 컴포넌트
+- 전역 컴포넌트와는 달리 특정 지역에서만 사용가능한 컴포넌트  
+  (아래 예제에서는 id 값이 `#app` 인 `div` 에서만 사용 가능)
+
+- `Vue` 인스턴스 생성 시 `components` 옵션을 사용하여 등록
+  ```js
+  var Child = {
+    template: '<div>사용자 정의 컴포넌트 입니다!</div>'
+  }
+
+  new Vue({
+    el: '#app',
+    components: {
+      'my-component': Child
+    }
+  })
+  ```
+
+> 지역 컴포넌트는 다음 강의부터 주로 사용하게 될 예정입니다.  
+> 아래 예제 코드들은 모두 전역 변수로 작성되었습니다 ^^
+
 ### 쇼핑몰 예제 코드 작성 (**Step_6**)
 - [shop_step_6.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_6.html) 파일 참고
 
@@ -66,7 +87,13 @@ Vue.component('product', {
     ...
   })
   ```
-- 좀 더 
+- `props` 속성을 좀 더 명확하게 표현하고 싶다면 
+  ```js
+  props: {
+    message: { type: String, default: 'Hello' },
+    cellphone: { type: Object, required: true}
+  }
+  ```
 
 
 ### 데이터 전달 방향
@@ -79,6 +106,21 @@ Vue.component('product', {
 ## Emit
 자식 컴포넌트에서 부모 컴포넌트로 통신하는 방법 (**Emit Events**)
 
+### Expression
+- 자식 컴포넌트에서 event 발신
+  ```js
+  // 자식 컴포넌트의 내용
+  this.$emit('add-to-cart');
+  ```
+
+- 부모 컴포넌트에서는 자식 컴포넌트가 발신한 이벤트 발생 시 실행할 method 정의
+  ```html
+  <!-- 부모 컴포넌트의 템플릿 -->
+  <div id="app">
+    <product v-on:add-to-cart="updateCart"></product>
+  </div>
+  ```
+
 ### 이벤트 발신 방법
 자식 컴포넌트에서 사용자 정의 event를 만들고 event를 발생시키면  
 부모 컴포넌트에서 event 핸들러 메서드를 호출하게 됨 
@@ -86,11 +128,60 @@ Vue.component('product', {
 ### 쇼핑몰 예제 코드 작성 (**Step_8**)
 - [shop_step_8.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_8.html) 파일 참고
 
+### ⚠️ **주의사항**  
+컴포넌트 작성 시 `props` 속성명을 작성할 때 카멜 표기법(camel casing)을 사용한다면  
+html tag 작성시에는 케밥 표기법(kebob casing)을 사용해야만 오류가 나지 않음.
+
+```html
+...
+<div id='app'>
+  <!-- 이렇게 코드 작성하면 에러남 -->
+  <product cellPhone="cellPhone"></product>
+</div>
+<template id='productTemplate'>
+<template>
+<script>
+  Vue.component('product', {
+    template: '#productTemplate',
+    // 카멜 표기법으로 작성
+    props: ['cellPhone']
+  })
+</script>
+...
+```
+
+> tag 작성시 속성(위 예제에서 cellPhone)은 대소문자를 구분하지 않기 때문에 전부 소문자로 작성하거나 카멜 표기법을 사용해야 합니다. 
 
 ## EventBus
+같은 레벨(형제 관계)에 있거나 아주 멀리 떨어진 컴포넌트들 간 정보를 주고 받기 위한 단일 통신 채널
 
+### EventBus 통신 방법
+- 빈 `Vue` 인스턴스 선언
+  ```js
+  var eventBus = new Vue()
+  ```
+- 이벤트 발신하는 컴포넌트
+  ```js
+  eventBus.$emit('add-to-cart', this.selectedVariant)
+  ```
 
-## 지역 컴포넌트
+- 이벤트 수신하는 컴포넌트는 이벤트가 발생하면 실행할 event 핸들러 method를 등록해야 함
+  ```js
+  ...
+  methods: {
+    updateCart(id) {
+      this.cartItems.push(id)
+    },
+  },
+  created() {
+    eventBus.$on('add-to-cart', this.updateCart);
+  }
+  ...
+  ```
+
+### 쇼핑몰 예제 코드 작성 (**Step_9**)
+- [shop_step_9.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_9.html) 파일 참고
+
 
 # Vue.js Reactivity System
 ## 예제 코드
