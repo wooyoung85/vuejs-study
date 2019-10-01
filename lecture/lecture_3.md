@@ -26,20 +26,19 @@ Vue.component('product', {
   computed: {}
 })
 ```
-👉 컴포넌트별로 다른 data 속성을 가지기 위해서
+> **컴포넌트별로 다른 data 속성을 가지기 위해서**  
 
 ### 쇼핑몰 예제 코드 작성 (**Step_6**)
 - [shop_step_6.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_6.html) 파일 참고
 
-## Props (Pass Props)
-상위 컴포넌트에서 하위 컴포넌트로 데이터를 전달하는 방법
+## Props 
+상위 컴포넌트에서 하위 컴포넌트로 데이터를 전달하는 방법 (**Pass Props**)
 
 ### 쇼핑몰 예제 코드 작성 (**Step_7**)
 - [shop_step_7.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_7.html) 파일 참고
 
-
-## Emit (Emit Events)
-하위 컴포넌트에서 상위 컴포넌트로 통신하는 방법
+## Emit
+하위 컴포넌트에서 상위 컴포넌트로 통신하는 방법 (**Emit Events**)
 
 ### 쇼핑몰 예제 코드 작성 (**Step_8**)
 - [shop_step_8.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_8.html) 파일 참고
