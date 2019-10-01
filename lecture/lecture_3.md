@@ -1,5 +1,5 @@
 # Components
-## 정의
+## 컴포넌트란?
 - 재사용 가능한 코드 블럭
 - 모듈화하고 관리가 용이한 코드베이스를 만드는데 도움이 됨
 
@@ -48,6 +48,9 @@ Vue.component('product', {
 
 
 ## 지역 컴포넌트
+
+> 실무에선 전역 Component를 사용할 일은 거의 없음  
+> 주로 확장자가 `.vue` 인 **단일 파일 컴포넌트(Single File Component)** 형태로 많이 개발됨
 
 # Vue.js Reactivity System
 ## 예제 코드
