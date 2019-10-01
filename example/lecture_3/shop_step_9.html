@@ -13,10 +13,7 @@
   <div class="nav-bar"></div>
   <div id="app">
     <cart></cart>
-    <div v-for="cellphone in cellphones">
-      <product :cellphone="cellphone">
-      </product>
-    </div>
+    <product v-for="cellphone in cellphones" :key="cellphone.id" :cellphone="cellphone"></product>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -149,6 +146,7 @@
     var model = {
       cellphones: [
         {
+          id: 's1',
           brand: "Samsung",
           product: 'Galaxy S10',
           isApple: false,
@@ -182,6 +180,7 @@
           ]
         },
         {
+          id: 'a1',
           brand: "Apple",
           product: 'iPhone XR',
           isApple: true,

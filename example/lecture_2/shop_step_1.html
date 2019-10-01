@@ -18,7 +18,7 @@
       </div>
       <div class="product-info">
           <h1>{{ brand + ' ' + product }}</h1>
-          <input v-model="brand">
+          <input v-model.trim="brand">
         <p v-if="inStock">재고 있음</p>
         <p v-else>재고 <span class="indeed">없음</span></p>
       </div>

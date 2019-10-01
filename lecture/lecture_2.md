@@ -1,16 +1,31 @@
-# 쇼핑몰 예제 코드 작성 (**Step_0**)
+# 🚀사전 준비
+## 쇼핑몰 예제 코드 작성 (**Step_0**)
 <img src="./images/lecture_2/step_0.png" width="600">
 
-- 예제 소스 내려받기
-  ```bash
-  $> git clone https://github.com/wooyoung85/vuejs-study.git
-  $> cd vuejs-study/example
-  ## Visual Studio Code 실행
-  $> code .
+### 예제 소스 내려받기
+```bash
+$> git clone https://github.com/wooyoung85/vuejs-study.git
+$> cd vuejs-study/example
+## Visual Studio Code 실행
+$> code .
+```
+
+# 템플릿, 보간법, Mustache 구문, Interpolation (`{{}}`)
+- Mustache 구문 안에 있는 값은 해당 data 속성 값으로 대체됨
+- data 속성 값이 변경될 때 마다 화면이 갱신됨  
+  (아래 예제에서는 `product`나 `onSale` 값이 변경될 때마다 화면이 갱신됨)
+
+  ```html
+  <div id="app">
+    <p>I have a {{ product }}</p>
+    <p>{{ product + 's' }}</p>
+    <p>{{ onSale ? 'YES' : 'NO' }}</p>
+    <p>{{ product.getSalePrice() }}</p>
+  </div>
   ```
 
-# 디렉티브 (Directive)
-## 선언적 렌더링 (`{{}}`, `v-text`, `v-html`)
+# 디렉티브(Directives)
+## 선언적 렌더링 (`v-text`, `v-html`)
 **HTML Element 콘텐츠 영역 설정**
 
 |Directive|Desc.|
@@ -48,9 +63,18 @@
 ## 양방향 렌더링 (`v-model`)
 다른 디렉티브들은 HTML Element 값을 변경해도 모델 객체의 값이 변경되지 않음  
 `input`과 `textarea` 에 `v-model` 디렉티브를 사용하면 양방향 데이터 바인딩을 생성할 수 있음
+### Expression
+```html
+<!-- 입력이 끝난 뒤 화면 변경 -->
+<input v-model.lazy="message">
+<!-- 항상 type="number" -->
+<input v-model.number="message">
+<!-- 앞 뒤 공백 제거 -->
+<input v-model.trim="message">
+```
 
-### 쇼핑몰 예제 코드 작성 (**Step_1**)
-[shop_step_1.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/shop_step_1.html) 파일 참고
+## 쇼핑몰 예제 코드 작성 (**Step_1**)
+[shop_step_1.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_2/shop_step_1.html) 파일 참고
 
 |단방향 바인딩|양방향 바인딩|
 |-|-|
@@ -76,8 +100,8 @@
   </option>
   ```
 
-### 쇼핑몰 예제 코드 작성 (**Step_2**)
-[shop_step_2.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/shop_step_2.html) 파일 참고
+## 쇼핑몰 예제 코드 작성 (**Step_2**)
+[shop_step_2.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_2/shop_step_2.html) 파일 참고
 
 <img src="./images/lecture_2/step_2.png" width="600">
 
@@ -92,6 +116,9 @@
 - 인라인 이벤트 핸들링
   ```html
   <button v-on:click="cart += 1">Add to cart</button>
+
+  <!-- 단축 표현법 -->
+  <button @click="cart += 1">
   ```
 - 이벤트 핸들러 메서드
   ```html
@@ -111,8 +138,8 @@
   </script>
   ```
 
-### 쇼핑몰 예제 코드 작성 (**Step_3**)
-[shop_step_3.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/shop_step_3.html) 파일 참고
+## 쇼핑몰 예제 코드 작성 (**Step_3**)
+[shop_step_3.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_2/shop_step_3.html) 파일 참고
 
 <img src="./images/lecture_2/step_3.gif" width="600">
 
@@ -129,72 +156,10 @@
 ### CSS 클래스 바인딩 (`v-bind:class`)
 - 개별적인 클래스 단위로 true가 되면 클래스가 주어짐
 
-### 쇼핑몰 예제 코드 작성 (**Step_4**)
-[shop_step_4.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/shop_step_4.html) 파일 참고
+## 쇼핑몰 예제 코드 작성 (**Step_4**)
+[shop_step_4.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_2/shop_step_4.html) 파일 참고
 
 <img src="./images/lecture_2/step_4.gif" width="600">
-
-## Computed 속성
-템플릿 안에서는 단순한 연산만 사용이 가능하기 때문에 복잡한 계산식을 계산해서 return해 줄 수 있는 `computed` 속성 필요
-
-- 템플릿
-  ```html
-  <!-- 템플릿에 복잡한 계산식을 넣으면 재사용성이 떨어지고 관리가 안됨 -->
-  <div id="app">
-    {{ message.split('').reverse().join('') }}
-  </div>
-  ```
-
-- computed  
-  - computed 속성은 계산된 값이 캐싱됨
-  - computed 속성은 종속된 대상이 변경될 때만 함수가 실행됨
-  ```html
-  <div id="app">
-    <p>원본 메시지: "{{ message }}"</p>
-    <p>역순으로 표시한 메시지: "{{ reversedMessage }}"</p>
-  </div>
-
-  <script>
-  var vm = new Vue({
-    el: '#app',
-    data: {
-      message: '안녕하세요'
-    },
-    computed: {
-      // 계산된 getter
-      reversedMessage: function () {
-        // `this` 는 vm 인스턴스를 가리킵니다.
-        return this.message.split('').reverse().join('')
-      }
-    }
-  })
-  </script>
-  ```
-
-### 어디서 많이 본 듯한 표현법인데...(Computed vs Methods)
-- methods
-  ```js
-  ...
-  //computed 부분 대체
-  methods: {
-    reversedMessage: function () {
-      return this.message.split('').reverse().join('')
-    }
-  }
-  ...
-  ```
-> 최종 결과는 서로 동일하지만..  
-> `reversedMessage` 를 `methods` 방식으로 만들면 `reversedMessage` 를 요청 할 때마다 함수가 재실행되고,  
-`computed` 속성은 `message`가 변경되지 않는 한, `reversedMessage를` 여러 번 요청해도 다시 계산 하지 않고 캐싱값을 즉시 반환한다.
-
-### 이와 비슷한 속성 중 `Wathch` 라는 관찰형 속성도 있는데 비동기 처리가 필요할 때 유용하다고만 알아두고 넘어가겠습니다.  
-> 당연히 computed는 동기 처리를 하겠죠??
-
-### 쇼핑몰 예제 코드 작성 (**Step_5**)
-[shop_step_5.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture2/shop_step_5.html) 파일 참고
-
-<img src="./images/lecture_2/step_5.gif" width="600">
-
 
 # 기타 디렉티브
 ## `v-pre`
@@ -231,6 +196,85 @@ Html Element를 딱 한번만 렌더링 (초기값이 주어지면 변경 안됨
 </div>
 ...
 ```
+
+
+# Computed vs Methods vs Watch
+## Computed 속성
+템플릿 안에서는 단순한 연산만 사용이 가능하기 때문에  
+**복잡한 계산식을 계산해서 return해 줄 수 있는 `computed` 속성 필요**
+
+### 템플릿
+```html
+<!-- 템플릿에 복잡한 계산식을 넣으면 재사용성이 떨어지고 관리가 안됨 -->
+<div id="app">
+  {{ message.split('').reverse().join('') }}
+</div>
+```
+
+### computed  
+```html
+<div id="app">
+  <p>원본 메시지: "{{ message }}"</p>
+  <p>역순으로 표시한 메시지: "{{ reversedMessage }}"</p>
+</div>
+
+<script>
+var vm = new Vue({
+  el: '#app',
+  data: {
+    message: '안녕하세요'
+  },
+  computed: {
+    // 계산된 getter
+    reversedMessage: function () {
+      // `this` 는 vm 인스턴스를 가리킵니다.
+      return this.message.split('').reverse().join('')
+    }
+  }
+})
+</script>
+```
+- **computed 속성은 계산된 값이 캐싱됨**  
+- computed 속성은 종속된 대상이 변경될 때만 함수가 실행됨  
+  (위 예제에서 `message` 값이 변경되면 `reversedMessage` 가 다시 계산됨)
+
+## Computed vs Methods
+### methods
+```js
+...
+//computed 부분 대체
+methods: {
+  reversedMessage: function () {
+    return this.message.split('').reverse().join('')
+  }
+}
+...
+```
+> 최종 결과는 서로 동일하지만..  
+> `reversedMessage` 를 `methods` 방식으로 만들면 `reversedMessage` 를 요청 할 때마다 함수가 재실행되고,  
+`computed` 속성은 `message`가 변경되지 않는 한, `reversedMessage를` 여러 번 요청해도 다시 계산 하지 않고 캐싱값을 즉시 반환한다.
+
+## 이와 비슷한 속성 중 `Watch` 라는 관찰형 속성도 있음
+```js
+...
+watch: { 
+  // firstName 값이 변경되면 함수가 실행됨
+  firstName: function (value, oldValue) { ... }
+},
+...
+```
+- 관찰하고 있던 데이터의 값이 변경되면 callback 함수를 실행함
+> 일반적인 경우에는 주로 `computed` 를 사용하게 됨  
+> **하지만 작업이 오래걸리는 작업을 비동기식으로 처리하는 경우 `watch` 옵션을 사용하는 것이 유용함**
+
+> 당연히 computed는 동기 처리를 하겠죠??
+
+## 쇼핑몰 예제 코드 작성 (**Step_5**)
+> 😅watch에 대한 예제 코드 작성은 API 호출하는 부분이 나올 때 진행하도록 하겠습니다.
+
+[shop_step_5.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_2/shop_step_5.html) 파일 참고
+
+<img src="./images/lecture_2/step_5.gif" width="600">
 
 
 ## 참고자료

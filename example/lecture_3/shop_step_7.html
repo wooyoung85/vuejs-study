@@ -15,10 +15,8 @@
     <div class="cart">
       <p>Cart({{ cart }})</p>
     </div>
-    <div v-for="cellphone in cellphones">
-      <product :cellphone="cellphone">
-      </product>
-    </div>
+
+    <product v-for="cellphone in cellphones" :key="cellphone.id" :cellphone="cellphone"></product>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -48,8 +46,8 @@
 
         <h3>색상</h3>
         <div class="color-info">
-          <div v-for="(variant, index) in cellphone.variants" :key="variant.variantId" :style="{ backgroundColor: variant.variantColorCode }"
-            @mouseover="updateProduct(index)" class="color-box">
+          <div v-for="(variant, index) in cellphone.variants" :key="variant.variantId"
+            :style="{ backgroundColor: variant.variantColorCode }" @mouseover="updateProduct(index)" class="color-box">
           </div>
         </div>
 
@@ -121,6 +119,7 @@
     var model = {
       cellphones: [
         {
+          id: 's1',
           brand: "Samsung",
           product: 'Galaxy S10',
           isApple: false,
@@ -154,6 +153,7 @@
           ]
         },
         {
+          id: 'a1',
           brand: "Apple",
           product: 'iPhone XR',
           isApple: true,

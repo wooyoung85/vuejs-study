@@ -18,10 +18,9 @@
         <li>{{cartitem}}</li>
       </ul>
     </div>
-    <div v-for="cellphone in cellphones">
-      <product :cellphone="cellphone" @add-to-cart="updateCart" @remove-from-cart="removeItem">
-      </product>
-    </div>
+
+    <product v-for="cellphone in cellphones" :key="cellphone.id" :cellphone="cellphone" @add-to-cart="updateCart"
+      @remove-from-cart="removeItem"></product>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -51,8 +50,8 @@
 
         <h3>색상</h3>
         <div class="color-info">
-          <div v-for="(variant, index) in cellphone.variants" :key="variant.variantId" :style="{ backgroundColor: variant.variantColorCode }"
-            @mouseover="updateProduct(index)" class="color-box">
+          <div v-for="(variant, index) in cellphone.variants" :key="variant.variantId"
+            :style="{ backgroundColor: variant.variantColorCode }" @mouseover="updateProduct(index)" class="color-box">
           </div>
         </div>
 
@@ -119,6 +118,7 @@
       cartItems: [],
       cellphones: [
         {
+          id: 's1',
           brand: "Samsung",
           product: 'Galaxy S10',
           isApple: false,
@@ -152,6 +152,7 @@
           ]
         },
         {
+          id: 'a1',
           brand: "Apple",
           product: 'iPhone XR',
           isApple: true,
