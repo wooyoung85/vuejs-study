@@ -1,9 +1,16 @@
 # Components
-## 정의
+## 컴포넌트란?
 - 재사용 가능한 코드 블럭
 - 모듈화하고 관리가 용이한 코드베이스를 만드는데 도움이 됨
+  <img src="./images/lecture_3/1-1.gif">
 
-<img src="./images/lecture_3/1.gif">
+- Vue.js는 컴포넌트들을 조합하여 어플리케이션을 작성
+- 컴포넌트들은 부모 자식 관계로 트리 구조 형성
+  <img src="./images/lecture_3/1-2.png">
+
+  <sup>이미지 출처 : 
+  [Cracking Vue.js](https://joshua1988.github.io/vue-camp/vue/components.html)
+  </sup>
 
 > 컴포넌트는 SPA(Single Page Application) 개발 시 가장 기본적이고 중요한 요소임
 
@@ -31,14 +38,50 @@ Vue.component('product', {
 ### 쇼핑몰 예제 코드 작성 (**Step_6**)
 - [shop_step_6.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_6.html) 파일 참고
 
-## Props 
-상위 컴포넌트에서 하위 컴포넌트로 데이터를 전달하는 방법 (**Pass Props**)
+## 컴포넌트 간 데이터 통신
+
+<img src="./images/lecture_3/1-3.png" width="400px">
+
+<sup>이미지 출처 : 
+[컴포넌트 — Vue.js](https://kr.vuejs.org/v2/guide/components.html)
+</sup>
+
+## Props
+부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달하는 방법 (**Pass Props**)
+
+### Expression
+- 부모 컴포넌트의 data 속성(`cellphone`) 값 전달
+  ```html
+  <!-- 부모 컴포넌트의 템플릿 -->
+  <div id="app">
+    <product v-bind:cellphone="cellphone"></product>
+  </div>
+  ```
+- 자식 컴포넌트는 `props` 라는 속성으로 전달받음
+  ```js
+  // 자식 컴포넌트의 내용
+  Vue.component('product', {
+    ...
+    props: ['cellphone'],
+    ...
+  })
+  ```
+- 좀 더 
+
+
+### 데이터 전달 방향
+데이터는 주로 부모 👉자식 방향으로만 전달함
+> 양방향 전달도 가능하지만 시스템 복잡도가 상승하고 유지보수성이 매우 떨어짐
 
 ### 쇼핑몰 예제 코드 작성 (**Step_7**)
 - [shop_step_7.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_7.html) 파일 참고
 
 ## Emit
-하위 컴포넌트에서 상위 컴포넌트로 통신하는 방법 (**Emit Events**)
+자식 컴포넌트에서 부모 컴포넌트로 통신하는 방법 (**Emit Events**)
+
+### 이벤트 발신 방법
+자식 컴포넌트에서 사용자 정의 event를 만들고 event를 발생시키면  
+부모 컴포넌트에서 event 핸들러 메서드를 호출하게 됨 
 
 ### 쇼핑몰 예제 코드 작성 (**Step_8**)
 - [shop_step_8.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_8.html) 파일 참고
@@ -53,8 +96,8 @@ Vue.component('product', {
 ## 예제 코드
 |#|Vanila Javascript|Vue.js|
 |-|-|-|
-|코드|<img src="./images/lecture_3/2-2.png" width="300px">|<img src="./images/lecture_3/1-2.png" width="300px">|
-|결과확인|<img src="./images/lecture_3/2-1.gif" width="300px">|<img src="./images/lecture_3/1-1.gif" width="300px">|
+|코드|<img src="./images/lecture_3/2-1-code.png" width="300px">|<img src="./images/lecture_3/2-2-code.png" width="300px">|
+|결과확인|<img src="./images/lecture_3/2-1-result.gif" width="300px">|<img src="./images/lecture_3/2-2-result.gif" width="300px">|
 
 > ### javascript는 절차적으로 코드를 처리하게 되는데 어떻게 `price` 나 `quantity` 값의 변화가 <br/> 이미 계산된 `total`, `totalPriceWithTax` 에 영향을 끼칠 수 있을까???
 
@@ -137,7 +180,7 @@ watcher(totalfunc)
 > 대략적으로 이런 작업을 거쳐 data에 있는 속성들은 **반응(reactive) 속성**이 된다
 
 ## 실제 Vue.js Reactivity System
-<img src="./images/lecture_3/3.png" width="500">
+<img src="./images/lecture_3/2-3.png" width="500">
 
 - 각 Component별로 Watcher 인스턴스를 가지게 됨
 - Watcher는 각 속성별로 getter 호출 시 dependency가 있는 target function 들을 수집함
