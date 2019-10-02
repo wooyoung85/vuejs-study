@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    table {
+      width: 100%;
+      border-top: 1px solid #444444;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid #444444;
+      padding: 10px;
+      text-align: center;
+    }
+
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav-bar"></div>
+  <div id="app">
+    <button @click="updateOrder">순위 변경</button>
+    <table>
+      <tr>
+        <th>제품명</th>
+        <th>브랜드</th>
+        <th>가격</th>
+      </tr>
+      <tr v-for="item in cellphones">
+        <td>{{item.name}}</td>
+        <td>{{item.brand}}</td>
+        <td>{{item.price}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var model = {
+      items: [{
+        id: 1,
+        name: 'Galaxy S10',
+        brand: 'Samsung',
+        order: 1000000,
+        price: 1000000
+      }, {
+        id: 2,
+        name: 'Galaxy Note10',
+        brand: 'Samsung',
+        order: 1500000,
+        price: 1500000
+      }, {
+        id: 3,
+        name: 'IPhone XS',
+        brand: 'Apple',
+        order: 3000000,
+        price: 3000000
+      }, {
+        id: 4,
+        name: 'IPhone X',
+        brand: 'Apple',
+        order: 2000000,
+        price: 2000000
+      }, {
+        id: 5,
+        name: 'V50',
+        brand: 'LG',
+        order: 1500000,
+        price: 1500000
+      }, {
+        id: 6,
+        name: 'V30',
+        brand: 'LG',
+        order: 1000000,
+        price: 1000000
+      }, {
+        id: 7,
+        name: 'Galaxy S9',
+        brand: 'Samsung',
+        order: 900000,
+        price: 900000
+      }, {
+        id: 8,
+        name: 'Galaxy Note9',
+        brand: 'Samsung',
+        order: 1000000,
+        price: 1000000
+      }]
+    }
+
+    var app = new Vue({
+      el: '#app',
+      data: model,
+      computed: {
+        cellphones() {
+          var sortingField = "order";
+          this.items.sort(function (a, b) { // 오름차순
+            return a[sortingField] - b[sortingField];
+          });
+          return this.items;
+        }
+      },
+      methods: {
+        update() {
+          this.items.forEach(item => {
+            if(item.brand === 'Samsung'){
+              item.price = item.price + 100000
+            }else if(item.brand === 'LG'){
+              item.price = item.price + 50000
+            }else{
+              item.price = item.price - 200000
+            }
+          });
+        },
+        updateOrder() {
+          this.items.forEach(item => {
+            if(item.brand === 'Samsung'){
+              item.order = item.order + 100000
+            }else if(item.brand === 'LG'){
+              item.order = item.order + 50000
+            }else{
+              item.order = item.order - 200000
+            }
+          });
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

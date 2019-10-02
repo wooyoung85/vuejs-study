@@ -95,10 +95,12 @@ Vue.component('product', {
   }
   ```
 
-
 ### 데이터 전달 방향
-데이터는 주로 부모 👉자식 방향으로만 전달함
-> 양방향 전달도 가능하지만 시스템 복잡도가 상승하고 유지보수성이 매우 떨어짐
+데이터는 부모 👉자식 방향으로만 전달함
+
+> **The two-way binding for props is being deprecated in Vue.js 2.0**   
+> 1.0에서는 `.sync` 옵션을 써서 양방향 전달도 가능했지만  
+> 시스템 복잡도가 상승하고 유지보수성이 매우 떨어져서 Vue.js 2.0 에서는 지원 안 함
 
 ### 쇼핑몰 예제 코드 작성 (**Step_7**)
 - [shop_step_7.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_7.html) 파일 참고
@@ -129,8 +131,8 @@ Vue.component('product', {
 - [shop_step_8.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_8.html) 파일 참고
 
 ### ⚠️ **주의사항**  
-컴포넌트 작성 시 `props` 속성명을 작성할 때 카멜 표기법(camel casing)을 사용한다면  
-html tag 작성시에는 케밥 표기법(kebob casing)을 사용해야만 오류가 나지 않음.
+컴포넌트 작성 시 `props` 속성명을 작성할 때 🐫카멜 표기법(camel casing)을 사용했다면  
+html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 오류가 나지 않음.
 
 ```html
 ...
@@ -342,4 +344,5 @@ watcher(totalfunc)
 [Our Courses | Vue Mastery](https://www.vuemastery.com/courses/)  
 [[Vue.JS] 컴포넌트 (기본)](https://beomy.tistory.com/55)  
 [API — Vue.js](https://kr.vuejs.org/v2/api/index.html#Vue-nextTick)  
-[Vue.js에서 nextTick 사용하기](http://vuejs.kr/jekyll/update/2017/01/19/vuejs-nexttick-example/)
+[Vue.js에서 nextTick 사용하기](http://vuejs.kr/jekyll/update/2017/01/19/vuejs-nexttick-example/)  
+[Passing Data from parent to child with props](https://riptutorial.com/vue-js/example/10471/passing-data-from-parent-to-child-with-props)
