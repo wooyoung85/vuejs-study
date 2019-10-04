@@ -104,7 +104,7 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
   - 사용자에게 데이터를 Presentation
   - 사용자로부터 Input을 받음
 
-### <span style="color:green">**ViewModel**</span> 
+### <span style="color:green;font-weight:bold">ViewModel</span> 
   - View를 추상화한 개념
   - View의 실제 논리 및 데이터 흐름 담당
   - 주요 기능
