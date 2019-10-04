@@ -44,7 +44,8 @@
         <th>브랜드</th>
         <th>가격</th>
       </tr>
-      <tr v-for="item in cellphones">
+      <tr v-for="item in cellphones" :key="item.id">
+      <!-- <tr v-for="item in cellphones"> -->
         <td>{{item.name}}</td>
         <td>{{item.brand}}</td>
         <td>{{item.price}}</td>
@@ -59,49 +60,49 @@
         id: 1,
         name: 'Galaxy S10',
         brand: 'Samsung',
-        order: 1000000,
+        order: 1,
         price: 1000000
       }, {
         id: 2,
         name: 'Galaxy Note10',
         brand: 'Samsung',
-        order: 1500000,
+        order: 2,
         price: 1500000
       }, {
         id: 3,
         name: 'IPhone XS',
         brand: 'Apple',
-        order: 3000000,
+        order: 3,
         price: 3000000
       }, {
         id: 4,
         name: 'IPhone X',
         brand: 'Apple',
-        order: 2000000,
+        order: 4,
         price: 2000000
       }, {
         id: 5,
         name: 'V50',
         brand: 'LG',
-        order: 1500000,
+        order: 5,
         price: 1500000
       }, {
         id: 6,
         name: 'V30',
         brand: 'LG',
-        order: 1000000,
+        order: 6,
         price: 1000000
       }, {
         id: 7,
         name: 'Galaxy S9',
         brand: 'Samsung',
-        order: 900000,
+        order: 7,
         price: 900000
       }, {
         id: 8,
         name: 'Galaxy Note9',
         brand: 'Samsung',
-        order: 1000000,
+        order: 8,
         price: 1000000
       }]
     }
@@ -119,26 +120,9 @@
         }
       },
       methods: {
-        update() {
-          this.items.forEach(item => {
-            if(item.brand === 'Samsung'){
-              item.price = item.price + 100000
-            }else if(item.brand === 'LG'){
-              item.price = item.price + 50000
-            }else{
-              item.price = item.price - 200000
-            }
-          });
-        },
         updateOrder() {
           this.items.forEach(item => {
-            if(item.brand === 'Samsung'){
-              item.order = item.order + 100000
-            }else if(item.brand === 'LG'){
-              item.order = item.order + 50000
-            }else{
-              item.order = item.order - 200000
-            }
+            item.order = item.order + Math.random()
           });
         }
       },
