@@ -98,16 +98,31 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
 
 # Vue.js 주요컨셉
 ## Inspired by MVVM Pattern 
-- View
-  - HTML + CSS
-- ViewModel 
-  - View를 위한 모델
-  - View의 실제 논리 및 데이터 흐름 담당
+### View
+- 사용자 UI (HTML + CSS)
+- 주요 기능
+  - 사용자에게 데이터를 Presentation
+  - 사용자로부터 Input을 받음
 
-- MVVM Pattern을 사용하는 이유  
-애플리케이션의 로직(ViewModel)과 사용자 UI(View)를 분리
+### <span style="color:green">**ViewModel**</span> 
+  - View를 추상화한 개념
+  - View의 실제 논리 및 데이터 흐름 담당
+  - 주요 기능
+    - View와 ViewModel의 상태를 동기화 하기 위해 `DataBinding` 기능 제공  
+      👉 ViewModel이 바뀌면 View도 변경됨
+    - 사용자가 View에 전달한 Input을 실행하기 위해 `Command` 들을 제공
+  
+
+### Model
+- only 데이터만 정의함 
+- View에서 어떻게 보이는지 혹은 ViewModel에 어떤 비지니스 로직이 있는지 등을 신경 쓸 필요가 ❌
+- 특정 프레임워크나 기술에 종속될 필요 ❌
 
 <img src="./images/lecture_1/3-1.png" width="500">
+
+> **MVVM Pattern을 사용하는 이유**   
+> 애플리케이션의 로직(ViewModel)과 사용자 UI(View)를 분리한 후 서로를 느슨하게 결합시키기 위함  
+> 이렇게 하면 테스트하기가 좋고, 유지 보수 측면에서도 매우 유리함
 
 ## Single File Component
 - 하나의 `.vue`파일에서 HTML/CSS/JavaScript를 모두 기술하게 함
@@ -123,7 +138,11 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
   - 타입별 파일 분리하는 것이 아니라 느슨하게 결함 된 컴포넌트로 나누어 구성
   - Single File Component 컨셉을 지키게 되면 컴포넌트의 응집력과 유지 보수와 재사용성이 높아짐
 
-> 현대적인 UI 개발에서 코드베이스를 서로 얽혀있는 세 개의 거대한 레이어로 나누는 대신, 느슨하게 결합 된 컴포넌트로 나누고 구성하는 것이 더 중요 
+> 현대적인 UI 개발에서 코드베이스를 서로 얽혀있는 세 개의 거대한 레이어로 나누는 대신,  
+> 느슨하게 결합 된 컴포넌트로 나누고 구성하는 것이 더 중요 
+
+> `.vue` 파일은 브라우저가 인식할 수 없기 때문에 별도의 작업이 필요함  
+> (자세한 내용은 `lecture_4` 에서 다룰 예정입니다.)
 
 ## Virtual DOM
 **효율적인 DOM 조작을 위해 사용**
@@ -245,4 +264,6 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
 [Vue.js 입문자를 위한 공개 세미나](https://www.slideshare.net/GihyoJoshuaJang/do-it-vuejs-88453012)  
 [[Vuetorials] 2. 전반적인 concept](https://jaeyeophan.github.io/2018/10/21/Vuetorials-2-Vue-concept/)  
 [[Vue.JS] 반응형 시스템](https://beomy.tistory.com/66)  
-[이제와서 JQUERY를 쓰면 안되는 이유, 혹은 JQUERY와 웹개발의 역사](https://www.tokyobranch.net/archives/6598)
+[이제와서 JQUERY를 쓰면 안되는 이유, 혹은 JQUERY와 웹개발의 역사](https://www.tokyobranch.net/archives/6598)  
+[MVVM 아키텍처 패턴 | Just hack'em](https://justhackem.wordpress.com/2017/03/05/mvvm-architectural-pattern/?source=post_page-----bb7576e23c65----------------------)  
+[너무 쉬운 Vue.js](https://brunch.co.kr/@skykamja24/254)

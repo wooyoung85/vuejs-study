@@ -1,11 +1,13 @@
 # Components
 ## 컴포넌트란?
 - 재사용 가능한 코드 블럭
-- 모듈화하고 관리가 용이한 코드베이스를 만드는데 도움이 됨
+- 모듈화 및 관리가 용이한 코드베이스를 만드는데 도움이 됨
+
   <img src="./images/lecture_3/1-1.gif">
 
 - Vue.js는 컴포넌트들을 조합하여 어플리케이션을 작성
 - 컴포넌트들은 부모 자식 관계로 트리 구조 형성
+
   <img src="./images/lecture_3/1-2.png">
 
   <sup>이미지 출처 : 
@@ -57,6 +59,7 @@ Vue.component('product', {
 > 아래 예제 코드들은 모두 전역 변수로 작성되었습니다 ^^
 
 ### 쇼핑몰 예제 코드 작성 (**Step_6**)
+
 - [shop_step_6.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_6.html) 파일 참고
 
 ## 컴포넌트 간 데이터 통신

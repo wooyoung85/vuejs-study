@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>preventDefault 예제</title>
+  <style>
+    #app {
+      height: 98vh;
+      min-height: 100%;
+      padding: 5px;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    #custom-menu {
+      border: 1px solid black;
+      background-color: white;
+    }
+
+    #custom-menu ul {
+      padding: 0;
+      margin: 5px;
+      list-style: none;
+    }
+
+    #custom-menu li {
+      list-style: none;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    #custom-menu li:hover {
+      background-color: #eef;
+      font-weight: bold;
+    }
+
+    .bigtext {
+      font-size: 30px
+    }
+
+    #inner {
+      padding: 20px;
+      margin: 30px;
+      border: 1px solid black;
+      background-color: yellow;
+    }
+
+    #outer {
+      margin-top: 50px;
+      border: 1px solid black;
+    }
+
+    form {
+      margin-top: 50px;
+    }
+
+    input {
+      width: 80%;
+      height: 25px;
+      margin-bottom: 20px
+    }
+
+    button {
+      margin-top: 30px;
+      border: none;
+      background-color: #327bd6;
+      color: #fff;
+      height: 40px;
+      width: 100px;
+      font-size: 14px
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    $(document).bind("click", function (event) {
+      document.getElementById("custom-menu").className = "hide";
+    });
+  </script>
+</head>
+
+
+<body>
+  <div id="app" v-on:contextmenu.prevent="customCtxMenu">
+    <div class="hide" id="custom-menu">
+      <ul>
+        <li>타요타요</li>
+        <li>꼬마타요</li>
+        <li>개구쟁이</li>
+        <li>꼬마버스</li>
+        <li>붕붕붕</li>
+        <li>씽씽씽</li>
+      </ul>
+    </div>
+
+    <a href="https://www.google.com" @click="confirmClick" target="_blank"><span class="bigtext">검색은 구글</span></a>
+
+    <div id="outer" @click="outerClick">
+      <div id="inner" @click="innerClick">여기를 클릭한 후 console 메세지 확인</div>
+    </div>
+
+    <form>
+      <input v-model:value="inputData" />
+      <button @click.prevent="submit">제출</button>
+    </form>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        inputData: ""
+      },
+      methods: {
+        customCtxMenu(e) {
+          $("#custom-menu").toggleClass("hide");
+          $("#custom-menu").css(
+            {
+              position: "absolute",
+              top: e.pageY,
+              left: e.pageX
+            }
+          );
+        },
+        confirmClick(e) {
+          if (!confirm("검색 페이지로 이동하시겠습니까?")) {
+            e.preventDefault();
+          }
+        },
+        outerClick(e) {
+          console.log('### OUTER 클릭 ###')
+          console.log("Event Phase : " + e.eventPhase)
+          console.log("Current Target ID : " + e.currentTarget.id)
+          console.log("Target ID: " + e.target.id)
+        },
+        innerClick(e) {
+          console.log('### INNER 클릭 ###')
+          console.log("Event Phase : " + e.eventPhase)
+          console.log("Current Target ID : " + e.currentTarget.id)
+          console.log("Target ID: " + e.target.id)
+        },
+        submit() {
+          alert(this.inputData + "를 입력하셨습니다")
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
