@@ -168,6 +168,9 @@ var app = new Vue({
 </script>
 ```
 
+### Default Event 및 Event Bubbling 처리
+> [preventEvent.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_2/preventEvent.html) 파일 참고
+
 ## 쇼핑몰 예제 코드 작성 (**Step_3**)
 [shop_step_3.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_2/shop_step_3.html) 파일 참고
 

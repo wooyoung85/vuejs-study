@@ -136,6 +136,7 @@
           console.log("Target ID: " + e.target.id)
         },
         innerClick(e) {
+          //e.stopPropagation();
           console.log('### INNER 클릭 ###')
           console.log("Event Phase : " + e.eventPhase)
           console.log("Current Target ID : " + e.currentTarget.id)
