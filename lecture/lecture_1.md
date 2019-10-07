@@ -218,6 +218,9 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
   3.9.3
   ```
 
+> **Mac에서 vue-cli 설치 시 오류가 날 수 있음**  
+> `sudo npm install -g @vue/cli --unsafe-perm` 로 설치하면 해결됨  
+> 참고 자료 : [Errors during install of vue-cli on Mac OSX](https://github.com/vuejs/vue-cli/issues/3402)
 
 # 첫번째 Vue.js Application 
 > 아주 간단한 Application 이기 때문에 [CodePen](https://codepen.io/pen/)에서 실습
