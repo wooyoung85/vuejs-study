@@ -1,3 +1,7 @@
+---
+marp: true
+---
+
 # Vue.js 란?
 > **progressive framework** for building user interfaces
 
@@ -7,9 +11,9 @@
 - 현재 가장 주목받고 있는 Frontend Framework 중 하나  
   <img src="./images/lecture_1/1-1.png" width="400">
 
-  <sup>이미지 출처 : 
-  [risingstars.js.org](https://risingstars.js.org/2018/en/)
-  </sup>
+  <sup>이미지 출처 : [risingstars.js.org](https://risingstars.js.org/2018/en/)</sup>
+
+---
 
 ## npm-stat 확인
 [npm-stat.com](https://npm-stat.com/charts.html?package=react&package=vue)
@@ -19,17 +23,18 @@
 > 사용량으로 보면 `React`가 월등히 앞서고 있음 🙄  
 > but, 2~3년 전과 비교해 본다면 그 격차가 매우 줄었음
 
+---
+
 ## Developer Survey Results 2019
 > **React.js and Vue.js are both the most loved and most wanted web frameworks by developers, while Drupal and jQuery are most dreaded.**
 
 <img src="./images/lecture_1/1-3.png" width="600">
 
-<sup>이미지 출처 : 
-[stackoverflow-Developer Survey Results 2019](https://insights.stackoverflow.com/survey/2019#technology-_-most-loved-dreaded-and-wanted-web-frameworks)
-</sup>
+<sup>이미지 출처 : [stackoverflow-Developer Survey Results 2019](https://insights.stackoverflow.com/survey/2019#technology-_-most-loved-dreaded-and-wanted-web-frameworks)</sup>
 
 > `Vue.js`는 매우 사랑받는 Web Framework 중 하나이고 `Jquery`는 기피하는 현상을 볼 수 있음
 
+---
 
 # Vue.js 의 장점
 ## 가볍고 유연함
