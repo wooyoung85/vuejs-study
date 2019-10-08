@@ -1,4 +1,6 @@
 # Vue.js 란?
+> **progressive framework** for building user interfaces
+
 - 2014 년 11월 9일에 Vue.js v0.11 Release 후 현재 v2.6.10 까지 Release 됨  
   [vue - Roadmap | github](https://github.com/vuejs/vue/projects/6)
 - Google Creative Lab에서 일하던 [EVAN YOU](https://blog.evanyou.me/) 가 개발 
@@ -220,7 +222,7 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
 
 > **Mac에서 vue-cli 설치 시 오류가 날 수 있음**  
 > `sudo npm install -g @vue/cli --unsafe-perm` 로 설치하면 해결됨  
-> 참고 자료 : [Errors during install of vue-cli on Mac OSX](https://github.com/vuejs/vue-cli/issues/3402)
+> 출처 : [Errors during install of vue-cli on Mac OSX](https://github.com/vuejs/vue-cli/issues/3402)
 
 # 첫번째 Vue.js Application 
 > 아주 간단한 Application 이기 때문에 [CodePen](https://codepen.io/pen/)에서 실습

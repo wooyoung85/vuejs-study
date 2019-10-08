@@ -55,7 +55,7 @@ Vue.component('product', {
   })
   ```
 
-> 지역 컴포넌트는 다음 강의부터 주로 사용하게 될 예정입니다.  
+> 지역 컴포넌트는 [lecture_4](https://github.com/wooyoung85/vuejs-study/blob/master/lecture/lecture_4.md) 부터 주로 사용하게 될 예정입니다.  
 > 아래 예제 코드들은 모두 전역 변수로 작성되었습니다 ^^
 
 ### 쇼핑몰 예제 코드 작성 (**Step_6**)
@@ -297,7 +297,7 @@ watcher(totalfunc)
 > data.totalWithTax
 480
 ```
-> 하지만 이 경우에도 `Vue.set(object, key, value)` 메소드를 사용하여 변경사항을 감지하게 할 수 있다.
+> 하지만 이 경우에도 `Vue.set(object, key, value)` 메소드를 사용하여 변경사항을 감지하게 할 수 있음
 
 ## 비동기 갱신 큐(Queue)
 - 사용자가 데이터를 변경하면 Watcher가 관리하는 Virtual DOM에는 즉시 반영됨
