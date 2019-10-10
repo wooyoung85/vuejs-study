@@ -2,3 +2,7 @@
 *.pdf
 
 example/lecture_4
+presentation/*.html
+
+settings.json
+*.drawio
