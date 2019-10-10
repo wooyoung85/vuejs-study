@@ -12,19 +12,20 @@
 <body>
   <div class="nav-bar"></div>
   <div id="app">
+    <cart></cart>
+    <product v-for="cellphone in cellphones" :key="cellphone.id" :cellphone="cellphone"></product>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <template id="cartTemplate">
     <div class="cart floating-div">
       <p>Cart({{ cartItems.length }})</p>
       <ul v-for="cartitem in cartItems">
         <li>{{cartitem}}</li>
       </ul>
     </div>
-    <div v-for="cellphone in cellphones">
-      <product :cellphone="cellphone" @add-to-cart="updateCart" @remove-from-cart="removeItem">
-      </product>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </template>
 
   <template id="productTemplate">
     <div class="product">
@@ -62,6 +63,33 @@
     </div>
   </template>
   <script>
+    var eventBus = new Vue();
+
+    Vue.component('cart', {
+      template: '#cartTemplate',
+      data() {
+        return {
+          cartItems: []
+        }
+      },
+      methods: {
+        updateCart(id) {
+          this.cartItems.push(id)
+        },
+        removeItem(id) {
+          for (var i = this.cartItems.length - 1; i >= 0; i--) {
+            if (this.cartItems[i] === id) {
+              this.cartItems.splice(i, 1);
+            }
+          }
+        }
+      },
+      created() {
+        eventBus.$on('add-to-cart', this.updateCart);
+        eventBus.$on('remove-from-cart', this.removeItem);
+      }
+    })
+
     Vue.component('product', {
       template: '#productTemplate',
       props: {
@@ -82,10 +110,10 @@
           this.selectedVariant = index
         },
         addToCart() {
-          this.$emit('add-to-cart', this.cellphone.variants[this.selectedVariant].variantId)
+          eventBus.$emit('add-to-cart', this.cellphone.variants[this.selectedVariant].variantId)
         },
         removeFromCart() {
-          this.$emit('remove-from-cart', this.cellphone.variants[this.selectedVariant].variantId)
+          eventBus.$emit('remove-from-cart', this.cellphone.variants[this.selectedVariant].variantId)
         }
       },
       computed: {
@@ -116,9 +144,9 @@
     })
 
     var model = {
-      cartItems: [],
       cellphones: [
         {
+          id: 's1',
           brand: "Samsung",
           product: 'Galaxy S10',
           isApple: false,
@@ -152,6 +180,7 @@
           ]
         },
         {
+          id: 'a1',
           brand: "Apple",
           product: 'iPhone XR',
           isApple: true,
@@ -203,19 +232,7 @@
 
     var app = new Vue({
       el: '#app',
-      data: model,
-      methods: {
-        updateCart(id) {
-          this.cartItems.push(id)
-        },
-        removeItem(id) {
-          for (var i = this.cartItems.length - 1; i >= 0; i--) {
-            if (this.cartItems[i] === id) {
-              this.cartItems.splice(i, 1);
-            }
-          }
-        }
-      }
+      data: model
     })
   </script>
 </body>

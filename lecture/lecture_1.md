@@ -1,13 +1,19 @@
+---
+marp: true
+---
+
 # Vue.js 란?
+> **progressive framework** for building user interfaces
+
 - 2014 년 11월 9일에 Vue.js v0.11 Release 후 현재 v2.6.10 까지 Release 됨  
   [vue - Roadmap | github](https://github.com/vuejs/vue/projects/6)
 - Google Creative Lab에서 일하던 [EVAN YOU](https://blog.evanyou.me/) 가 개발 
 - 현재 가장 주목받고 있는 Frontend Framework 중 하나  
   <img src="./images/lecture_1/1-1.png" width="400">
 
-  <sup>이미지 출처 : 
-  [risingstars.js.org](https://risingstars.js.org/2018/en/)
-  </sup>
+  <sup>이미지 출처 : [risingstars.js.org](https://risingstars.js.org/2018/en/)</sup>
+
+---
 
 ## npm-stat 확인
 [npm-stat.com](https://npm-stat.com/charts.html?package=react&package=vue)
@@ -17,29 +23,33 @@
 > 사용량으로 보면 `React`가 월등히 앞서고 있음 🙄  
 > but, 2~3년 전과 비교해 본다면 그 격차가 매우 줄었음
 
+---
+
 ## Developer Survey Results 2019
 > **React.js and Vue.js are both the most loved and most wanted web frameworks by developers, while Drupal and jQuery are most dreaded.**
 
 <img src="./images/lecture_1/1-3.png" width="600">
 
-<sup>이미지 출처 : 
-[stackoverflow-Developer Survey Results 2019](https://insights.stackoverflow.com/survey/2019#technology-_-most-loved-dreaded-and-wanted-web-frameworks)
-</sup>
+<sup>이미지 출처 : [stackoverflow-Developer Survey Results 2019](https://insights.stackoverflow.com/survey/2019#technology-_-most-loved-dreaded-and-wanted-web-frameworks)</sup>
 
 > `Vue.js`는 매우 사랑받는 Web Framework 중 하나이고 `Jquery`는 기피하는 현상을 볼 수 있음
 
+---
 
 # Vue.js 의 장점
+
+---
+
 ## 가볍고 유연함
 ### **ViewModel layer에 초점을 맞추어 핵심 라이브러리가 개발됨**
 <img src="./images/lecture_1/2-1.png" width="400">
 
-<sup>이미지 출처 : 
-[Vue.js 입문자를 위한 공개 세미나](https://www.slideshare.net/GihyoJoshuaJang/do-it-vuejs-88453012?from_action=save)
-</sup>
+<sup>이미지 출처 : [Vue.js 입문자를 위한 공개 세미나](https://www.slideshare.net/GihyoJoshuaJang/do-it-vuejs-88453012?from_action=save)</sup>
 
   - Lean & Small (**16KB** minified and gzipped)
   - 실제 개발 시에는 Vue.js 관련 라이브러리 사용이 필수
+
+---
 
 ### **전체 아키텍처를 새롭게 구성할 필요가 없음** (점진적 프레임워크)  
   - 기존 앱의 일부 화면에 적용해본 후 전체 적용을 검토해볼 수 있음
@@ -48,22 +58,26 @@
   - Router 기능 지원 (Client Side Routing)
   - Dynamic UI 의 웹 페이지를 만들 때 유리
 
+---
+
 ## 진입 장벽이 (상대적으로) 낮음
 - (상대적으로) 간단하고 쉬운 코드
 - 필요 기술 스택
 
   <img src="./images/lecture_1/2-2.png" width="400">
 
-  <sup>이미지 출처 : 
-  [Vue.js 입문자를 위한 공개 세미나](https://www.slideshare.net/GihyoJoshuaJang/do-it-vuejs-88453012?from_action=save)
-  </sup>
+  <sup>이미지 출처 : [Vue.js 입문자를 위한 공개 세미나](https://www.slideshare.net/GihyoJoshuaJang/do-it-vuejs-88453012?from_action=save)</sup>
 
 - `<script>` 태그를 활용하여 CDN 주소를 추가한 후 vue.js 디렉티브 몇 가지를 익히면 바로 프로그래밍 가능
 - 문서가 매우 잘 정리되어 있고, 한글 번역도 매우 훌륭함
-- ~~개떡~~같이 만들어도 동작은 잘 하는편 (React같이 엄격하지 않음, Magic이 있음)
+- <del>개떡</del>같이 만들어도 동작은 잘 하는편 (React같이 엄격하지 않음, Magic이 있음)
+
+---
 
 > 공식문서 👉[시작하기 - Vue.js](https://kr.vuejs.org/v2/guide/)  
 > 추천 영상 👉 [Learn Vue.js with our Courses - Vue Mastery](https://www.vuemastery.com/courses/) (일부 유료)
+
+---
 
 ## 리액트와 앵귤러의 장점을 포함하면서 Jquery를 대체 가능한 프레임워크
 ### 2-Way Binding (Angular)
@@ -98,16 +112,31 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
 
 # Vue.js 주요컨셉
 ## Inspired by MVVM Pattern 
-- View
-  - HTML + CSS
-- ViewModel 
-  - View를 위한 모델
-  - View의 실제 논리 및 데이터 흐름 담당
+### View
+- 사용자 UI (HTML + CSS)
+- 주요 기능
+  - 사용자에게 데이터를 Presentation
+  - 사용자로부터 Input을 받음
 
-- MVVM Pattern을 사용하는 이유  
-애플리케이션의 로직(ViewModel)과 사용자 UI(View)를 분리
+### <span style="color:green;font-weight:bold">ViewModel</span> 
+  - View를 추상화한 개념
+  - View의 실제 논리 및 데이터 흐름 담당
+  - 주요 기능
+    - View와 ViewModel의 상태를 동기화 하기 위해 `DataBinding` 기능 제공  
+      👉 ViewModel이 바뀌면 View도 변경됨
+    - 사용자가 View에 전달한 Input을 실행하기 위해 `Command` 들을 제공
+  
+
+### Model
+- only 데이터만 정의함 
+- View에서 어떻게 보이는지 혹은 ViewModel에 어떤 비지니스 로직이 있는지 등을 신경 쓸 필요가 ❌
+- 특정 프레임워크나 기술에 종속될 필요 ❌
 
 <img src="./images/lecture_1/3-1.png" width="500">
+
+> **MVVM Pattern을 사용하는 이유**   
+> 애플리케이션의 로직(ViewModel)과 사용자 UI(View)를 분리한 후 서로를 느슨하게 결합시키기 위함  
+> 이렇게 하면 테스트하기가 좋고, 유지 보수 측면에서도 매우 유리함
 
 ## Single File Component
 - 하나의 `.vue`파일에서 HTML/CSS/JavaScript를 모두 기술하게 함
@@ -123,7 +152,11 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
   - 타입별 파일 분리하는 것이 아니라 느슨하게 결함 된 컴포넌트로 나누어 구성
   - Single File Component 컨셉을 지키게 되면 컴포넌트의 응집력과 유지 보수와 재사용성이 높아짐
 
-> 현대적인 UI 개발에서 코드베이스를 서로 얽혀있는 세 개의 거대한 레이어로 나누는 대신, 느슨하게 결합 된 컴포넌트로 나누고 구성하는 것이 더 중요 
+> 현대적인 UI 개발에서 코드베이스를 서로 얽혀있는 세 개의 거대한 레이어로 나누는 대신,  
+> 느슨하게 결합 된 컴포넌트로 나누고 구성하는 것이 더 중요 
+
+> `.vue` 파일은 브라우저가 인식할 수 없기 때문에 별도의 작업이 필요함  
+> (자세한 내용은 `lecture_4` 에서 다룰 예정입니다.)
 
 ## Virtual DOM
 **효율적인 DOM 조작을 위해 사용**
@@ -199,6 +232,9 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
   3.9.3
   ```
 
+> **Mac에서 vue-cli 설치 시 오류가 날 수 있음**  
+> `sudo npm install -g @vue/cli --unsafe-perm` 로 설치하면 해결됨  
+> 출처 : [Errors during install of vue-cli on Mac OSX](https://github.com/vuejs/vue-cli/issues/3402)
 
 # 첫번째 Vue.js Application 
 > 아주 간단한 Application 이기 때문에 [CodePen](https://codepen.io/pen/)에서 실습
@@ -245,4 +281,6 @@ jQuery는 DOM을 직접 다루는 기능이 너무 많기 때문에 안티패턴
 [Vue.js 입문자를 위한 공개 세미나](https://www.slideshare.net/GihyoJoshuaJang/do-it-vuejs-88453012)  
 [[Vuetorials] 2. 전반적인 concept](https://jaeyeophan.github.io/2018/10/21/Vuetorials-2-Vue-concept/)  
 [[Vue.JS] 반응형 시스템](https://beomy.tistory.com/66)  
-[이제와서 JQUERY를 쓰면 안되는 이유, 혹은 JQUERY와 웹개발의 역사](https://www.tokyobranch.net/archives/6598)
+[이제와서 JQUERY를 쓰면 안되는 이유, 혹은 JQUERY와 웹개발의 역사](https://www.tokyobranch.net/archives/6598)  
+[MVVM 아키텍처 패턴 | Just hack'em](https://justhackem.wordpress.com/2017/03/05/mvvm-architectural-pattern/?source=post_page-----bb7576e23c65----------------------)  
+[너무 쉬운 Vue.js](https://brunch.co.kr/@skykamja24/254)
