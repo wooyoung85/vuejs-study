@@ -187,6 +187,54 @@ html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 �
 ### 쇼핑몰 예제 코드 작성 (**Step_9**)
 - [shop_step_9.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_9.html) 파일 참고
 
+# Vue 인스턴스 생명주기
+## 크게 4단계로 나눌 수 있음
+- `Creation` : 컴포넌트 초기화 단계
+- `Mounting` : 돔(DOM) 삽입 단계
+- `Updating` : Diff 및 재 렌더링 단계
+- `Destruction` : 해체 단계
+  <img src="./images/lecture_3/lifecycle.png">
+
+## 간단한 예제로 알아보기 (가위바위보 게임)
+<img src="./images/lecture_3/rockpaperscissors.jpg" width="500px">
+
+### 프로젝트 생성
+```bash
+vue create rock-paper-scissors
+
+cd rock-paper-scissors
+```
+
+### 어플리케이션 실행
+```bash
+npm run serve
+...
+DONE  Compiled successfully in 71ms    
+
+App running at:
+- Local:   http://localhost:8080/ 
+- Network: http://10.250.67.60:8080/
+```
+
+### 스캐폴딩 된 파일 삭제
+- `src/App.vue` 파일 삭제
+- `src/component/HelloWorld.vue` 파일 삭제
+
+### `RpsApp.vue` 파일 생성
+- `src` 폴더 밑에 `RpsApp.vue` 파일 생성
+- `main.js` 수정
+  ```js
+  import Vue from 'vue'
+  import RpsApp from './RpsApp.vue'
+
+  Vue.config.productionTip = false
+
+  new Vue({
+    render: h => h(RpsApp),
+  }).$mount('#app')
+  ```
+
+
 
 # Vue.js Reactivity System
 ## 예제 코드
@@ -348,4 +396,6 @@ watcher(totalfunc)
 [[Vue.JS] 컴포넌트 (기본)](https://beomy.tistory.com/55)  
 [API — Vue.js](https://kr.vuejs.org/v2/api/index.html#Vue-nextTick)  
 [Vue.js에서 nextTick 사용하기](http://vuejs.kr/jekyll/update/2017/01/19/vuejs-nexttick-example/)  
-[Passing Data from parent to child with props](https://riptutorial.com/vue-js/example/10471/passing-data-from-parent-to-child-with-props)
+[Passing Data from parent to child with props](https://riptutorial.com/vue-js/example/10471/passing-data-from-parent-to-child-with-props)  
+[Vue.js 2.0 라이프사이클 이해하기
+](https://medium.com/witinweb/vue-js-%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-7780cdd97dd4)
