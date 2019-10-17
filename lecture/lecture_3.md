@@ -193,10 +193,15 @@ html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 �
 - `Mounting` : 돔(DOM) 삽입 단계
 - `Updating` : Diff 및 재 렌더링 단계
 - `Destruction` : 해체 단계
-  <img src="./images/lecture_3/lifecycle.png">
+  <img src="./images/lecture_3/lifecycle.png" width="500px">
+  
+  <sup>이미지 출처 : [Vue 인스턴스-라이프사이클 다이어그램](https://kr.vuejs.org/v2/guide/instance.html#%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4-%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8)</sup>
 
 ## 간단한 예제로 알아보기 (가위바위보 게임)
 <img src="./images/lecture_3/rockpaperscissors.jpg" width="500px">
+
+<sup>이미지 출처 : [가위 바위 보 대회의 무료 벡터 클립 아트 | illustAC](https://ac-illust.com/ko/search-result?keyword=%EA%B0%80%EC%9C%84%20%EB%B0%94%EC%9C%84%20%EB%B3%B4%20%EB%8C%80%ED%9A%8C)</sup>
+
 
 ### 프로젝트 생성
 ```bash
@@ -220,19 +225,8 @@ App running at:
 - `src/App.vue` 파일 삭제
 - `src/component/HelloWorld.vue` 파일 삭제
 
-### `RpsApp.vue` 파일 생성
-- `src` 폴더 밑에 `RpsApp.vue` 파일 생성
-- `main.js` 수정
-  ```js
-  import Vue from 'vue'
-  import RpsApp from './RpsApp.vue'
-
-  Vue.config.productionTip = false
-
-  new Vue({
-    render: h => h(RpsApp),
-  }).$mount('#app')
-  ```
+### 이후 과정은 예제 코드를 참고
+> 👬[rock-paper-scissors 예제 코드](https://github.com/wooyoung85/vuejs-study/tree/master/example/lecture_3/rock-paper-scissors) 를 참고하면서 같이 작성해 보도록 하겠습니다.
 
 
 
