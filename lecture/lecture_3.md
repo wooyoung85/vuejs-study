@@ -187,6 +187,11 @@ html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 �
 ### 쇼핑몰 예제 코드 작성 (**Step_9**)
 - [shop_step_9.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_9.html) 파일 참고
 
+
+> 실무에선 전역 Component만 사용해서 개발하는 경우는 거의 없음  
+> 주로 확장자가 `.vue` 인 **단일 파일 컴포넌트(Single File Component)** 형태로 많이 개발됨
+
+
 # Vue 인스턴스 생명주기
 ## 크게 4단계로 나눌 수 있음
 - `Creation` : 컴포넌트 초기화 단계
@@ -228,10 +233,6 @@ App running at:
 ### 이후 과정은 예제 코드를 참고
 > 👬[rock-paper-scissors 예제 코드](https://github.com/wooyoung85/vuejs-study/tree/master/example/lecture_3/rock-paper-scissors) 를 참고하면서 같이 작성해 보도록 하겠습니다.
 
-
-
-> 실무에선 전역 Component를 사용할 일은 거의 없음  
-> 주로 확장자가 `.vue` 인 **단일 파일 컴포넌트(Single File Component)** 형태로 많이 개발됨
 
 # Vue.js Reactivity System
 ## 예제 코드

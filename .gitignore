@@ -2,6 +2,7 @@
 *.pdf
 
 example/lecture_3/rock-paper-scissors/node_modules
+example/lecture_3/rock-paper-scissors/package-lock.json
 example/lecture_3/rock-paper-scissors/dist
 example/lecture_4
 presentation/*.html
