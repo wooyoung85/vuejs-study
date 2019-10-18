@@ -67,6 +67,77 @@ loader와 plugin을 사용하여 html, css, js로 변환
 vue 단일 파일 컴포넌트를 사용하기 위해서는 .vue 파일을 컴파일하고 번들링하는 작업이 필요합니다.
 
 
+## Webpack 을 좀 더 이해하기 위한 실습 예제
+### 실습을 위한 기본 설정
+  ```bash
+  mkdir webpack-demo-app
+  cd webpack-demo-app
+
+  # package.json 파일 만들기
+  npm init -y
+
+  # webpack, lodash 설치
+  npm install -D webpack webpack-cli
+  npm install lodash
+  ```
+### package.json 수정
+```diff
+"scripts": {
++   "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+```
+
+### `webpack.config.js` 파일 생성
+```js
+const path = require('path')
+
+module.exports = {
+  entry: {
+    app: path.join(__dirname, 'index.js')
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: 'build.js'
+  },
+};
+```
+
+
+### `index.html`, `index.js` 파일 생성
+index.html
+```html
+<html>
+  <head>
+    <title>webpack demo app</title>
+  </head>
+  <body>
+    <script src="./dist/build.js"></script>
+  </body>
+</html>
+```
+
+index.js
+```js
+import _ from 'lodash';
+
+function component() {
+  var element = document.createElement('div');
+
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
+  return element;
+}
+
+document.body.appendChild(component());
+```
+
+### webpack 실행
+```bash
+npm run build
+```
+
+
 # Vue Router
 
 # Vue Components
