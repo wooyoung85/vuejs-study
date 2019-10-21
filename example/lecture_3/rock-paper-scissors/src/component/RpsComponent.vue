@@ -126,7 +126,6 @@ export default {
       };
       this.results.push(rpsResult);
 
-      //this.changeHand();
       setTimeout(() => {
         this.changeHand();
       }, 1000);
