@@ -1,7 +1,7 @@
 # 진짜 Vue.js 개발 시작하기
 
 # Vue CLI
-- Vue.js 개발을 위한 환경을 빠르고 쉽게 제공
+- Vue.js 개발 환경을 빠르고 쉽게 제공
 - 공식 지원되는 도구
 - `project scffoding` 제공 (👉 프로젝트 폴더 구조 및 라이브러리 설정)
 - Vue CLI를 쓰지 않고 직접 설정도 가능하지만 추천 ❌
@@ -43,7 +43,7 @@
 > 참고자료 : [What exactly is the 'react-scripts start' command?](https://stackoverflow.com/questions/50722133/what-exactly-is-the-react-scripts-start-command)
 
 
-## Install CLI
+## Vue CLI 설치
 ```bash
 npm i -g @vue/cli
 ```
@@ -52,10 +52,38 @@ npm i -g @vue/cli
 
 > 😎 `lecture_1` 에서 설치했다면 Pass  
 
-## Create Project
+## Project 만들기
 ```bash
-vue create todolistapp
+vue create shoppingmall
 ```
+
+<iframe src="https://player.vimeo.com/video/367217922" width="640" height="480" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+### preset (수동)설정
+- 추가적인 설정을 해줘야 하기 때문에 Manually 선택
+  <img src="./images/lecture_4/make-project-1.png" />
+
+- `Router`, `Vuex` 추가 선택 (이 둘은 거의 필수라고 보면 됨)
+  <img src="./images/lecture_4/make-project-2.png" />
+  
+- history 모드 사용
+  vue-router의 기본 모드는 hash mode
+  <img src="./images/lecture_4/make-project-3.png" />
+  
+- linter / formatter 는 `ESLint + Prettier`로 설정
+  <img src="./images/lecture_4/make-project-4.png" />
+
+- 추가적인 lint 설정
+  <img src="./images/lecture_4/make-project-5.png" />
+
+- Babel, PostCSS, ESLint 등의 설정 파일은 전용 설정 파일 생성
+  <img src="./images/lecture_4/make-project-6.png" />
+
+- 이렇게 설정한 값들을 저장 가능하지만 여기서는 N 선택
+  <img src="./images/lecture_4/make-project-7.png" />
+
+- 프로젝트 생성 완료
+  <img src="./images/lecture_4/make-project-8.png" />
 
 ## Webpack
 Webpack 👉 module bundler

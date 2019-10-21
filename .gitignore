@@ -1,10 +1,10 @@
 .DS_Store
 *.pdf
 
-example/lecture_3/rock-paper-scissors/node_modules
-example/lecture_3/rock-paper-scissors/package-lock.json
-example/lecture_3/rock-paper-scissors/dist
-example/lecture_4
+node_modules
+package-lock.json
+dist
+
 presentation/*.html
 
 settings.json
