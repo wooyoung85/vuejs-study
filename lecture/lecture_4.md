@@ -57,8 +57,7 @@ npm i -g @vue/cli
 vue create shoppingmall
 ```
 
-[![프로젝트 만들기](https://i.vimeocdn.com/video/823499582_640.webp)](https://player.vimeo.com/video/367217922{:target="_blank"})
-
+[![프로젝트 만들기](https://i.vimeocdn.com/video/823499582_640.webp)](https://player.vimeo.com/video/367217922)
 
 ### preset (수동)설정
 - 추가적인 설정을 해줘야 하기 때문에 Manually 선택
