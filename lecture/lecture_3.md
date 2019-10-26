@@ -58,7 +58,7 @@ Vue.component('product', {
 > 지역 컴포넌트는 [lecture_4](https://github.com/wooyoung85/vuejs-study/blob/master/lecture/lecture_4.md) 부터 주로 사용하게 될 예정입니다.  
 > 아래 예제 코드들은 모두 전역 변수로 작성되었습니다 ^^
 
-### 쇼핑몰 예제 코드 작성 (**Step_6**)
+## 쇼핑몰 예제 코드 작성 (**Step_6**)
 
 - [shop_step_6.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_6.html) 파일 참고
 
@@ -300,17 +300,16 @@ var totalfunc = function() {
 
 watcher(totalfunc)
 ```
-- Vue 인스턴스가 초기화 될 때 data(javascript object)에 있는 모든 속성별로  `Object.defineProperty()` 메서드를 사용하여 getter/setter 설정
-- watcher 함수가 파라미터로 전달받은 target 함수를 실행하게 되면 dependency가 생김
-- 위 예제로 좀 더 자세히 설명해 본다면..
-  1. watcher가 total 함수를 실행 
-  2. price와 quantity 값을 각각의 getter로 호출
-  3. 이때 getter 함수는 target 함수를 각 data 속성 별로 subscribers에 등록
+- Vue 인스턴스가 초기화 될 때 `Object.defineProperty()` 메서드를 사용하여 data에 있는 모든 속성별로 getter/setter 설정
+- watcher 함수가 실행될 때 파라미터로 전달받은 target 함수를 실행하면서 target 함수가 subscribers에 추가됨
 
-- data 속성 값을 변경하기 위해 setter를 이용하게 됨
-- setter가 호출되면 내부 데이터를 변경하고 dependency가 있는 target 함수들을 실행함
+### 위 예제를 좀 더 자세히 설명해 본다면..
+1. watcher가 total 함수를 실행  
+2. price와 quantity 값을 각각의 getter로 호출  
+3. 이때 getter 함수는 target 함수를 각 data 속성 별로 subscribers에 등록
 
 ```js
+// Setter 테스트
 > data.total
 10
 > data.price = 200
@@ -318,6 +317,8 @@ watcher(totalfunc)
 > data.total
 400
 ```
+- data 속성 값을 변경하기 위해 setter를 이용하게 됨
+- setter가 호출되면 내부 데이터를 변경하고 dependency가 있는 target 함수들을 실행함
 
 > 대략적으로 이런 작업을 거쳐 data에 있는 속성들은 **반응(reactive) 속성**이 된다
 

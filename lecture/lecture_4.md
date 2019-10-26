@@ -31,7 +31,7 @@
 - 복잡한 `webpack` 설정을 알아서 해줌 
 - `webpack-dev-server` 를 사용하여 Hot Module Replacement 가 가능하도록 함  
   (👉 코드를 저장하면 브라우저에 바로 반영)
-- `package.json` 에 정의되어 있음
+- 사용 가능한 명령어는 `package.json` 에 정의되어 있음
   |command|desc|
   |-|-|
   |serve|start development server|
@@ -60,42 +60,53 @@ vue create shoppingmall
 [![프로젝트 만들기](https://i.vimeocdn.com/video/823499582_640.webp)](https://player.vimeo.com/video/367217922)
 
 ### preset (수동)설정
-- 추가적인 설정을 해줘야 하기 때문에 Manually 선택
+- 추가적인 설정을 해줘야 하기 때문에 `Manually select features` 선택
   <img src="./images/lecture_4/make-project-1.png" />
 
-- `Router`, `Vuex` 추가 선택 (이 둘은 거의 필수라고 보면 됨)
+- `Router`, `Vuex` 추가  
+(실제 개발 시 필수 선택 항목)
   <img src="./images/lecture_4/make-project-2.png" />
   
-- history 모드 사용
-  vue-router의 기본 모드는 hash mode
+- `history mode` 사용  
+  (`vue-router`의 기본 모드는 `hash mode`임)
   <img src="./images/lecture_4/make-project-3.png" />
   
 - linter / formatter 는 `ESLint + Prettier`로 설정
   <img src="./images/lecture_4/make-project-4.png" />
 
-- 추가적인 lint 설정
+- 추가적인 lint 설정  
+(파일 저장 시 규칙에 맞게 코드가 작성되었는지 체크)
   <img src="./images/lecture_4/make-project-5.png" />
 
 - Babel, PostCSS, ESLint 등의 설정 파일은 전용 설정 파일 생성
   <img src="./images/lecture_4/make-project-6.png" />
 
-- 이렇게 설정한 값들을 저장 가능하지만 여기서는 N 선택
+- 이렇게 프로젝트 설정한 값들을 저장할 수 있지만 여기서는 N 선택
   <img src="./images/lecture_4/make-project-7.png" />
 
 - 프로젝트 생성 완료
   <img src="./images/lecture_4/make-project-8.png" />
 
-## Webpack
-Webpack 👉 module bundler
-여러 파일을 하나로 묶어주는 기능
+## 실행하기
 
-.vue 파일은 브라우저가 인식할 수 없음
-loader와 plugin을 사용하여 html, css, js로 변환
+- `npm run serve` 실행  
+(만약에 8080 포트가 사용 중이라면 다른 포트 번호로 실행될 수 있음)
+  <img src="./images/lecture_4/make-project-9.png" />
 
-vue 단일 파일 컴포넌트를 사용하기 위해서는 .vue 파일을 컴파일하고 번들링하는 작업이 필요합니다.
+- 브라우저에서 `http://localhost:8080` 접속
+<img src="./images/lecture_4/make-project-10.png" />
 
+## 스캐폴딩 된 소스코드 구조 분석
+<img src="./images/lecture_4/1.png" width=300px />
 
-## Webpack 을 좀 더 이해하기 위한 실습 예제
+## 🧐 Webpack에 대해 좀 더 자세히 알아보자.. 
+> Webpack 👉 module bundler (여러 파일들을 하나로 묶어주는 기능)
+
+### Vue에서 Webpack이 필요한 이유??
+- `Single File Component` 컨셉으로 개발할 경우 하나의 `.vue`파일에서 `HTML`/`CSS`/`JavaScript`를 모두 기술하게 됨
+- 이렇게 작성한 `.vue` 파일은 브라우저가 인식할 수 없음
+- `loader`와 `plugin` 등을 사용하여 .vue 파일을 컴파일하고 번들링하는 작업이 필요함
+
 ### 실습을 위한 기본 설정
   ```bash
   mkdir webpack-demo-app
@@ -166,11 +177,6 @@ npm run build
 ```
 
 
-# Vue Router
-
-# Vue Components
-
-# API 호출 (with. Axios)
 
 ## 참고자료
 [Vue CLI](https://cli.vuejs.org/)  
