@@ -5,7 +5,7 @@
 
   <img src="./images/lecture_3/1-1.gif">
 
-- Vue.js는 컴포넌트들을 조합하여 어플리케이션을 작성
+- 컴포넌트들을 조합하여 어플리케이션 개발
 - 컴포넌트들은 부모 자식 관계로 트리 구조 형성
 
   <img src="./images/lecture_3/1-2.png">
@@ -23,7 +23,7 @@ Vue.component('product', {})
 - 첫번째 인자값은 컴포넌트 명
 - 두번째 인자는 컴포넌트의 option들을 설정 (type은 object)
 
-### **data** 속성은 <span style="color:red">**함수**</span> 형태로 선언
+### ⭐ **data** 속성은 <span style="color:red">**함수**</span> 형태로 선언
 ```js
 Vue.component('product', {
   template: `<div></div>`,
@@ -105,6 +105,30 @@ Vue.component('product', {
 > 1.0에서는 `.sync` 옵션을 써서 양방향 전달도 가능했지만  
 > 시스템 복잡도가 상승하고 유지보수성이 매우 떨어져서 Vue.js 2.0 에서는 지원 안 함
 
+### ⚠️ **주의사항**  
+컴포넌트 작성 시 `props` 속성명을 작성할 때 🐫카멜 표기법(camel casing)을 사용했다면  
+html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 오류가 나지 않음.
+
+```html
+...
+<div id='app'>
+  <!-- 이렇게 코드 작성하면 에러남 -->
+  <product :cellPhone="cellPhone"></product>
+</div>
+<template id='productTemplate'>
+<template>
+<script>
+  Vue.component('product', {
+    template: '#productTemplate',
+    // 카멜 표기법으로 작성
+    props: ['cellPhone']
+  })
+</script>
+...
+```
+
+> tag 작성시 속성(위 예제에서 `:cellPhone`)은 대소문자를 구분하지 않기 때문에 전부 소문자로 작성하거나 케밥 표기법을 사용해야 합니다. 
+
 ### 쇼핑몰 예제 코드 작성 (**Step_7**)
 - [shop_step_7.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_7.html) 파일 참고
 
@@ -131,31 +155,7 @@ Vue.component('product', {
 부모 컴포넌트에서 event 핸들러 메서드를 호출하게 됨 
 
 ### 쇼핑몰 예제 코드 작성 (**Step_8**)
-- [shop_step_8.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_8.html) 파일 참고
-
-### ⚠️ **주의사항**  
-컴포넌트 작성 시 `props` 속성명을 작성할 때 🐫카멜 표기법(camel casing)을 사용했다면  
-html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 오류가 나지 않음.
-
-```html
-...
-<div id='app'>
-  <!-- 이렇게 코드 작성하면 에러남 -->
-  <product cellPhone="cellPhone"></product>
-</div>
-<template id='productTemplate'>
-<template>
-<script>
-  Vue.component('product', {
-    template: '#productTemplate',
-    // 카멜 표기법으로 작성
-    props: ['cellPhone']
-  })
-</script>
-...
-```
-
-> tag 작성시 속성(위 예제에서 cellPhone)은 대소문자를 구분하지 않기 때문에 전부 소문자로 작성하거나 카멜 표기법을 사용해야 합니다. 
+- [shop_step_8.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_3/shop_step_8.html) 파일 참고
 
 ## EventBus
 같은 레벨(형제 관계)에 있거나 아주 멀리 떨어진 컴포넌트들 간 정보를 주고 받기 위한 단일 통신 채널
