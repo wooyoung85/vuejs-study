@@ -4,8 +4,9 @@ marp: true
 <style>
 ::-webkit-scrollbar { width: 8px; } 
 ::-webkit-scrollbar-thumb { background: #a9a9a9; }
-.scroll {overflow-y:scroll;}
+.scroll {overflow-y:scroll;margin-bottom:20px;}
 .center-image{display: block; margin-left: auto; margin-right: auto;}
+img{margin-bottom:20px;}
 </style>
 
 # Components
@@ -41,7 +42,7 @@ Vue.component('product', {})
 
 ---
 
-### ⭐️ **data** 속성은 <span style="color:red">**함수**</span> 형태로 선언
+### ⭐️ Component 작성시 **data** 속성은 <span style="color:red">**함수**</span> 형태로 선언
 ```js
 Vue.component('product', {
   template: `<div></div>`,
@@ -82,7 +83,10 @@ Vue.component('product', {
 
 ## 쇼핑몰 예제 코드 작성 (**Step_6**)
 
-- [shop_step_6.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_6.html) 파일 참고
+- [shop_step_6.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_3/shop_step_6.html) 파일 참고
+- 기존 코드 컴포넌트화 시키기
+<img src="./images/lecture_3/step_6.png" width="500px" style="float:left">
+<img src="./images/lecture_3/step_6.gif" width="500px">
 
 ---
 
@@ -130,8 +134,8 @@ Vue.component('product', {
 ---
 
 ### ⚠️ **주의사항**  
-**컴포넌트 작성 시** `props` 속성명을 작성할 때 🐫카멜 표기법(camel casing)을 사용했다면  
-html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 오류가 나지 않음.
+**컴포넌트 작성 시** 🐫카멜 표기법(camel casing)을 사용하여 `props` 속성명을 작성했다면  
+부모 컴포넌트의 html tag 에서 속성명 작성 시 🍢케밥 표기법(kebob casing)을 사용해야만 오류가 나지 않음.
 
 ---
 
@@ -141,6 +145,7 @@ html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 �
   <!-- 이렇게 코드 작성하면 에러남 -->
   <product :cellPhone="cellPhone"></product>
 </div>
+
 <template id='productTemplate'>
 <template>
 <script>
@@ -167,7 +172,9 @@ html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 �
 ---
 
 ### 쇼핑몰 예제 코드 작성 (**Step_7**)
-- [shop_step_7.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_7.html) 파일 참고
+- [shop_step_7.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_3/shop_step_7.html) 파일 참고
+- `Props` 를 활용하여 `product` 컴포넌트에 데이터 전달
+<img src="./images/lecture_3/step_7.png" width="600px">
 
 ---
 
@@ -199,11 +206,14 @@ html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 �
 
 ### 쇼핑몰 예제 코드 작성 (**Step_8**)
 - [shop_step_8.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_3/shop_step_8.html) 파일 참고
+- `Emit` 을 활용하여 `product` 컴포넌트에서 `add-to-cart` 이벤트 발생 시 `updateCart` 실행
+<img src="./images/lecture_3/step_8.gif" width="600px">
 
 ---
 
 ## EventBus
-같은 레벨(형제 관계)에 있거나 아주 멀리 떨어진 컴포넌트들 간 정보를 주고 받기 위한 단일 통신 채널
+같은 레벨(형제 관계)에 있거나 아주 멀리 떨어진 컴포넌트들 간  
+정보를 주고 받기 위한 단일 통신 채널
 
 ---
 
@@ -236,8 +246,11 @@ html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 �
 ---
 
 ### 쇼핑몰 예제 코드 작성 (**Step_9**)
-- [shop_step_9.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture3/shop_step_9.html) 파일 참고
+- [shop_step_9.html](https://github.com/wooyoung85/vuejs-study/blob/master/example/lecture_3/shop_step_9.html) 파일 참고
+- `EventBus` 를 활용하여 `Product` 컴포넌트에서 같은 레벨에 있는 `Cart` 컴포넌트로 데이터 전달
+<img src="./images/lecture_3/step_9.png" width="450px">
 
+---
 
 > 실무에선 전역 Component만 사용해서 개발하는 경우는 거의 없음  
 > 주로 확장자가 `.vue` 인 **단일 파일 컴포넌트(Single File Component)** 형태로 많이 개발됨
@@ -259,8 +272,8 @@ html tag 작성시에는 🍢케밥 표기법(kebob casing)을 사용해야만 �
 <div class="scroll">
   <img src="./images/lecture_3/lifecycle.png" class="center-image">
 </div>
-  
-  <sup>이미지 출처 : [Vue 인스턴스-라이프사이클 다이어그램](https://kr.vuejs.org/v2/guide/instance.html#%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4-%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8)</sup>
+
+<sup>이미지 출처 : [Vue 인스턴스-라이프사이클 다이어그램](https://kr.vuejs.org/v2/guide/instance.html#%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4-%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8)</sup>
 
 ---
 
@@ -310,30 +323,33 @@ App running at:
 
 |#|Vanila Javascript|Vue.js|
 |-|-|-|
-|코드|<img src="./images/lecture_3/2-1-code.png" width="300px">|<img src="./images/lecture_3/2-2-code.png" width="280px">|
+|코드|<img src="./images/lecture_3/2-1-code.png" width="300px">|<img src="./images/lecture_3/2-2-code.png" width="250px">|
 |결과확인|<img src="./images/lecture_3/2-1-result.gif" width="300px">|<img src="./images/lecture_3/2-2-result.gif" width="300px">|
 
 ---
 
-> ### javascript는 절차적으로 코드를 처리하게 되는데 어떻게 `price` 나 `quantity` 값의 변화가 <br/> 이미 계산된 `total`, `totalPriceWithTax` 에 영향을 끼칠 수 있을까???
+> ### javascript는 절차적으로 코드를 처리하게 되는데 <br/> 어떻게 `price` 나 `quantity` 값의 변화가 <br/> 이미 계산된 `total`, `totalPriceWithTax` 에 영향을 끼칠 수 있을까???
 
 ---
 
 ## 간단한 Reactivity System 구현 (with. `Dependency Class` & `Object.defineProperty`) 👉 [TL;DR](https://github.com/wooyoung85/vuejs-study/blob/master/lecture/lecture_3.md#%EA%B0%84%EB%8B%A8%ED%95%9C-reactivity-system-%EA%B5%AC%ED%98%84-with-dependency-class--objectdefineproperty)
 
 
-- Vue 인스턴스가 초기화 될 때 `Object.defineProperty()` 메서드를 사용하여 data에 있는 모든 속성별로 getter/setter 설정
-- watcher 함수가 실행될 때 파라미터로 전달받은 target 함수를 실행하면서 target 함수가 subscribers에 추가됨
+1. Vue 인스턴스가 초기화 될 때 `Object.defineProperty()` 메서드를 사용하여 data에 있는 모든 속성별로 getter/setter 설정
+2. watcher 함수는 파라미터로 전달받은 함수를 target 변수에 넣은 후 target 함수 실행 
+3. target함수의 실행을 위해 data 속성 별로 설정된 getter 호출
+4. getter는 target 함수를 subscribers에 추가
 
 ---
 
 ### 위 예제를 좀 더 자세히 설명해 본다면..
-1. watcher가 total 함수를 실행  
-2. price와 quantity 값을 각각의 getter로 호출  
-3. 이때 getter 함수는 target 함수를 각 data 속성 별로 subscribers에 등록
+1. Vue 인스턴스가 초기화 될 때 `price` 와 `quantity` 에 대해 getter/setter 설정됨
+2. `watcher` 함수는 파라미터로 전달받은 `totalfunc` 를 `target` 에 넣은 후 실행  
+3. `totalfunc`를 실행하기 위해 `price` 와 `quantity` 값을 각각의 `getter` 로 호출  
+4. `price` 와 `quantity` 의 `getter` 함수는 `target` 을 subscribers에 등록 (<del>이미 등록했다면 안하겠지만..</del>)
 
 ---
-
+### 🤥 진짜 잘 변하는지 테스트 해보자
 ```js
 // Setter 테스트
 > data.total
@@ -346,7 +362,7 @@ App running at:
 - data 속성 값을 변경하기 위해 setter를 이용하게 됨
 - setter가 호출되면 내부 데이터를 변경하고 dependency가 있는 target 함수들을 실행함
 
-> 대략적으로 이런 작업을 거쳐 data에 있는 속성들은 **반응(reactive) 속성**이 된다
+> 대략적으로 이런 작업을 거쳐 data에 있는 속성들은 **반응형(reactivity) 속성**이 된다
 
 ---
 
@@ -361,6 +377,7 @@ App running at:
 
 ## 만약에 인스턴스 속성이 동적으로 추가된다면??
 👉 이미 만들어진 인스턴스에 반응 속성을 동적으로 추가하는 것은 허용되지 않음
+
 ```js
 // 위 예제에 이어서 코드 작성 
 > data.totalWithTax = data.price * data.quantity * 1.2
