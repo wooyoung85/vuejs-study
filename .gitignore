@@ -11,3 +11,4 @@ settings.json
 *.drawio
 
 example/lecture_2_practice
+lecture/*.html

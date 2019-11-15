@@ -77,7 +77,7 @@ Vue.component('product', {
   ```
 
 > 지역 컴포넌트는 [lecture_4](https://github.com/wooyoung85/vuejs-study/blob/master/lecture/lecture_4.md) 부터 주로 사용하게 될 예정입니다.  
-> 아래 예제 코드들은 모두 전역 변수로 작성되었습니다 ^^
+> [lecture_3](https://github.com/wooyoung85/vuejs-study/blob/master/lecture/lecture_3.md) 에 나오는 예제들은 모두 전역 변수로 작성되었습니다 ^^
 
 ---
 
@@ -158,7 +158,8 @@ Vue.component('product', {
 ...
 ```
 
-> tag 작성시 속성(위 예제에서 `:cellPhone`)은 대소문자를 구분하지 않기 때문에 전부 소문자로 작성하거나 케밥 표기법을 사용해야 합니다. 
+> tag 작성시 속성(위 예제에서 `:cellPhone`)은 대소문자를 구분하지 않기 때문에 케밥 표기법을 사용해야 합니다.   
+> 😎소문자로만 작성하는 것도 좋은 방법이 될 수 있습니다 :)
 
 ---
 
@@ -315,6 +316,8 @@ App running at:
 ### 이후 과정은 예제 코드를 참고
 > 👬[rock-paper-scissors 예제 코드](https://github.com/wooyoung85/vuejs-study/tree/master/example/lecture_3/rock-paper-scissors) 를 참고하면서 같이 작성해 보도록 하겠습니다.
 
+<img src="./images/lecture_3/rps.gif" width="800px">
+
 ---
 
 # Vue.js Reactivity System
@@ -402,7 +405,7 @@ App running at:
 
 ---
 
-## Vue는 DOM 업데이트를 비동기로 동작한다는데 문제는 없을까?
+## Vue는 DOM 업데이트를 비동기로 작업한다는데 문제는 없을까?
 일반적으로는 문제가 없겠지만 렌더링 된 값에 의존하는 로직이 있다면 문제가 생길수도 있음
 
 ---

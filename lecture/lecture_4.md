@@ -1,4 +1,4 @@
-# 진짜 Vue.js 개발 시작하기
+# Vue.js 로 SPA 만들기
 
 # Vue CLI
 - Vue.js 개발 환경을 빠르고 쉽게 제공
@@ -14,17 +14,17 @@
 
   |command|desc|
   |-|-|
-  |**create** [options] <app-name> |create a new project powered by vue-cli-service|
-  |**add** [options] <plugin> [pluginOptions]|install a plugin and invoke its generator in an already created project|
-  |**invoke** [options] <plugin> [pluginOptions]|invoke the generator of a plugin in an already created project|
-  |**inspect** [options] [paths...]|inspect the webpack config in a project with vue-cli-service|
-  |**serve** [options] [entry]|serve a .js or .vue file in development mode with zero config|
-  |**build** [options] [entry]|build a .js or .vue file in production mode with zero config|
-  |**ui** [options]|start and open the vue-cli ui|
-  |**init** [options] \<template> \<app-name>|generate a project from a remote template (legacy API, requires @vue/cli-init)|
-  |**config** [options] [value]|inspect and modify the config|
-  |**upgrade** [semverLevel] | upgrade vue cli service / plugins (default semverLevel: minor)|
-  |**info**|print debugging information about your environment|
+  |**create** [options] <app-name> |프로젝트 생성|
+  |**add** [options] <plugin> [pluginOptions]|`npm install ` + 이미 생성된 프로젝트에 plugin 추가|
+  |**invoke** [options] <plugin> [pluginOptions]|이미 생성된 프로젝트에 plugin 추가|
+  |**inspect** [options] [paths...]|프로젝트의 webpack 설정 파일 자세히 보기|
+  |**serve** [options] [entry]|개발 모드로 Application 실행 <br/>@vue/cli-service-global 전역 설치 필수|
+  |**build** [options] [entry]|운영 모드로 Application 빌드 <br/>@vue/cli-service-global 전역 설치 필수|
+  |**ui** [options]|vue-cli ui 시작하기|
+  |**init** [options] \<template> \<app-name>|다른 Template으로 프로젝트 생성 <br/> (legacy API, @vue/cli-init 설치 필수)|
+  |**config** [options] [value]|설정 자세히 보기 및 수정|
+  |**upgrade** [semverLevel] | vue cli service / plugins 업그레이드 <br/>(default semverLevel: minor)|
+  |**info**|디버깅 정보 출력|
 
 ## CLI Service
 
@@ -45,7 +45,7 @@
 
 ## Vue CLI 설치
 ```bash
-npm i -g @vue/cli
+$> npm i -g @vue/cli
 ```
 
 > Mac OS 사용 시 앞에 `sudo` 붙여야 함
@@ -54,12 +54,15 @@ npm i -g @vue/cli
 
 ## Project 만들기
 ```bash
-vue create shoppingmall
+$> vue create shoppingmall
 ```
 
 [![프로젝트 만들기](https://i.vimeocdn.com/video/823499582_640.webp)](https://player.vimeo.com/video/367217922)
 
-### preset (수동)설정
+> vue-cli 2.X 에서는 `vue init <template-name> <project-name>` 명령어를 통해 프로젝트를 생성하였음  
+관련된 내용은 [vue-cli v2 github](https://github.com/vuejs/vue-cli/tree/v2#vue-cli--) 를 참고하시기 바랍니다.
+
+### preset 수동 설정하기
 - 추가적인 설정을 해줘야 하기 때문에 `Manually select features` 선택
   <img src="./images/lecture_4/make-project-1.png" />
 
@@ -99,11 +102,46 @@ vue create shoppingmall
 ## 스캐폴딩 된 소스코드 구조 분석
 <img src="./images/lecture_4/1.png" width=300px />
 
+1. 📂**node_modules** : 프로젝트를 빌드하는 데 필요한 모든 라이브러리가 저장되는 곳  
+(`npm install` 명령어를 실행하면 폴더가 생성됨)
+
+2. 📂**public** : Webpack을 통해 관리되지 않는 정적 Resource들을 모아두는 곳.
+    > ⚠️ image나 font 같은 정적 Resource들은 **src/assets** 폴더에 넣어서 Webpack의 관리를 받게하는 것을 추천
+
+3. 📂**src/components** : 어플리케이션에서 사용되는 컴포넌트들을 모아두는 곳
+
+4. 📂**src/router** : Router 설정 파일들을 모아두는 곳 (Client-Side-Routing)
+
+5. 📂**src/store** : Vuex 설정 파일들을 모아두는 곳 (State 관리)
+
+6. 📂**src/views** : Application의 다른 뷰 또는 페이지에 대한 파일을 저장하는 위치
+
+7. 📄**App.vue** : 다른 컴포넌트를 포함하고 있는 최상위(root) 컴포넌트
+
+8. 📄**main.js** : 어플리케이션에 필요한 요소들을 Load하여 렌더링한 후 DOM에 마운트하게 하는 작업 수행
+    ```js
+    import Vue from "vue";
+    import App from "./App.vue";
+    import router from "./router";
+    import store from "./store";
+
+    Vue.config.productionTip = false;
+
+    new Vue({
+      router,
+      store,
+      render: h => h(App)
+    }).$mount("#app");
+    ```
+9. 📄**package.json** : 프로젝트에 필요한 package 들을 정의하고 관리해줌
+
+> ✔️. 프로젝트 생성시 Babel, PostCSS, ESLint 등의 설정 파일은 전용 설정 파일 생성하도록 선택하였기 때문에  `.eslintrc.js`, `babel.config.js`, `postcss.config.js` 파일이 생성됨
+
 ## 🧐 Webpack에 대해 좀 더 자세히 알아보자.. 
 > Webpack 👉 module bundler (여러 파일들을 하나로 묶어주는 기능)
 
 ### Vue에서 Webpack이 필요한 이유??
-- `Single File Component` 컨셉으로 개발할 경우 하나의 `.vue`파일에서 `HTML`/`CSS`/`JavaScript`를 모두 기술하게 됨
+- `Single File Component` 컨셉으로 개발할 경우 하나의 `.vue`파일에 `HTML`/`CSS`/`JavaScript`를 모두 기술하게 됨
 - 이렇게 작성한 `.vue` 파일은 브라우저가 인식할 수 없음
 - `loader`와 `plugin` 등을 사용하여 .vue 파일을 컴파일하고 번들링하는 작업이 필요함
 
@@ -114,10 +152,10 @@ vue create shoppingmall
 
   # package.json 파일 만들기
   npm init -y
-
-  # webpack, lodash 설치
+  
+  # webpack, vue 설치
   npm install -D webpack webpack-cli
-  npm install lodash
+  npm install vue
   ```
 ### package.json 수정
 ```diff
@@ -135,6 +173,10 @@ module.exports = {
   entry: {
     app: path.join(__dirname, 'index.js')
   },
+  module: {
+    rules: [],
+  },
+  plugins: [],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'build.js'
@@ -151,6 +193,7 @@ index.html
     <title>webpack demo app</title>
   </head>
   <body>
+    <div id="app"></div>
     <script src="./dist/build.js"></script>
   </body>
 </html>
@@ -158,17 +201,9 @@ index.html
 
 index.js
 ```js
-import _ from 'lodash';
+import Vue from 'vue'
 
-function component() {
-  var element = document.createElement('div');
-
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-  return element;
-}
-
-document.body.appendChild(component());
+new Vue().$mount('#app')
 ```
 
 ### webpack 실행
@@ -176,6 +211,7 @@ document.body.appendChild(component());
 npm run build
 ```
 
+### 
 
 
 ## 참고자료

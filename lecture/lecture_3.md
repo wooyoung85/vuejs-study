@@ -23,7 +23,7 @@ Vue.component('product', {})
 - 첫번째 인자값은 컴포넌트 명
 - 두번째 인자는 컴포넌트의 option들을 설정 (type은 object)
 
-### Component 작성시 ⭐ **data** 속성은 <span style="color:red">**함수**</span> 형태로 선언
+### ⭐ Component 작성시 **data** 속성은 <span style="color:red">**함수**</span> 형태로 선언
 ```js
 Vue.component('product', {
   template: `<div></div>`,
@@ -39,7 +39,6 @@ Vue.component('product', {
 
 ## 지역 컴포넌트
 - 전역 컴포넌트와는 달리 특정 지역에서만 사용가능한 컴포넌트  
-  (아래 예제에서는 id 값이 `#app` 인 `div` 에서만 사용 가능)
 
 - `Vue` 인스턴스 생성 시 `components` 옵션을 사용하여 등록
   ```js
@@ -56,7 +55,7 @@ Vue.component('product', {
   ```
 
 > 지역 컴포넌트는 [lecture_4](https://github.com/wooyoung85/vuejs-study/blob/master/lecture/lecture_4.md) 부터 주로 사용하게 될 예정입니다.  
-> 아래 예제 코드들은 모두 전역 변수로 작성되었습니다 ^^
+> [lecture_3](https://github.com/wooyoung85/vuejs-study/blob/master/lecture/lecture_3.md) 에 나오는 예제들은 모두 전역 변수로 작성되었습니다 ^^
 
 ## 쇼핑몰 예제 코드 작성 (**Step_6**)
 
@@ -122,7 +121,8 @@ Vue.component('product', {
 ...
 ```
 
-> tag 작성시 속성(위 예제에서 `:cellPhone`)은 대소문자를 구분하지 않기 때문에 전부 소문자로 작성하거나 케밥 표기법을 사용해야 합니다. 
+> tag 작성시 속성(위 예제에서 `:cellPhone`)은 대소문자를 구분하지 않기 때문에 케밥 표기법을 사용해야 합니다.   
+> 😎소문자로만 작성하는 것도 좋은 방법이 될 수 있습니다 :)
 
 ### 데이터 전달 방향
 데이터는 부모 👉자식 방향으로만 전달함
@@ -220,14 +220,14 @@ Vue.component('product', {
 
 ### 프로젝트 생성
 ```bash
-vue create rock-paper-scissors
+$> vue create rock-paper-scissors
 
-cd rock-paper-scissors
+$> cd rock-paper-scissors
 ```
 
 ### 어플리케이션 실행
 ```bash
-npm run serve
+$> npm run serve
 ...
 DONE  Compiled successfully in 71ms    
 
@@ -242,6 +242,8 @@ App running at:
 
 ### 이후 과정은 예제 코드를 참고
 > 👬[rock-paper-scissors 예제 코드](https://github.com/wooyoung85/vuejs-study/tree/master/example/lecture_3/rock-paper-scissors) 를 참고하면서 같이 작성해 보도록 하겠습니다.
+
+<img src="./images/lecture_3/rps.gif" width="600px">
 
 
 # Vue.js Reactivity System
@@ -366,7 +368,7 @@ watcher(totalfunc)
   (버퍼링으로 중복이 제거된 작업)
 - 버퍼링을 거쳐서 큐에 푸시가 되면 이벤트 루프 tick이 큐에 있는 내용을 Flush하면서 실제 DOM을 업데이트 함
 
-## Vue는 DOM 업데이트를 비동기로 동작한다는데 문제는 없을까?
+## Vue는 DOM 업데이트를 비동기로 작업한다는데 문제는 없을까?
 일반적으로는 문제가 없겠지만 렌더링 된 값에 의존하는 로직이 있다면 문제가 생길수도 있음
 
 ### 해결책
