@@ -198,8 +198,13 @@ Vue.component('product', {
 - `EventBus` 를 활용하여 `Product` 컴포넌트에서 같은 레벨에 있는 `Cart` 컴포넌트로 데이터 전달
 <img src="./images/lecture_3/step_9.png" width="600px">
 
-> 실무에선 전역 Component만 사용해서 개발하는 경우는 거의 없음  
-> 주로 확장자가 `.vue` 인 **단일 파일 컴포넌트(Single File Component)** 형태로 많이 개발됨
+## Component 부분을 마무리 하며...
+- 실무에선 전역 Component 만 사용해서 개발하는 경우는 거의 없음  
+- 주로 확장자가 `.vue` 인 **단일 파일 컴포넌트(Single File Component)** 형태로 많이 개발됨
+
+> `slot`에 대한 내용을 미쳐 넣지 못하였습니다😭 이 부분은 추후에 다뤄지도록 할 예정입니다 
+
+> [Vue.js 공식문서 - 컴포넌트](https://kr.vuejs.org/v2/guide/components.html) 부분을 꼭 읽어보시기 바랍니다!!
 
 
 # Vue 인스턴스 생명주기
@@ -208,6 +213,9 @@ Vue.component('product', {
 - `Mounting` : 돔(DOM) 삽입 단계
 - `Updating` : Diff 및 재 렌더링 단계
 - `Destruction` : 해체 단계
+
+> 각 단계마다 실행 전과 실행 후에 life cycle hook 로직을 추가할 수 있음
+
   <img src="./images/lecture_3/lifecycle.png" width="500px">
   
   <sup>이미지 출처 : [Vue 인스턴스-라이프사이클 다이어그램](https://kr.vuejs.org/v2/guide/instance.html#%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4-%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8)</sup>

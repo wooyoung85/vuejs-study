@@ -292,7 +292,8 @@ data : function () {
 - `Updating` : Diff 및 재 렌더링 단계
 - `Destruction` : 해체 단계
 
-> 각 단계마다 실행 전과 실행 후에 life cycle hook 로직을 추가할 수 있다.
+> 각 단계마다 실행 전과 실행 후에 life cycle hook 로직을 추가할 수 있음
+
 ---
 
 <div class="scroll">
