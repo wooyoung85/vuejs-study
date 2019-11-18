@@ -1,4 +1,4 @@
-# shoppingmall
+# rock-paper-scissors
 
 ## Project setup
 ```

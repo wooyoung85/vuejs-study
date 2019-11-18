@@ -59,6 +59,20 @@ Vue.component('product', {
 
 ---
 
+> 함수 형태로 작성한 data 문법이 생소했다면 ES6 에서 지원하는 문법이니 놀라지 마세요
+
+### ES6 Shortcut
+```js
+data : function () {
+  return {
+
+  }
+}
+```
+<sup>참고 자료 : [9. 메서드를 선언할 때 function을 생략, method shorthand](https://pro-self-studier.tistory.com/28)</sup>
+
+---
+
 ## 지역 컴포넌트
 - 전역 컴포넌트와는 달리 특정 지역에서만 사용가능한 컴포넌트  
 
@@ -131,11 +145,18 @@ Vue.component('product', {
   }
   ```
 
+>  Vue.js 공식문서 중 [Style Guide - Props 정의](https://kr.vuejs.org/v2/style-guide/index.html#Props-%EC%A0%95%EC%9D%98-%ED%95%84%EC%88%98) 부분을 보면 Prop은 가능한 상세하게 정의되어야 한다고 써 있습니다 :)
+
+> 상세하게 정의하는 것을 추천 드립니다. 😎
+
 ---
 
 ### ⚠️ **주의사항**  
 **컴포넌트 작성 시** 🐫카멜 표기법(camel casing)을 사용하여 `props` 속성명을 작성했다면  
 부모 컴포넌트의 html tag 에서 속성명 작성 시 🍢케밥 표기법(kebob casing)을 사용해야만 오류가 나지 않음.
+
+> We’re simply following the conventions of each language. Within JavaScript, camelCase is more natural. Within HTML, kebab-case is.
+<sup> 참고자료 : [Style Guide - Prop 이름 규칙 지정(casing)](https://kr.vuejs.org/v2/style-guide/index.html#Prop-%EC%9D%B4%EB%A6%84-%EA%B7%9C%EC%B9%99-%EC%A7%80%EC%A0%95-casing-%EB%A7%A4%EC%9A%B0-%EC%B6%94%EC%B2%9C%ED%95%A8) </sup>
 
 ---
 
@@ -252,10 +273,13 @@ Vue.component('product', {
 <img src="./images/lecture_3/step_9.png" width="450px">
 
 ---
+## Component 부분을 마무리 하며...
+- 실무에선 전역 Component 만 사용해서 개발하는 경우는 거의 없음  
+- 주로 확장자가 `.vue` 인 **단일 파일 컴포넌트(Single File Component)** 형태로 많이 개발됨
 
-> 실무에선 전역 Component만 사용해서 개발하는 경우는 거의 없음  
-> 주로 확장자가 `.vue` 인 **단일 파일 컴포넌트(Single File Component)** 형태로 많이 개발됨
+> `slot`에 대한 내용을 미쳐 넣지 못하였습니다😭 이 부분은 추후에 다뤄지도록 할 예정입니다 
 
+> [Vue.js 공식문서 - 컴포넌트](https://kr.vuejs.org/v2/guide/components.html) 부분을 꼭 읽어보시기 바랍니다!!
 ---
 
 # Vue 인스턴스 생명주기
@@ -268,6 +292,7 @@ Vue.component('product', {
 - `Updating` : Diff 및 재 렌더링 단계
 - `Destruction` : 해체 단계
 
+> 각 단계마다 실행 전과 실행 후에 life cycle hook 로직을 추가할 수 있다.
 ---
 
 <div class="scroll">
@@ -287,16 +312,17 @@ Vue.component('product', {
 
 ### 프로젝트 생성
 ```bash
-vue create rock-paper-scissors
+# preset은 기본으로 설정
+$> vue create rock-paper-scissors
 
-cd rock-paper-scissors
+$> cd rock-paper-scissors
 ```
 
 ---
 
 ### 어플리케이션 실행
 ```bash
-npm run serve
+$> npm run serve
 ...
 DONE  Compiled successfully in 71ms    
 
@@ -455,5 +481,6 @@ App running at:
 [API — Vue.js](https://kr.vuejs.org/v2/api/index.html#Vue-nextTick)  
 [Vue.js에서 nextTick 사용하기](http://vuejs.kr/jekyll/update/2017/01/19/vuejs-nexttick-example/)  
 [Passing Data from parent to child with props](https://riptutorial.com/vue-js/example/10471/passing-data-from-parent-to-child-with-props)  
-[Vue.js 2.0 라이프사이클 이해하기
-](https://medium.com/witinweb/vue-js-%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-7780cdd97dd4)
+[Vue.js 2.0 라이프사이클 이해하기](https://medium.com/witinweb/vue-js-%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-7780cdd97dd4)  
+[Reactivity in Depth](https://kr.vuejs.org/v2/guide/reactivity.html)  
+[Style Guide](https://kr.vuejs.org/v2/style-guide/index.html)
