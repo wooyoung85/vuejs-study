@@ -1,27 +1,27 @@
 <template>
-  <div class="wrapper">
-    <div>
-      <h1 style="text-align:center">컴퓨터</h1>
-      <div class="rps" :style="computedRpsStyle" @click="toggleRps"></div>
-    </div>
-    <div class="versus">
-      <p class="jumbo-text">VS</p>
-    </div>
-    <div>
-      <h1 style="text-align:center">나</h1>
-      <div class="mychoice" style="text-align:center">
-        <button class="jumbo-text button red" @click="onClickButton('가위')">가위</button>
-        <button class="jumbo-text button blue" @click="onClickButton('바위')">바위</button>
-        <button class="jumbo-text button yellow" @click="onClickButton('보')">보</button>
+    <div class="wrapper">
+      <div>
+        <h1 style="text-align:center">컴퓨터</h1>
+        <div class="rps" :style="computedRpsStyle" @click="toggleRps"></div>
+      </div>
+      <div class="versus">
+        <p class="jumbo-text">VS</p>
+      </div>
+      <div>
+        <h1 style="text-align:center">나</h1>
+        <div class="mychoice" style="text-align:center">
+          <button class="jumbo-text button red" @click="onClickButton('가위')">가위</button>
+          <button class="jumbo-text button blue" @click="onClickButton('바위')">바위</button>
+          <button class="jumbo-text button yellow" @click="onClickButton('보')">보</button>
+        </div>
+      </div>
+      <div class="result" v-for="(result, index) in results" :key="index">
+        <p v-if="result.round > 0" style="margin: 1px">
+          {{result.round}}라운드 결과
+          <span style="font-weight:bold">{{result.winorloss}}</span>
+        </p>
       </div>
     </div>
-    <div class="result" v-for="(result, index) in results" :key="index">
-      <p v-if="result.round > 0" style="margin: 1px">
-        {{result.round}}라운드 결과
-        <span style="font-weight:bold">{{result.winorloss}}</span>
-      </p>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -37,7 +37,6 @@ const computerChoice = imgCoord => {
   })[0];
 };
 export default {
-  name: "IconButtons",
   data() {
     return {
       imgCoord: rspCoords.가위,
@@ -122,7 +121,7 @@ export default {
     computedRpsStyle() {
       return {
         backgroundImage:
-          "url(" + require("@/assets/img/rockpaperscissors.jpg") + ")",
+          "url(" + require("../assets/img/rockpaperscissors.jpg") + ")",
         backgroundPosition: `${this.imgCoord}, 0`
       };
     }
@@ -144,7 +143,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scope>
 .wrapper {
   display: grid;
   grid-template-columns: 33% 33% 33%;

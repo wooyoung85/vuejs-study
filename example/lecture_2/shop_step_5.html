@@ -12,17 +12,27 @@
 <body>
   <div class="nav-bar"></div>
   <div id="app">
+    <div class="cart">
+      <p>Cart({{ cart }})</p>
+    </div>
+
+    <product v-for="cellphone in cellphones" :key="cellphone.id" :cellphone="cellphone"></product>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <template id="productTemplate">
     <div class="product">
       <div class="product-image">
-        <img :src="image.front" class="viewer-image" />
-        <img :src='image.side' class="viewer-image" />
-        <img :src="image.back" class="viewer-image" />
-        <img :src="image.flip" class="viewer-image" />
+        <img :src="image.front" class="viewer-image" v-bind:class="{apple : cellphone.isApple}" />
+        <img :src='image.side' class="viewer-image" v-bind:class="{apple : cellphone.isApple}" />
+        <img :src="image.back" class="viewer-image" v-bind:class="{apple : cellphone.isApple}" />
+        <img :src="image.flip" class="viewer-image" v-bind:class="{apple : cellphone.isApple}" />
       </div>
       <div class="product-info">
-        <h1>{{ title }}</h1>
-        
-        <p>{{ sale }}</p>
+        <h1>{{ title }}</h1>
+
+        <p>{{ sale }}</p>
 
         <h3>용량</h3>
         <ul>
@@ -36,63 +46,32 @@
 
         <h3>색상</h3>
         <div class="color-info">
-          <div v-for="(variant, index) in variants" :key="variant.variantId"
+          <div v-for="(variant, index) in cellphone.variants" :key="variant.variantId"
             :style="{ backgroundColor: variant.variantColorCode }" @mouseover="updateProduct(index)" class="color-box">
           </div>
         </div>
 
         <button v-on:click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">장바구니 담기</button>
         <button @click="removeFromCart">장바구니 빼기</button>
-
-        <div class="cart">
-          <p>Cart({{ cart }})</p>
-        </div>
       </div>
     </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </template>
   <script>
-    var model = {
-      brand: "Samsung",
-      selectedVariant: 0,
-      product: '핸드폰',
-      cart: 0,
-      regTypes: ['기기변경', '번호이동', '신규가입'],
-      variants: [
-        {
-          variantId: 1,
-          variantColor: '프리즘 그린',
-          variantColorCode: '#32829D',
-          variantImage: 'A0ZA_001',
-          variantQuantity: 10
-        }, {
-          variantId: 2,
-          variantColor: '프리즘 블랙',
-          variantColorCode: '#231F20',
-          variantImage: 'A0Z6_001',
-          variantQuantity: 2
-        }, {
-          variantId: 3,
-          variantColor: '프리즘 화이트',
-          variantColorCode: '#D2EDF4',
-          variantImage: 'A0Z8_001',
-          variantQuantity: 0
-        },
-        {
-          variantId: 4,
-          variantColor: '플라밍고 핑크',
-          variantColorCode: '#F2756D',
-          variantImage: 'A13T_001',
-          variantQuantity: 100
+    Vue.component('product', {
+      template: '#productTemplate',
+      props: {
+        cellphone: {
+          type: Object,
+          required: true
         }
-      ],
-      volumes: ['32GB', '64GB', '128GB', '512GB']
-    }
-
-    var app = new Vue({
-      el: '#app',
-      data: model,
+      },
+      data() {
+        return {
+          selectedVariant: 0,
+          regTypes: ['기기변경', '번호이동', '신규가입'],
+          volumes: ['32GB', '64GB', '128GB', '512GB']
+        }
+      },
       methods: {
         addToCart() {
           this.cart += 1
@@ -112,29 +91,120 @@
       },
       computed: {
         title() {
-          return this.brand + ' ' + this.product
+          return this.cellphone.brand + ' ' + this.cellphone.product
         },
         image() {
-          return this.variants[this.selectedVariant].variantImage
+          return this.cellphone.variants[this.selectedVariant].variantImage
         },
         inStock() {
-          return this.variants[this.selectedVariant].variantQuantity
+          return this.cellphone.variants[this.selectedVariant].variantQuantity
         },
         sale() {
           if (this.inStock) {
-            return this.brand + ' ' + this.product + ' ' + this.variants[this.selectedVariant].variantColor + ' 판매중입니다!'
+            return this.cellphone.brand + ' ' + this.cellphone.product + ' ' + this.cellphone.variants[this.selectedVariant].variantColor + ' 판매중입니다!'
           }
-          return this.brand + ' ' + this.product + ' ' + this.variants[this.selectedVariant].variantColor + ' 완판되었습니다ㅠ.ㅠ'
+          return this.cellphone.brand + ' ' + this.cellphone.product + ' ' + this.cellphone.variants[this.selectedVariant].variantColor + ' 완판되었습니다ㅠ.ㅠ'
         },
         image() {
           return {
-            front: "./assets/images/Galaxy10/" + this.variants[this.selectedVariant].variantImage + "_13.jpg",
-            side: "./assets/images/Galaxy10/" + this.variants[this.selectedVariant].variantImage + "_14.jpg",
-            back: "./assets/images/Galaxy10/" + this.variants[this.selectedVariant].variantImage + "_15.jpg",
-            flip: "./assets/images/Galaxy10/" + this.variants[this.selectedVariant].variantImage + "_16.jpg",
+            front: "./assets/images/" + this.cellphone.product + "/" + this.cellphone.variants[this.selectedVariant].variantImage + "_13.jpg",
+            side: "./assets/images/" + this.cellphone.product + "/" + this.cellphone.variants[this.selectedVariant].variantImage + "_14.jpg",
+            back: "./assets/images/" + this.cellphone.product + "/" + this.cellphone.variants[this.selectedVariant].variantImage + "_15.jpg",
+            flip: "./assets/images/" + this.cellphone.product + "/" + this.cellphone.variants[this.selectedVariant].variantImage + "_16.jpg"
           }
         }
       }
+    })
+    var model = {
+      cellphones: [
+        {
+          id: 's1',
+          brand: "Samsung",
+          product: 'Galaxy S10',
+          isApple: false,
+          variants: [
+            {
+              variantId: 1,
+              variantColor: '프리즘 그린',
+              variantColorCode: '#32829D',
+              variantImage: 'A0ZA_001',
+              variantQuantity: 10
+            }, {
+              variantId: 2,
+              variantColor: '프리즘 블랙',
+              variantColorCode: '#231F20',
+              variantImage: 'A0Z6_001',
+              variantQuantity: 2
+            }, {
+              variantId: 3,
+              variantColor: '프리즘 화이트',
+              variantColorCode: '#D2EDF4',
+              variantImage: 'A0Z8_001',
+              variantQuantity: 0
+            },
+            {
+              variantId: 4,
+              variantColor: '플라밍고 핑크',
+              variantColorCode: '#F2756D',
+              variantImage: 'A13T_001',
+              variantQuantity: 100
+            }
+          ]
+        },
+        {
+          id: 'a1',
+          brand: "Apple",
+          product: 'iPhone XR',
+          isApple: true,
+          variants: [
+            {
+              variantId: 1,
+              variantColor: '옐로',
+              variantColorCode: '#F9D045',
+              variantImage: 'A0QP_001',
+              variantQuantity: 10
+            }, {
+              variantId: 2,
+              variantColor: '화이트',
+              variantColorCode: '#F3F3F3',
+              variantImage: 'A0QM_001',
+              variantQuantity: 2
+            }, {
+              variantId: 3,
+              variantColor: 'Product Red',
+              variantColorCode: '#B41325',
+              variantImage: 'A0QN_001',
+              variantQuantity: 0
+            },
+            {
+              variantId: 4,
+              variantColor: '코럴',
+              variantColorCode: '#FF6E5A',
+              variantImage: 'A0QQ_001',
+              variantQuantity: 10
+            },
+            {
+              variantId: 5,
+              variantColor: '블루',
+              variantColorCode: '#48AEE6',
+              variantImage: 'A0QR_001',
+              variantQuantity: 0
+            },
+            {
+              variantId: 6,
+              variantColor: '블랙',
+              variantColorCode: '#2E3034',
+              variantImage: 'A0PY_001',
+              variantQuantity: 100
+            }
+          ]
+        }
+      ],
+      cart: []
+    }
+    var app = new Vue({
+      el: '#app',
+      data: model
     })
   </script>
 </body>

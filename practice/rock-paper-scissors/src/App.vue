@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import rpsComponent from "@/components/RpsComponent.vue";
+import rpsComponent from "./components/RpsComponent.vue";
 export default {
   components: { rpsComponent },
   data() {
