@@ -22,7 +22,7 @@
 ```bash
 $> vue add router
 ```
-- `vue-cli` 로 프로젝트를 만들면서 Vue-Router를 추가하지 않았을 경우에만  
+- `vue-cli` 로 프로젝트를 만들면서 `Router` 를 추가하지 않았을 경우에만  
  `vue add` 를 통해 추가하면 됨
 
 ### NPM
@@ -51,7 +51,7 @@ import VueRouter from "vue-router";
 import HomeComponent from "../views/HomeComponent.vue";
 ```
 - `vue` 와 `vue-router` 는 반드시 import
-- routing 해 줄 컴포넌트들도 import 해야 함
+- routing 해 줄 컴포넌트들도 import 해야 함 (dynamic import 방식도 지원)
 
 #### 명시적 사용 선언
 ```js
@@ -186,6 +186,8 @@ new Vue({
   ```
 
 ## Code Splitting & Lazy Loading
+<img src="./images/lecture_5/question.jpg">
+
 > SPA 로 작성한 어플리케이션의 규모가 점점 커진다면  
 화면 렌더링을 위한 초기 리소스를 다운받는 부담이 매우 커지기 때문에  
 code-splitting 을 통한 Lazy loading 에 대한 고려가 필요함!!
