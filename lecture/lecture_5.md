@@ -10,7 +10,8 @@
 - client 가 URL을 변경 요청할 때마다 서버로 요청이 가고 서버로부터 페이지를 Return 받는 방식
 
 ### Client-side Routing(SPA)
-- 하나의 페이지에서 모든 모듈(화면)들을 로드한 후 다이나믹하게 화면이 업데이트 되는 SPA에서 컨텐츠를 탐색하기 위한 방식
+- SPA에서 컨텐츠를 탐색하기 위한 방식  
+(SPA는 하나의 페이지에서 모든 리소스들을 로드한 후 다이나믹하게 화면을 업데이트 함)
 
 > 이번 강의에서는 `Client-side Routing`에 대해 학습할 예정이고 추후 SSR(Server Side Rendering)에 대해 다룰 예정임
 
