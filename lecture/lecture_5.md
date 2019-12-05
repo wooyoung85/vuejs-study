@@ -1,3 +1,139 @@
+# API 호출 (with. Axios)
+
+## Mock API Server
+- `db.json` 파일 만들기 ([파일 내용은 github 참고](https://github.com/wooyoung85/vuejs-sample-project/blob/master/db.json))
+
+- `json-server` Install
+  ```bash
+  $> npm install -g json-server
+
+  $> json-server --watch db.json
+
+  \{^_^}/ hi!
+
+  Loading db.json
+  Done
+
+  Resources
+  http://localhost:3000/cellphones
+
+  Home
+  http://localhost:3000
+
+  Type s + enter at any time to create a snapshot of the database
+  Watching...
+  ```
+- 브라우저에서 확인
+  <img src="./images/lecture_5/JsonDB.png">
+
+## Rest Client Install
+> API 테스트를 위해 PostMan 같은 Tool을 일반적으로 많이 사용하지만  
+Visual Studio Code Extention 중 매우 괜찮은 Tool이 있어서 사용해 보려고 합니다 ^^
+
+### Extension Install
+<img src="./images/lecture_5/RestClient.png">
+
+### 사용하기
+- 테스트 작성
+  ```json
+  POST http://localhost:8080/register
+  Content-Type: application/json
+
+  {
+    "username": "test",
+    "password": "password"
+  }
+  ```
+- Send Request
+  [![Send Request](https://i.vimeocdn.com/video/836918030_640x265.webp)](https://player.vimeo.com/video/377469256)
+
+## Install Axios
+```bash
+$> npm install axios
+```
+
+## Axios 사용하기
+> Axios 란? 👉 Promise based HTTP client for the browser and node.js
+
+### 📱`ProductList` Component에 뿌릴 데이터를 원격 API 에서 받아오는 예제
+
+<img src="./images/lecture_5/ProductList.png">
+
+### Component에서 axios 직접 사용하기
+- `ProductList` 수정
+  ```html
+  <template>
+    ...
+    <product-card-component v-for="(product, index) in products" :key="index" :product="product" />
+  </template>
+  ...
+  <script>
+  import ProductCardComponent from "../components/ProductCardComponent";
+  import axios from "axios";
+
+  export default {
+    components: { ProductCardComponent },
+    data() {
+      return {
+        products: [],
+      }
+    }
+    created() {
+      axios
+        .get("http://localhost:3000/cellphones")
+        .then(response => {
+          this.products = response.data;
+        })
+        .catch(error => {
+          console.log("Error Message :", error.response);
+        });
+    }
+  }
+  </script>
+  ```
+
+### Service로 분리하기
+- `src/services/ProductService.js` 만들기
+  ```js
+  import axios from 'axios'
+      
+  const apiClient = axios.create({  
+    baseURL: `http://localhost:3000`,
+    withCredentials: false,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+
+  export default {
+    getCellphones() {
+      return apiClient.get('/cellphones')
+    }
+  }
+  ```
+- `ProductList` 수정
+  ```html
+  <script>
+  import ProductCardComponent from "../components/ProductCardComponent";
+  import ProductService from '@/services/ProductService.js'
+
+  export default {
+    ...
+    created() {
+      ProductService.getCellphones()
+        .then(response => {
+          this.products = response.data;
+        })
+        .catch(error => {
+          console.log("Error Message:", error.response)
+        })
+    }
+  }
+  </script>
+  ```
+
+
 # Vue Router
 
 ## Server-side Routing(MPA) VS Client-side Routing(SPA)
@@ -5,6 +141,8 @@
 |MPA|SPA|
 |-|-|
 |<img src="./images/lecture_5/ServerSideRouting.jpg" width="500">|<img src="./images/lecture_5/ClientSideRouting.jpg" width="500">|
+
+<sup>이미지 출처 : [Vue Mastery-facebook](https://www.facebook.com/vuemastery/photos/a.2088441761371177/2269031573312194/?type=3)</sup>
 
 ### Server-side Routing(MPA)
 - client 가 URL을 변경 요청할 때마다 서버로 요청이 가고 서버로부터 페이지를 Return 받는 방식
@@ -104,25 +242,24 @@ new Vue({
 ```
 
 ## Route 설정 자세히 알아보기
-### params 사용하기
-- `router-link` 에 `params` 객체를 같이 선언
-  ```html
-  <router-link :to="{ name: 'productDetail', params: { productId: 123, productCode: 'S001' }}">ProductDetail</router-link>
+### 기본적인 속성
+- **path** : 사용자가 연결될 실제 경로
+- **name** : route의 이름
+- **component** : 해당 경로에서 렌더링 할 컴포넌트를 지정
+
+  ```js
+  const router = new VueRouter({
+    routes: [
+      {
+        path: "/users",
+        name: "users",
+        component: UsersComponent,
+      },
+      ...  
+    ]
+  })
   ```
-
-- `ProductDetail.vue` 
-  ```html
-  <template>
-    <h1>상품 상세 화면</h1>
-    <p>상품 ID : {{ this.$route.params.productId }} </p>
-    <p>상품코드 : {{ this.$route.params.productCode }}</p>
-  </template>
-  ```
-
-  > `this.$route` 를 통해 현재 라우트 정보를 확인할 수 있고 `$route` 는 `path, params, query` 같은 속성들을 가지고 있음
-
-  > ⚠️ 주의사항  
-  `this.$router` 는 `router.js` 에서 `new VueRouter()` 를 통해 생성한 router를 가리키는 객체임
+  > name 을 사용하여 routing 하는 것이 좀 더 유연하고 편리함
 
 ### `/products/1` 같이 path parameter 를 사용하려면 어떻게 해야 할까❓
 - routes 속성 설정 시 아래와 같이 `path` 에 `:parameter` 추가
@@ -137,25 +274,6 @@ new Vue({
     ]
   })
   ```
-
-### query 사용하기
-- `router-link` 에 `query` 객체를 같이 선언
-  ```html
-  <router-link :to="{ path: 'product', query: { company: 'apple', support: 'welfare' }}">Products</router-link>
-  ```
-
-- `ProductList.vue` 파일 수정  
-
-  ```html
-  <template>
-    <h1>상품 리스트</h1>
-    <p>회사 : {{ this.$route.query.company }} </p>
-    <p>지원방법 : {{ this.$route.query.support }}</p>
-  </template>
-  ```
-
-> 외부에서도 접근 가능하도록 하기 위해서는 path parameter 를 지원하거나 query 방식을 지원해야 함  
-(params 방식은 외부 접근 X)
 
 ### 🤦`/about` 과 `/about-us` 가 동일한 Component를 로드해야 할 경우
 
@@ -185,16 +303,85 @@ new Vue({
   })
   ```
 
-## Code Splitting & Lazy Loading
+
+## Vue Router 사용하기
+### `App.vue`
+```html
+<template>
+  <header>
+    <nav>
+      <router-link to="/">Home</router-link>
+      <router-link to="{ name: 'about' }">About</router-link>
+      <router-link to="{ name: 'product'}">Products</router-link>
+    </nav> 
+  </header>   
+  <main>
+    <router-view />
+  </main>  
+</template>
+```
+
+#### `<router-link>`
+- Vue Router 가 제공하는 컴포넌트 (전역에서 사용 가능)
+- to 속성 작성 시 `path` 뿐만 아니라 `name` 을 활용하여 routing 가능
+
+  > `<router-link>`의 `to` 속성 값을 작성할 때 name을 활용하는 것이 좀 더 유연한 방법이 될 수 있음  
+  > (각각의 컴포넌트들을 수정할 필요 없이 `router.js` 만 잘 관리하면 되기 때문)
+
+#### `<router-view />`
+- routing 될 컴포넌트가 페이지에 렌더링 될 자리 표시 (place holder 역할)
+
+### params 사용하기
+- `router-link` 에 `params` 객체를 같이 선언
+  ```html
+  <router-link :to="{ name: 'productDetail', params: { productId: 123, productCode: 'S001' }}">ProductDetail</router-link>
+  ```
+
+- `ProductDetail.vue` 
+  ```html
+  <template>
+    <h1>상품 상세 화면</h1>
+    <p>상품 ID : {{ this.$route.params.productId }} </p>
+    <p>상품코드 : {{ this.$route.params.productCode }}</p>
+  </template>
+  ```
+
+  > `this.$route` 를 통해 현재 라우트 정보를 확인할 수 있고 `$route` 는 `path, params, query` 같은 속성들을 가지고 있음
+
+  > ⚠️ 주의사항  
+  `this.$router` 는 `router.js` 에서 `new VueRouter()` 를 통해 생성한 router를 가리키는 객체임
+
+### query 사용하기
+- `router-link` 에 `query` 객체를 같이 선언
+  ```html
+  <router-link :to="{ path: 'product', query: { company: 'apple', support: 'welfare' }}">Products</router-link>
+  ```
+
+- `ProductList.vue` 파일 수정  
+
+  ```html
+  <template>
+    <h1>상품 리스트</h1>
+    <p>회사 : {{ this.$route.query.company }} </p>
+    <p>지원방법 : {{ this.$route.query.support }}</p>
+  </template>
+  ```
+
+> 외부에서도 접근 가능하도록 하기 위해서는 path parameter 를 지원하거나 query 방식을 지원해야 함  
+(params 방식은 외부 접근 X)
+
+
+
+# Code Splitting & Lazy Loading
 <img src="./images/lecture_5/question.jpg">
 
 <sup>이미지 출처 : [자이언트 펭TV](https://www.youtube.com/channel/UCtckgmUcpzqGnzcs7xEqMzQ)</sup>
 
 > SPA 로 작성한 어플리케이션의 규모가 점점 커진다면  
 화면 렌더링을 위한 초기 리소스를 다운받는 부담이 매우 커지기 때문에  
-code-splitting 을 통한 Lazy loading 에 대한 고려가 필요함!!
+`code-splitting` 을 통한 `Lazy loading` 에 대한 고려가 필요함!! 🤔
 
-### Code Splitting
+## Code Splitting
 ```js
 const ProductList = () => import("../views/ProductList.vue")
 
@@ -238,13 +425,13 @@ const ProductList = () => import(/* webpackChunkName: "product" */ '../views/Pro
 </div>
 
 
-### Lazy Loading
+## Lazy Loading
 route 설정 시 `dynamic import` 형태로 component 속성을 선언했다면  
 처음부터 모든 자원을 Loading 하는 것이 아니라 해당 경로 요청 시 필요한 자원을 load 하게 됨
 
 > but, pre-fetch 기능을 끄지 않으면 lazy loading을 제대로 테스트 할 수 없음 😅
 
-### pre-fetch
+## pre-fetch
 - dynamic import를 통해 만들어진 분리된 chunk 파일들이 html 상단에 prefetch로 태그됨
 - pre-fetch 로 선언된 리소스들은 브라우저가 미리 캐시하게 됨
 - vue-cli3 부터 지원하는 기능
@@ -281,38 +468,8 @@ route 설정 시 `dynamic import` 형태로 component 속성을 선언했다면
 
 
 
-## Vue Router 사용하기
-```html
-<!-- App.vue 파일 예시 -->
-<template>
-  <header>
-    <nav>
-      <router-link to="/">Home</router-link>
-      <router-link to="{ name: 'about' }">About</router-link>
-      <router-link to="{ name: 'product'}">Products</router-link>
-    </nav> 
-  </header>   
-  <main>
-    <router-view />
-  </main>  
-</template>
-```
-
-#### `<router-link>`
-- Vue Router 가 제공하는 컴포넌트 (전역에서 사용 가능)
-- to 속성 작성 시 `path` 뿐만 아니라 `name` 을 활용하여 routing 가능
-
-  > `<router-link>`의 `to` 속성 값을 작성할 때 name을 활용하는 것이 좀 더 유연한 방법이 될 수 있음  
-  > (각각의 컴포넌트들을 수정할 필요 없이 `router.js` 만 잘 관리하면 되기 때문)
-
-#### `<router-view />`
-- routing 될 컴포넌트가 페이지에 렌더링 될 자리 표시 (place holder 역할)
-
-
-
-# API 호출 (with. Axios)
+# Vuex
 
 
 ## 참고자료
 [[Vue.js] Lazy load 적용하기2](https://medium.com/@jeongwooahn/vue-js-lazy-load-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B02-3f1a2f4a4ee8)  
-[Vue Mastery-facebook](https://www.facebook.com/vuemastery/photos/a.2088441761371177/2269031573312194/?type=3)
