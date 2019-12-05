@@ -191,5 +191,6 @@ $> vue add vuetify
 
 ## 참고자료
 [Vue CLI](https://cli.vuejs.org/)  
+[Our Courses | Vue Mastery](https://www.vuemastery.com/courses/) 
 [[Vue] 개발환경 만들기 (without vue-cli)](https://velog.io/@kyusung/Vue-app-sfc-without-vue-cli)  
-[Vue CLI 3.X 사용하기](https://velog.io/@skyepodium/Vue-CLI-3.X-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)
+[Vue CLI 3.X 사용하기](https://velog.io/@skyepodium/Vue-CLI-3.X-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)  

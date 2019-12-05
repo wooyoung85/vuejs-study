@@ -135,6 +135,7 @@ $> npm install axios
   ```
 
 
+
 # Vue Router
 
 ## Server-side Routing(MPA) VS Client-side Routing(SPA)
@@ -260,7 +261,7 @@ new Vue({
     ]
   })
   ```
-  > name 을 사용하여 routing 하는 것이 좀 더 유연하고 편리함
+  > `name` 을 사용하여 routing 하는 것이 좀 더 유연하고 편리함
 
 ### `/products/1` 같이 path parameter 를 사용하려면 어떻게 해야 할까❓
 - routes 속성 설정 시 아래와 같이 `path` 에 `:parameter` 추가
@@ -278,7 +279,7 @@ new Vue({
 
 ### 🤦`/about` 과 `/about-us` 가 동일한 Component를 로드해야 할 경우
 
-- redirect 속성 사용
+- `redirect` 속성 사용
   ```js
   const router = new VueRouter({
     routes: [
@@ -290,7 +291,7 @@ new Vue({
   })
   ```
 
-- alias 속성 사용
+- `alias` 속성 사용
   ```js
   const router = new VueRouter({
     routes: [
@@ -332,7 +333,7 @@ new Vue({
 #### `<router-view />`
 - routing 될 컴포넌트가 페이지에 렌더링 될 자리 표시 (place holder 역할)
 
-### params 사용하기
+### `params` 사용하기
 - `router-link` 에 `params` 객체를 같이 선언
   ```html
   <router-link :to="{ name: 'productDetail', params: { productId: 123, productCode: 'S001' }}">ProductDetail</router-link>
@@ -352,7 +353,7 @@ new Vue({
   > ⚠️ 주의사항  
   `this.$router` 는 `router.js` 에서 `new VueRouter()` 를 통해 생성한 router를 가리키는 객체임
 
-### query 사용하기
+### `query` 사용하기
 - `router-link` 에 `query` 객체를 같이 선언
   ```html
   <router-link :to="{ path: 'product', query: { company: 'apple', support: 'welfare' }}">Products</router-link>
@@ -368,7 +369,7 @@ new Vue({
   </template>
   ```
 
-> 외부에서도 접근 가능하도록 하기 위해서는 path parameter 를 지원하거나 query 방식을 지원해야 함  
+> 외부에서도 접근 가능하도록 하기 위해서는 `path parameter` 를 지원하거나 `query` 방식을 지원해야 함  
 (params 방식은 외부 접근 X)
 
 
@@ -433,7 +434,7 @@ route 설정 시 `dynamic import` 형태로 component 속성을 선언했다면
 > but, pre-fetch 기능을 끄지 않으면 lazy loading을 제대로 테스트 할 수 없음 😅
 
 ## pre-fetch
-- dynamic import를 통해 만들어진 분리된 chunk 파일들이 html 상단에 prefetch로 태그됨
+- dynamic import를 통해 만들어진 분리된 chunk 파일들이 html 상단에 pre-fetch로 태그됨
 - pre-fetch 로 선언된 리소스들은 브라우저가 미리 캐시하게 됨
 - vue-cli3 부터 지원하는 기능
 
@@ -460,6 +461,7 @@ route 설정 시 `dynamic import` 형태로 component 속성을 선언했다면
   ```js
   module.exports = {
     ...
+    // prefetch 기능 off
     chainWebpack: (config) => {
       config.plugins.delete('prefetch')
     }
@@ -470,7 +472,44 @@ route 설정 시 `dynamic import` 형태로 component 속성을 선언했다면
 
 
 # Vuex
+> Vuex 👉 Vue.js 애플리케이션에 대한 **상태 관리 패턴** + **라이브러리**
+
+## Vuex 의 필요성
+### Application 규모가 커지면서 구조가 복잡해진다면 ❓
+🙉 **각 컴포넌트들의 state를 관리하기가 매우 어려워짐**  
+- 서로 멀리 떨어져 있는 Component 들 간에 통신이 필요하다면 매우 비 효율적인 작업이 발생할 수 있음  
+(Props & Emit Event 혹은 EventBus 등을 사용할 수 있지만 코드 관리가 지나치게 복잡해짐) 
+
+  <img src="./images/lecture_5/ComponentsGrowUp.png">
+
+  <sup>이미지 출처 : [Vuex Explained Visually](https://medium.com/vue-mastery/vuex-explained-visually-f17c8c76d6c4)</sup>
+
+### 모든 컴포넌트에 대한 중앙 집중식 저장소가 있다면 매우 효율적이지 않을까 ❓ 
+😎 그래서 **Vuex** 가 등장!!
+
+- `Vuex` 도 결국 `Vue` 로 작성되었기 때문에 `Vuex`가 관리하는 `state` 들은 Vue instance의 data 와 같이 **reactive** 함
+  > **reactive** 하다는게 뭐지??라고 생각이 드신다면... [lecture.03 - Vue.js Reactivity System](https://github.com/wooyoung85/vuejs-study/blob/master/lecture/lecture_3.md#vuejs-reactivity-system) 을 참고하시기 바랍니다 ^^
+
+  <img src="./images/lecture_5/ComponentsWithVuex.png">
+
+  <sup>이미지 출처 : [Vuex Explained Visually](https://medium.com/vue-mastery/vuex-explained-visually-f17c8c76d6c4)</sup>
+
+
+
+## State Management Pattern
+
+<img src="./images/lecture_5/VueVuexSimilar.png">
+
+<sup>이미지 출처 : [Vuex Explained Visually](https://medium.com/vue-mastery/vuex-explained-visually-f17c8c76d6c4)</sup>
+
+
+
+
 
 
 ## 참고자료
+[Vue Router 공식문서](https://router.vuejs.org/kr/)  
+[Our Courses | Vue Mastery](https://www.vuemastery.com/courses/)  
 [[Vue.js] Lazy load 적용하기2](https://medium.com/@jeongwooahn/vue-js-lazy-load-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B02-3f1a2f4a4ee8)  
+[Vuex 공식문서](https://vuex.vuejs.org/kr/)  
+[Vuex Explained Visually](https://medium.com/vue-mastery/vuex-explained-visually-f17c8c76d6c4)
