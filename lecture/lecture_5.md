@@ -384,47 +384,48 @@ new Vue({
 `code-splitting` 을 통한 `Lazy loading` 에 대한 고려가 필요함!! 🤔
 
 ## Code Splitting
-```js
-const ProductList = () => import("../views/ProductList.vue")
-
-const router = new VueRouter({
-  routes: [
-    {
-      path: "/product",
-      name: "product",
-      component: ProductList
-    }
-  ]
-})
-```
 - component 속성 선언 시 `dynamic import` 형태로 작성할 경우 별도의 파일로 번들링 됨
+  ```js
+  const ProductList = () => import("../views/ProductList.vue")
+
+  const router = new VueRouter({
+    routes: [
+      {
+        path: "/product",
+        name: "product",
+        component: ProductList
+      }
+    ]
+  })
+  ```
+
 - `npm run build` 를 실행하면 `dist` 폴더 밑에 별도의 배포용 파일이 떨어지게 됨
 
   <img src="./images/lecture_5/DistFolder.png">
 
-
-```js
-const ProductList = () => import(/* webpackChunkName: "product" */ '../views/ProductList.vue')
-const ProductDetail = () => import(/* webpackChunkName: "product" */ '../views/ProductDetail.vue')
-```
 - 여러 컴포넌트들을 하나의 그룹으로 묶어서 번들링 하고 싶다면 `dynamic import` 구문에 `webpackChunkName` 을 같이 작성해 주면 됨
 
-<div class="es6_box">
+  ```js
+  const ProductList = () => import(/* webpackChunkName: "product" */ '../views/ProductList.vue')
+  const ProductDetail = () => import(/* webpackChunkName: "product" */ '../views/ProductDetail.vue')
+  ```
 
 ### ES6 Shortcut
-```js
-// ES5
-const ProductList = function() {
-  return import("../views/ProductList.vue")
-}
+- function 키워드 대신 화살표(=>)를 사용하여 함수를 선언할 수 있음
+  ```js
+  // ES5
+  const ProductList = function() {
+    return import("../views/ProductList.vue")
+  }
 
-// ES6 (Arrow Function)
-const ProductList = () => { return import(/* webpackChunkName: "product" */ "../views/ProductList.vue")}
+  // ES6 (Arrow Function)
+  const ProductList = () => { return import(/* webpackChunkName: "product" */ "../views/ProductList.vue")}
 
-// ES6 Shortcut (return 되는 인자가 하나일 경우)
-const ProductList = () => import(/* webpackChunkName: "product" */ '../views/ProductList.vue')
-```
-</div>
+  // ES6 Shortcut (return 되는 인자가 하나일 경우)
+  const ProductList = () => import(/* webpackChunkName: "product" */ '../views/ProductList.vue')
+  ```
+  > 자세한 내용은 아래 글을 확인하시기 바랍니다.   
+  [ES6 화살표 함수(arrow function) 변경점 요약 (사용법, this등)](https://jeong-pro.tistory.com/110) 
 
 
 ## Lazy Loading
@@ -484,6 +485,8 @@ route 설정 시 `dynamic import` 형태로 component 속성을 선언했다면
 
   <sup>이미지 출처 : [Vuex Explained Visually](https://medium.com/vue-mastery/vuex-explained-visually-f17c8c76d6c4)</sup>
 
+  > Application 이 단순하다면 EventBus 로도 충분히 커버 가능합니다 :)
+
 ### 모든 컴포넌트에 대한 중앙 집중식 저장소가 있다면 매우 효율적이지 않을까 ❓ 
 😎 그래서 **Vuex** 가 등장!!
 
@@ -494,7 +497,13 @@ route 설정 시 `dynamic import` 형태로 component 속성을 선언했다면
 
   <sup>이미지 출처 : [Vuex Explained Visually](https://medium.com/vue-mastery/vuex-explained-visually-f17c8c76d6c4)</sup>
 
+### 그래서 중앙 집중식 저장소만 있으면 모든 것이 완벽할까 ❓ 
+여러 컴포넌트에서 동시에 Vuex State 접근한다면 서로 충돌이 날 수 있기 때문에  
+표준화된 방식으로 접근하는 **State Management Pattern 제공**
 
+<img src="./images/lecture_5/VuexPattern.png">
+
+<sup>이미지 출처 : [Vuex 공식문서](https://vuex.vuejs.org/kr/)</sup>
 
 ## State Management Pattern
 
