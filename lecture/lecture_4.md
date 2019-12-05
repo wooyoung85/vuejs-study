@@ -65,7 +65,7 @@ $> vue -V
 $> vue create shoppingmall
 ```
 
-[![프로젝트 만들기](https://i.vimeocdn.com/video/823499582_640.webp)](https://player.vimeo.com/video/367217922)
+[![프로젝트 만들기](./images/lecture_4/VueCliCreateProject.png)](https://player.vimeo.com/video/367217922)
 
 > `vue-cli 2.X` 에서는 `vue init <template-name> <project-name>` 명령어를 통해 프로젝트를 생성했었습니다.   
 >
