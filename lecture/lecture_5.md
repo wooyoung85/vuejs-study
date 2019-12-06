@@ -1,141 +1,3 @@
-# API 호출 (with. Axios)
-
-## Mock API Server
-- `db.json` 파일 만들기 ([파일 내용은 github 참고](https://github.com/wooyoung85/vuejs-sample-project/blob/master/db.json))
-
-- `json-server` Install
-  ```bash
-  $> npm install -g json-server
-
-  $> json-server --watch db.json
-
-  \{^_^}/ hi!
-
-  Loading db.json
-  Done
-
-  Resources
-  http://localhost:3000/cellphones
-
-  Home
-  http://localhost:3000
-
-  Type s + enter at any time to create a snapshot of the database
-  Watching...
-  ```
-- 브라우저에서 확인
-  <img src="./images/lecture_5/JsonDB.png">
-
-## Rest Client Install
-> API 테스트를 위해 PostMan 같은 Tool을 일반적으로 많이 사용하지만  
-Visual Studio Code Extention 중 매우 괜찮은 Tool이 있어서 사용해 보려고 합니다 ^^
-
-### Extension Install
-<img src="./images/lecture_5/RestClient.png">
-
-### 사용하기
-- 테스트 작성
-  ```json
-  POST http://localhost:8080/register
-  Content-Type: application/json
-
-  {
-    "username": "test",
-    "password": "password"
-  }
-  ```
-- Send Request
-
-  [![Send Request](./images/lecture_5/RestClientTest.png)](https://player.vimeo.com/video/377469256)
-
-## Install Axios
-```bash
-$> npm install axios
-```
-
-## Axios 사용하기
-> Axios 란? 👉 Promise based HTTP client for the browser and node.js
-
-### 📱`ProductList` Component에 뿌릴 데이터를 원격 API 에서 받아오는 예제
-
-<img src="./images/lecture_5/ProductList.png">
-
-### Component에서 axios 직접 사용하기
-- `ProductList` 수정
-  ```html
-  <template>
-    ...
-    <product-card-component v-for="(product, index) in products" :key="index" :product="product" />
-  </template>
-  ...
-  <script>
-  import ProductCardComponent from "../components/ProductCardComponent";
-  import axios from "axios";
-
-  export default {
-    components: { ProductCardComponent },
-    data() {
-      return {
-        products: [],
-      }
-    }
-    created() {
-      axios
-        .get("http://localhost:3000/cellphones")
-        .then(response => {
-          this.products = response.data;
-        })
-        .catch(error => {
-          console.log("Error Message :", error.response);
-        });
-    }
-  }
-  </script>
-  ```
-
-### Service로 분리하기
-- `src/services/ProductService.js` 만들기
-  ```js
-  import axios from 'axios'
-      
-  const apiClient = axios.create({  
-    baseURL: `http://localhost:3000`,
-    withCredentials: false,
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
-
-  export default {
-    getCellphones() {
-      return apiClient.get('/cellphones')
-    }
-  }
-  ```
-- `ProductList` 수정
-  ```html
-  <script>
-  import ProductCardComponent from "../components/ProductCardComponent";
-  import ProductService from '@/services/ProductService.js'
-
-  export default {
-    ...
-    created() {
-      ProductService.getCellphones()
-        .then(response => {
-          this.products = response.data;
-        })
-        .catch(error => {
-          console.log("Error Message:", error.response)
-        })
-    }
-  }
-  </script>
-  ```
-
-
-
 # Vue Router
 
 ## Server-side Routing(MPA) VS Client-side Routing(SPA)
@@ -277,6 +139,13 @@ new Vue({
   })
   ```
 
+- path parameter 접근
+  ```html
+  <template>
+    {{ $route.params.productId }}
+  </template>
+  ```
+
 ### 🤦`/about` 과 `/about-us` 가 동일한 Component를 로드해야 할 경우
 
 - `redirect` 속성 사용
@@ -313,8 +182,8 @@ new Vue({
   <header>
     <nav>
       <router-link to="/">Home</router-link>
-      <router-link to="{ name: 'about' }">About</router-link>
-      <router-link to="{ name: 'product'}">Products</router-link>
+      <router-link :to="{ name: 'about' }">About</router-link>
+      <router-link :to="{ name: 'product'}">Products</router-link>
     </nav> 
   </header>   
   <main>
@@ -409,8 +278,11 @@ new Vue({
   const ProductList = () => import(/* webpackChunkName: "product" */ '../views/ProductList.vue')
   const ProductDetail = () => import(/* webpackChunkName: "product" */ '../views/ProductDetail.vue')
   ```
+  > 위 예제와 같이 설정 후 `npm run build` 하면   
+  > `ProductList`, `ProductDetail` 컴포넌트는 `product.[hash값].js` 파일로 번들링 됩니다 😎
 
-### ES6 Shortcut
+### 🌈ES6 문법
+#### Arrow Function
 - function 키워드 대신 화살표(=>)를 사용하여 함수를 선언할 수 있음
   ```js
   // ES5
@@ -427,24 +299,39 @@ new Vue({
   > 자세한 내용은 아래 글을 확인하시기 바랍니다.   
   [ES6 화살표 함수(arrow function) 변경점 요약 (사용법, this등)](https://jeong-pro.tistory.com/110) 
 
+- 화살표가 두개인 함수는 머지??? 👉 Currying Function
+  ```js
+  const add = function(x, y) {
+    return x + y
+  }
+
+  const add1 = (x, y) => x + y
+  add1(2, 3) //=> 5
+
+  const add2 = x => y => x + y
+  add2(2)(3) // 5
+  add2(2) // y => x + y
+  ```
+
+  > 자세한 내용은 아래 글을 확인하시기 바랍니다.   
+  [[번역] 초보자를 위한 함수형 자바스크립트 Currying 가이드](https://sujinlee.me/currying-in-functional-javascript/)
 
 ## Lazy Loading
 route 설정 시 `dynamic import` 형태로 component 속성을 선언했다면  
 처음부터 모든 자원을 Loading 하는 것이 아니라 해당 경로 요청 시 필요한 자원을 load 하게 됨
 
-> but, pre-fetch 기능을 끄지 않으면 lazy loading을 제대로 테스트 할 수 없음 😅
+> ⚠️ but, prefetch 기능을 끄지 않으면 lazy loading을 제대로 테스트 할 수 없음 😅
 
-## pre-fetch
-- dynamic import를 통해 만들어진 분리된 chunk 파일들이 html 상단에 pre-fetch로 태그됨
-- pre-fetch 로 선언된 리소스들은 브라우저가 미리 캐시하게 됨
-- vue-cli3 부터 지원하는 기능
+## prefetch
+- `vue-cli` 3.x 버전부터 `dynamic import` 를 통해 만들어진 분리된 chunk 파일들이 html 상단에 `prefetch` 로 태그됨
+- `prefetch` 로 선언된 리소스들은 브라우저가 미리 캐시하게 됨
 
-  ```html
+  ```diff
   <!DOCTYPE html>
   <html lang="en">
     <head>
       ...
-      <link href="/js/product.js" rel="prefetch">
+  +   <link href="/js/product.js" rel="prefetch">
       <link href="/js/app.js" rel="preload" as="script">
       <link href="/js/chunk-vendors.js" rel="preload" as="script">
     </head>
@@ -468,7 +355,7 @@ route 설정 시 `dynamic import` 형태로 component 속성을 선언했다면
     }
   };
   ```
-> lazy loading 과 pre-fetch 관련된 자세한 내용은 [Jeong Woo Ahn님의 블로그](https://medium.com/@jeongwooahn/vue-js-lazy-load-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-b1925e83d3c6) 를 참고하시기 바랍니다 ^^
+> `lazy loading` 과 `prefetch` 관련된 자세한 내용은 [Jeong Woo Ahn님의 블로그](https://medium.com/@jeongwooahn/vue-js-lazy-load-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-b1925e83d3c6) 를 참고하시기 바랍니다 ^^
 
 
 
@@ -479,19 +366,20 @@ route 설정 시 `dynamic import` 형태로 component 속성을 선언했다면
 ### Application 규모가 커지면서 구조가 복잡해진다면 ❓
 🙉 **각 컴포넌트들의 state를 관리하기가 매우 어려워짐**  
 - 서로 멀리 떨어져 있는 Component 들 간에 통신이 필요하다면 매우 비 효율적인 작업이 발생할 수 있음  
-(Props & Emit Event 혹은 EventBus 등을 사용할 수 있지만 코드 관리가 지나치게 복잡해짐) 
+(`Props` & `Emit Event` 혹은 `EventBus` 등을 사용할 수 있지만 코드가 지나치게 복잡해질 수 있음) 
 
   <img src="./images/lecture_5/ComponentsGrowUp.png">
 
   <sup>이미지 출처 : [Vuex Explained Visually](https://medium.com/vue-mastery/vuex-explained-visually-f17c8c76d6c4)</sup>
 
-  > Application 이 단순하다면 EventBus 로도 충분히 커버 가능합니다 :)
+  > Application 이 단순하다면 `EventBus` 로도 충분히 커버 가능합니다 :)
 
 ### 모든 컴포넌트에 대한 중앙 집중식 저장소가 있다면 매우 효율적이지 않을까 ❓ 
 😎 그래서 **Vuex** 가 등장!!
 
-- `Vuex` 도 결국 `Vue` 로 작성되었기 때문에 `Vuex`가 관리하는 `state` 들은 Vue instance의 data 와 같이 **reactive** 함
-  > **reactive** 하다는게 뭐지??라고 생각이 드신다면... [lecture.03 - Vue.js Reactivity System](https://github.com/wooyoung85/vuejs-study/blob/master/lecture/lecture_3.md#vuejs-reactivity-system) 을 참고하시기 바랍니다 ^^
+- `Vuex` 도 결국 `Vue` 로 작성되었기 때문에 `Vuex`가 관리하는 `state` 들은 Vue instance의 data 같이 **reactive** 함
+  > **reactive** 하다는게 뭐지?? 라고 생각이 드신다면...  
+  [lecture.03 - Vue.js Reactivity System](https://github.com/wooyoung85/vuejs-study/blob/master/lecture/lecture_3.md#vuejs-reactivity-system) 을 참고하시기 바랍니다 ^^
 
   <img src="./images/lecture_5/ComponentsWithVuex.png">
 
@@ -505,15 +393,429 @@ route 설정 시 `dynamic import` 형태로 component 속성을 선언했다면
 
 <sup>이미지 출처 : [Vuex 공식문서](https://vuex.vuejs.org/kr/)</sup>
 
-## State Management Pattern
+> Vuex 의 State Management Pattern 은 [Flux](https://facebook.github.io/flux/), [Redux](https://redux.js.org/), [The Elm Architecture](https://guide.elm-lang.org/architecture/) 에서 영감을 받았다고 합니다~
+
+
+## State Management Pattern 좀 더 자세히 알아보기
 
 <img src="./images/lecture_5/VueVuexSimilar.png">
 
 <sup>이미지 출처 : [Vuex Explained Visually](https://medium.com/vue-mastery/vuex-explained-visually-f17c8c76d6c4)</sup>
 
+### Vue와 Vuex 의 유사성
+|Vue|Vuex|
+|-|-|
+|data|state|
+|🤷|mutations|
+|methods|actions|
+|computed|getters|
+
+- state : global state 데이터
+- mutations : state 의 상태 변경 관리
+- actions : (mutation commit을 통한) state 업데이트
+- getters : state 를 활용한 계산된 값 제공
 
 
 
+## Vuex 사용하기
+### 기본 설정
+- `store.js` 파일 생성
+  ```js
+  import Vue from "vue";
+  import Vuex from "vuex";
+
+  Vue.use(Vuex);
+
+  const store = new Vuex.Store({
+    state: {},
+    mutations: {},
+    actions: {},
+    getters: {}
+  });
+
+  export default store;
+  ```
+
+- `main.js` 에서 전역 사용 가능하도록 등록
+
+  ```js
+  import store from './store' 
+
+  new Vue({
+    router,
+    store, // <-- injecting the store for global access
+    render: h => h(App)
+  }).$mount('#app')
+  ```
+  
+  > 이 설정은 Vue CLI로 프로젝트 생성 시 `Vuex` 를 선택했다면 잘 설정되어 있습니다 :)
+
+### Access State
+- `state` 에 데이터 추가
+  ```js
+  const store = new Vuex.Store({
+    state: {
+      user: { id: 'wooyoung85', name: 'WooYoung SEO' }
+    },
+    ...
+  });
+  ```
+
+- `state` 에 접근하기
+  ```html
+  <template>
+    <h1>{{ $store.state.user.name }}</h1>
+  </template>
+  ```
+
+#### 여러 state에 접근하고 싶을때 좀 더 효율적인 방법은 없을까?
+👉 **mapState** 를 사용하면 좀 더 효율적으로 접근 가능
+
+- `state` 에 많은 데이터가 있다고 가정
+  ```js
+  state: {
+    user: { id: 'wooyoung85', name: 'WooYoung SEO' },
+    cities: ['서울', '대전', '대구', '부산', '광주', '울산'],
+    ...
+  },
+  ```
+
+- `vue` 파일 수정
+  ```html
+  <template>
+    <div>
+      <h1>{{ userName }}</h1>
+      <p>{{ cities.length }}</p>
+    </div>
+  </template>
+
+  <script>
+  import { mapState } from 'vuex'
+  
+  export default {
+    ...
+    computed: mapState({
+      userName: state => state.user.name,
+      cities: state => state.cities
+    })
+  }
+  </script>
+  ```
+
+#### `mapState` 를 좀 더 간단하게 작성
+- 축약 표현법 (`state => state.cities` 👉 `'cities'`)
+  ```js
+  computed: mapState({
+    user: 'user',
+    cities: 'cities' 
+  })
+  ```
+
+- 배열 안에 `state` 들을 string type 으로 넘겨주기
+  ```js
+  computed: mapState(['cities', 'user'])
+  ```
+  > ⚠️ but, `computed: mapState()` 이런 식으로 작성한다면 다른 computed 속성을 추가할 수 없음 !!!  
+
+- Spread Operator 활용  
+mapState에서 반환되는 객체를 펼처서 `computed` 요소로 추가
+  ```js
+  computed: {
+    localComputed() {
+      return something
+    },
+    ...mapState(['cities', 'user'])
+  }
+  ```
+
+
+### 🌈ES6 문법
+#### 구조분해 할당 (Destructuring)
+---
+**간단한 예제**
+  ```js
+  const destruct = ({ mapState }) => {
+    console.log(mapState);
+  };
+  const arg = { mapState: 'I am mapState' };
+  destruct(arg);
+  ```
+---
+
+Module Import 할 때 구조분해 할당 (Destructuring) 을 활용하면 좀 더 깔끔한 코드를 작성할 수 있음
+
+- 실제 `vuex.common.js` 는 대략적으로 이렇게 생겼음
+  ```js
+  /**
+  * vuex v3.1.2
+  * (c) 2019 Evan You
+  * @license MIT
+  */
+  'use strict';
+
+  ...
+
+  var index = {
+    Store: Store,
+    install: install,
+    version: '3.1.2',
+    mapState: mapState,
+    mapMutations: mapMutations,
+    mapGetters: mapGetters,
+    mapActions: mapActions,
+    createNamespacedHelpers: createNamespacedHelpers
+  };
+
+  module.exports = index;
+  ```
+
+- `vue` 파일에서 `mapState`와 `mapGetters` 를 사용하기 위해 구조분해 할당을 사용
+  ```js
+  import { mapState, mapGetters } from 'vuex'
+  ```
+
+> 구조분해 할당 관련하여 자세한 내용은 아래 글을 참고하시기 바랍니다.  
+[ES2015(ES6) 구조 분해 할당(destructuring)](https://www.zerocho.com/category/ECMAScript/post/575d20a97d96d81700508ccd)
+
+#### 전개 연산자 (Spread Operator)
+---
+```js
+const odd = [1, 3, 5 ];
+const nums = [2, ...odd, 4 , 6];
+// nums = [2, 1, 3, 5, 4, 6]
+```
+---
+
+mapState() 에서 return 한 객체를 그대로 computed 에 할당하는 것이 아니라  
+return 객체를 펼처서 computed에 넣어주면 다른 computed 속성도 작성 가능
+
+### Getters
+- `getters` 추가
+  ```js
+  const store = new Vuex.Store({
+    state: {
+      user: { id: 'wooyoung85', name: 'WooYoung SEO' },
+      cities: ['서울', '대전', '대구', '부산', '광주', '울산'],
+    },
+    mutations: {},
+    actions: {},
+    getters: {
+      citiesLength: state => {
+        return state.cities.length
+      }
+    }
+  });
+  ```
+
+- `getters` 사용하기
+  ```html
+  <template>
+    <p>{{ this.$store.getters.citiesLength }}</p> 
+  </template>
+  ```
+
+#### `mapGetters` 도 있음
+- `getters` 가 다수 있다고 가정
+  ```js
+  const store = new Vuex.Store({
+    state: {
+      user: { id: 'wooyoung85', name: 'WooYoung SEO' },
+      cities: ['서울', '대전', '대구', '부산', '광주', '울산'],
+      todos: [
+        { id: 1, text: '1번 할일', done: true },
+        { id: 2, text: '2번 할일', done: false },
+        { id: 3, text: '3번 할일', done: true },
+        { id: 4, text: '4번 할일', done: false }
+      ]
+    },
+    getters: {
+      citiesLength: state => {
+        return state.cities.length
+      },
+      activeTodosCount: (state) => {
+        return state.todos.filter(todo => !todo.done).length
+      },
+      getEventById: (state) => (id) => {
+        return state.todos.find(todo => todo.id === id)
+      }
+    }
+  });
+  ```
+  > 화살표가 두번 나오는 Arrow Function 은 위에서 이미 설명했음 :)
+
+- `mapState` 와 유사하게 사용하면 됨
+  ```html
+  <template>
+    <div>
+      <p>{{ citiesLength }}</p> 
+      <p>{{ activeTodosCount }}</p>
+      <p>{{ getEventById(1).text }}</p>
+    </div>
+  </template>
+
+  <script>
+  import { mapGetters } from 'vuex'
+
+  export default {
+    ...
+    computed: mapGetters([
+      'citiesLength',
+      'activeTodosCount',
+      'getEventById'
+    ])
+  }
+  </script>
+  ```
+
+- 당연히 구조분해 할당도 가능
+  ```js
+  computed: {
+    localComputed() { 
+      return something 
+    },
+    ...mapGetters({
+      catCount: 'citiesLength',
+      getEvent: 'getEventById'
+    })
+  }
+  ```
+
+
+# API 호출 (with. Axios)
+
+## Mock API Server
+- `db.json` 파일 만들기 ([파일 내용은 github 참고](https://github.com/wooyoung85/vuejs-sample-project/blob/master/db.json))
+
+- `json-server` Install
+  ```bash
+  $> npm install -g json-server
+
+  $> json-server --watch db.json
+
+  \{^_^}/ hi!
+
+  Loading db.json
+  Done
+
+  Resources
+  http://localhost:3000/cellphones
+
+  Home
+  http://localhost:3000
+
+  Type s + enter at any time to create a snapshot of the database
+  Watching...
+  ```
+- 브라우저에서 확인
+  <img src="./images/lecture_5/JsonDB.png">
+
+## Rest Client Install
+> API 테스트를 위해 PostMan 같은 Tool을 일반적으로 많이 사용하지만  
+Visual Studio Code Extention 중 매우 괜찮은 Tool이 있어서 사용해 보려고 합니다 ^^
+
+### Extension Install
+<img src="./images/lecture_5/RestClient.png">
+
+### 사용하기
+- 테스트 작성
+  ```json
+  POST http://localhost:8080/register
+  Content-Type: application/json
+
+  {
+    "username": "test",
+    "password": "password"
+  }
+  ```
+- Send Request
+
+  [![Send Request](./images/lecture_5/RestClientTest.png)](https://player.vimeo.com/video/377469256)
+
+## Install Axios
+```bash
+$> npm install axios
+```
+
+## Axios 사용하기
+> Axios 란? 👉 Promise based HTTP client for the browser and node.js
+
+### 📱`ProductList` Component에 뿌릴 데이터를 원격 API 에서 받아오는 예제
+
+<img src="./images/lecture_5/ProductList.png">
+
+### Component에서 axios 직접 사용하기
+- `ProductList` 수정
+  ```html
+  <template>
+    ...
+    <product-card-component v-for="(product, index) in products" :key="index" :product="product" />
+  </template>
+  ...
+  <script>
+  import ProductCardComponent from "../components/ProductCardComponent";
+  import axios from "axios";
+
+  export default {
+    components: { ProductCardComponent },
+    data() {
+      return {
+        products: [],
+      }
+    }
+    created() {
+      axios
+        .get("http://localhost:3000/cellphones")
+        .then(response => {
+          this.products = response.data;
+        })
+        .catch(error => {
+          console.log("Error Message :", error.response);
+        });
+    }
+  }
+  </script>
+  ```
+
+### Service로 분리하기
+- `src/services/ProductService.js` 만들기
+  ```js
+  import axios from 'axios'
+      
+  const apiClient = axios.create({  
+    baseURL: `http://localhost:3000`,
+    withCredentials: false,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+
+  export default {
+    getCellphones() {
+      return apiClient.get('/cellphones')
+    }
+  }
+  ```
+- `ProductList` 수정
+  ```html
+  <script>
+  import ProductCardComponent from "../components/ProductCardComponent";
+  import ProductService from '@/services/ProductService.js'
+
+  export default {
+    ...
+    created() {
+      ProductService.getCellphones()
+        .then(response => {
+          this.products = response.data;
+        })
+        .catch(error => {
+          console.log("Error Message:", error.response)
+        })
+    }
+  }
+  </script>
+  ```
 
 
 ## 참고자료
