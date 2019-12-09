@@ -748,8 +748,6 @@ return 객체를 펼처서 하나씩 `computed` 에 넣어주면 다른 `compute
       user: { id: 'wooyoung85', name: 'WooYoung SEO' },
       cities: ['서울', '대전', '대구', '부산', '광주', '울산'],
     },
-    mutations: {},
-    actions: {},
     getters: {
       citiesLength: state => {
         return state.cities.length
@@ -858,22 +856,24 @@ return 객체를 펼처서 하나씩 `computed` 에 넣어주면 다른 `compute
 - mutation commit
   ```html
   <template>
+    <p><span>증가 값 : </span><input type="number" v-model.number="incrementBy"></p>
+    <p>Cart : {{ this.$store.state.cart }}</p>
     <button @click="clickCartButton">ADD CART</button>
   </template>
   <script>
-  ...
-  methods: {
-    clickCartButton() {
-      this.$store.commit('ADD_CART')
-    },
-  }
+    ...
+    methods: {
+      clickCartButton() {
+        this.$store.commit('ADD_CART')
+      },
+    }
   </script>
   ```
 
 ---
 
 #### Mutation 에 Payload 전달하기
-- `store.js` 에 `mutations` 추가
+- `store.js` 에 `mutations` 수정
   ```js
   mutations: {
     ADD_CART(state, value) {
@@ -885,7 +885,7 @@ return 객체를 펼처서 하나씩 `computed` 에 넣어주면 다른 `compute
 - `mutation commit`
   ```js
   data() {
-      return { incrementBy: 1 }
+    return { incrementBy: 10 }
   },
   methods: {
     clickCartButton() {
@@ -893,6 +893,11 @@ return 객체를 펼처서 하나씩 `computed` 에 넣어주면 다른 `compute
     },
   }
   ```
+
+---
+
+### 여러 Mutaion에 효율적으로 접근하기 위한 mapMuations 도 있습니다 ^^
+사용법은 앞서 설명드린 mapState와 mapGetters 의 사용법과 거의 유사합니다 :)
 
 ---
 
@@ -913,6 +918,7 @@ mutation 은 synchronous 하게 작업을 처리하기 때문에 마냥 기다�
       if (state.inStock) {
         commit('ADD_CART', incrementBy)
       } 
+    }
   }
   ```
 
@@ -922,12 +928,14 @@ mutation 은 synchronous 하게 작업을 처리하기 때문에 마냥 기다�
 
   ```html
   <template>
+    <p><span>증가 값 : </span><input type="number" v-model.number="incrementBy"></p>
+    <p>Cart : {{ this.$store.state.cart }}</p>
     <button @click="clickCartButton">ADD CART</button>
   </template>
   <script>
     data() {
       return {
-        incrementBy: 1
+        incrementBy: 10
       }
     },
     methods: {
@@ -937,6 +945,11 @@ mutation 은 synchronous 하게 작업을 처리하기 때문에 마냥 기다�
     }
   </script>
   ```
+
+---
+
+### 여러 Action을 효율적으로 접근하기 위한 mapActions 도 있습니다 ^^
+사용법은 앞서 설명드린 mapState와 mapGetters 의 사용법과 거의 유사합니다 :)
 
 ---
 
@@ -957,17 +970,12 @@ mutation 은 synchronous 하게 작업을 처리하기 때문에 마냥 기다�
   $> npm install -g json-server
 
   $> json-server --watch db.json
-
   \{^_^}/ hi!
 
   Loading db.json
   Done
 
-  Resources
-  http://localhost:3000/cellphones
-
-  Home
-  http://localhost:3000
+  ...
 
   Type s + enter at any time to create a snapshot of the database
   Watching...

@@ -713,20 +713,22 @@ return 객체를 펼처서 하나씩 `computed` 에 넣어주면 다른 `compute
 - mutation commit
   ```html
   <template>
+    <p><span>증가 값 : </span><input type="number" v-model.number="incrementBy"></p>
+    <p>Cart : {{ this.$store.state.cart }}</p>
     <button @click="clickCartButton">ADD CART</button>
   </template>
   <script>
-  ...
-  methods: {
-    clickCartButton() {
-      this.$store.commit('ADD_CART')
-    },
-  }
+    ...
+    methods: {
+      clickCartButton() {
+        this.$store.commit('ADD_CART')
+      },
+    }
   </script>
   ```
 
 #### Mutation 에 Payload 전달하기
-- `store.js` 에 `mutations` 추가
+- `store.js` 에 `mutations` 수정
   ```js
   mutations: {
     ADD_CART(state, value) {
@@ -738,9 +740,9 @@ return 객체를 펼처서 하나씩 `computed` 에 넣어주면 다른 `compute
 - `mutation commit`
   ```js
   data() {
-      return {
-        incrementBy: 1
-      }
+    return {
+      incrementBy: 1
+    }
   },
   methods: {
     clickCartButton() {
@@ -770,6 +772,8 @@ mutation 은 synchronous 하게 작업을 처리하기 때문에 마냥 기다�
 
   ```html
   <template>
+    <p><span>증가 값 : </span><input type="number" v-model.number="incrementBy"></p>
+    <p>Cart : {{ this.$store.state.cart }}</p>
     <button @click="clickCartButton">ADD CART</button>
   </template>
   <script>
