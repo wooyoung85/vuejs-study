@@ -39,7 +39,7 @@ Vue.component('product', {
 
 > 함수 형태로 작성한 data 문법이 생소했다면 ES6 에서 지원하는 문법이니 놀라지 마세요
 
-### 🌈ES6 문법
+### 🌈 ES6 문법
 ```js
 data : function () {
   return {

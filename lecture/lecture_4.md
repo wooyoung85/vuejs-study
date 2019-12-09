@@ -163,7 +163,7 @@ $> vue create shoppingmall
 - IE11 과 Safari9을 지원하기 위해서는 `babel-polyfill` 설치 후 약간의 설정 필요  
 (자세한 내용은 [공식문서](https://vuetifyjs.com/ko/getting-started/browser-support#ie-11-amp-safari-9-support)를 참고하시기 바랍니다~)
 
-- ⚠️ 유의사항
+#### ⚠️ 유의사항
   - **모든 브라우저를 지원해야 하는 시스템이라면 Vuetify를 사용하면 안됩니다!!**
   - 사내 디자인 가이드가 있다면 굳이 Vuetify 같은 UI Library 를 사용할 필요는 없습니다 :)
 
@@ -186,11 +186,12 @@ $> vue add vuetify
   - [Buttons](https://vuetifyjs.com/ko/components/buttons)
   - [Dialogs](https://vuetifyjs.com/en/components/dialogs)
 
-  > 화면 구성을 위한 기본적인 컴포넌트들은 거의 다 갖춰져 있으니 잘 찾아서 쓰시면 됩니다 ^^
+> 화면 구성을 위한 기본적인 컴포넌트들은 거의 다 갖춰져 있으니 잘 찾아서 쓰시면 됩니다 :)
 
 
 ## 참고자료
 [Vue CLI](https://cli.vuejs.org/)  
 [Our Courses | Vue Mastery](https://www.vuemastery.com/courses/) 
 [[Vue] 개발환경 만들기 (without vue-cli)](https://velog.io/@kyusung/Vue-app-sfc-without-vue-cli)  
-[Vue CLI 3.X 사용하기](https://velog.io/@skyepodium/Vue-CLI-3.X-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)  
+[Vue CLI 3.X 사용하기](https://velog.io/@skyepodium/Vue-CLI-3.X-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)   
+[Vuetify 공식문서](https://vuetifyjs.com/ko/)
